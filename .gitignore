@@ -174,3 +174,5 @@ media/
 .LSOverride
 
 *.bak
+
+**/migrations
