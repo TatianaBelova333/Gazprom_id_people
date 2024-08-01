@@ -1,0 +1,450 @@
+[
+{
+  "model": "staff.skill",
+  "pk": 1,
+  "fields": {
+    "name": "HTML"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 2,
+  "fields": {
+    "name": "Java 17"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 3,
+  "fields": {
+    "name": "Spring Boot"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 4,
+  "fields": {
+    "name": "Kafka"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 5,
+  "fields": {
+    "name": "Python"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 6,
+  "fields": {
+    "name": "Docker"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 7,
+  "fields": {
+    "name": "Django"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 8,
+  "fields": {
+    "name": "Hibernate"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 9,
+  "fields": {
+    "name": "PostgreSQL"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 10,
+  "fields": {
+    "name": "Unit"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 11,
+  "fields": {
+    "name": "Maven"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 12,
+  "fields": {
+    "name": "Scala"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 13,
+  "fields": {
+    "name": "Jira"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 14,
+  "fields": {
+    "name": "K8s"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 15,
+  "fields": {
+    "name": "Confluence"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 16,
+  "fields": {
+    "name": "Gitlab CI/CD"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 17,
+  "fields": {
+    "name": "Golang"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 18,
+  "fields": {
+    "name": "C++"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 19,
+  "fields": {
+    "name": "FastAPI"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 20,
+  "fields": {
+    "name": "Kotlin"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 21,
+  "fields": {
+    "name": "Redis"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 22,
+  "fields": {
+    "name": "Celery"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 23,
+  "fields": {
+    "name": "C#"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 24,
+  "fields": {
+    "name": "CSS"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 25,
+  "fields": {
+    "name": "Git"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 26,
+  "fields": {
+    "name": "Flexbox"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 27,
+  "fields": {
+    "name": "JavaScript"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 28,
+  "fields": {
+    "name": "React"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 29,
+  "fields": {
+    "name": "React Router"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 30,
+  "fields": {
+    "name": "Flask"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 31,
+  "fields": {
+    "name": "MySQL"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 32,
+  "fields": {
+    "name": "MongoDB"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 33,
+  "fields": {
+    "name": "Nest.js"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 34,
+  "fields": {
+    "name": "Node.js"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 35,
+  "fields": {
+    "name": "Redux"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 36,
+  "fields": {
+    "name": "Figma"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 37,
+  "fields": {
+    "name": "SQL"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 38,
+  "fields": {
+    "name": "Postman"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 39,
+  "fields": {
+    "name": "Android Studio"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 40,
+  "fields": {
+    "name": "DevTools"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 41,
+  "fields": {
+    "name": "Charles"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 42,
+  "fields": {
+    "name": "YouTrack"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 43,
+  "fields": {
+    "name": "JSON/XML"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 44,
+  "fields": {
+    "name": "XML/XSD"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 45,
+  "fields": {
+    "name": "Cygwin"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 46,
+  "fields": {
+    "name": "STL"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 47,
+  "fields": {
+    "name": "CMake"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 48,
+  "fields": {
+    "name": "Java Core"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 49,
+  "fields": {
+    "name": "Service Mesh"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 50,
+  "fields": {
+    "name": "Genkins"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 51,
+  "fields": {
+    "name": "Linux"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 52,
+  "fields": {
+    "name": "Ansible"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 53,
+  "fields": {
+    "name": "NGINX"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 54,
+  "fields": {
+    "name": "Kubernetes"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 55,
+  "fields": {
+    "name": "Grafana"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 56,
+  "fields": {
+    "name": "Pandas"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 57,
+  "fields": {
+    "name": "Agile"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 58,
+  "fields": {
+    "name": "Scrum"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 59,
+  "fields": {
+    "name": "Miro"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 60,
+  "fields": {
+    "name": "Kanban"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 61,
+  "fields": {
+    "name": "Kaiten"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 62,
+  "fields": {
+    "name": "CJM"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 63,
+  "fields": {
+    "name": "BPMN"
+  }
+},
+{
+  "model": "staff.skill",
+  "pk": 64,
+  "fields": {
+    "name": "Google Sheets"
+  }
+}
+]

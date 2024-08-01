@@ -3,18 +3,19 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 from django.db import models
+from django.db.models import F, Q
 from phonenumber_field.modelfields import PhoneNumberField
 
-from apps.users.managers import CustomUserManager, UserRoles
+from apps.staff.managers import CustomUserManager, UserRoles
 
 
-class User(
+class Employee(
     AbstractBaseUser,
     PermissionsMixin,
 ):
     '''
-    Кастомная модель пользователей.
-    Для входа требуется email пользователя и пароль.
+    Custom User model for employees.
+    Email and password required for authorization.
     '''
     first_name = models.CharField('Имя', max_length=50, blank=True)
     last_name = models.CharField('Фамилия', max_length=50, blank=True)
@@ -29,21 +30,44 @@ class User(
     )
     email = models.EmailField('Email адрес', unique=True)
     phone_number = PhoneNumberField(
-            'Номер телефона',
-            blank=True,
-            null=True,
-            unique=True,
+        'Номер телефона',
+        blank=True,
+        null=True,
+        unique=True,
     )
     birthday = models.DateField(
         'День рождения',
         blank=True,
         null=True,
     )
+    about_me = models.TextField(
+        'О себе',
+        blank=True,
+    )
     role = models.CharField(
         'Тип учетной записи',
         max_length=5,
         choices=UserRoles.choices,
         default=UserRoles.USER,
+    )
+    status = models.ForeignKey(
+        'EmployeeStatus',
+        verbose_name='Статус',
+        on_delete=models.SET_NULL,
+        null=True,
+    )
+    skills = models.ManyToManyField(
+        'Skill',
+        verbose_name='Навыки',
+        related_name='employees',
+        blank=True,
+    )
+    manager = models.ForeignKey(
+        'self',
+        verbose_name='Руководитель',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
     )
 
     objects = CustomUserManager()
@@ -74,14 +98,21 @@ class User(
         return self.is_admin
 
     class Meta:
-        verbose_name = "Пользователь"
-        verbose_name_plural = "Пользователи"
+        verbose_name = "Сотрудник"
+        verbose_name_plural = "Сотрудники"
+        constraints = [
+            models.CheckConstraint(
+                check=~Q(pk=F('manager')),
+                name='employee_manager_constraint',
+            )
+        ]
 
     def __str__(self):
-        return f'{self.get_full_name()}'
+        full_name = self.get_full_name()
+        return full_name or self.email
 
     def get_full_name(self):
-        '''Возвращает полное имя пользователя с заглавной буквы.'''
+        '''Returns employee's full name.'''
         full_name = " ".join(
             (self.last_name, self.first_name, self.middle_name)
         )

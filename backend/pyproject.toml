@@ -11,6 +11,7 @@ django = "^5.0.7"
 python-dotenv = "^1.0.1"
 django-phonenumbers = "^1.0.1"
 django-phonenumber-field = "^8.0.0"
+django-colorfield = "^0.11.0"
 
 
 [build-system]

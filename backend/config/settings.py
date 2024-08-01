@@ -25,9 +25,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'phonenumber_field',
+    'colorfield',
 
-    'apps.users.apps.UsersConfig',
-    'apps.skills.apps.SkillsConfig',
+    'apps.staff.apps.StaffConfig',
 ]
 
 MIDDLEWARE = [
@@ -96,7 +96,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "staff.Employee"
 
 LANGUAGE_CODE = 'ru-ru'
 
@@ -108,6 +108,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+FIXTURE_DIRS = (os.path.join(BASE_DIR, 'apps/core/fixtures/'),)
 
 STATIC_URL = '/static/'
 
