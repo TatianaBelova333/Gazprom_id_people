@@ -28,6 +28,7 @@ class Employee(
         auto_now=True,
         verbose_name='Дата обновления',
     )
+    is_active = models.BooleanField(default=True)
     email = models.EmailField('Email адрес', unique=True)
     phone_number = PhoneNumberField(
         'Номер телефона',
