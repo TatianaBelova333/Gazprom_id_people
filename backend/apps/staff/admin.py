@@ -1,6 +1,13 @@
 from django.contrib import admin
 
-from apps.staff.models import Employee, EmployeeStatus, Skill
+from apps.staff.models import (
+    CompanyOffice,
+    Employee,
+    EmployeeStatus,
+    EmployeeTimeZone,
+    SavedContact,
+    Skill,
+)
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 
@@ -12,7 +19,6 @@ class EmployeeAdmin(BaseUserAdmin):
         'get_full_name',
         'email',
         'date_joined',
-        'manager',
         'role',
         'status',
     )
@@ -29,9 +35,16 @@ class EmployeeAdmin(BaseUserAdmin):
                 'middle_name',
                 'about_me',
                 'phone_number',
+                'timezone',
+                'birthday',
+                'image',
+            )
+        }),
+        ('Рабочая информация', {
+            'fields': (
                 'status',
                 'skills',
-                'manager',
+                'office',
             )
         }),
         ('Доступы', {
@@ -46,7 +59,7 @@ class EmployeeAdmin(BaseUserAdmin):
             ),
         }),
     )
-    list_select_related = ('status',)
+    list_select_related = ('status', 'office')
 
 
 @admin.register(Skill)
@@ -55,6 +68,7 @@ class SkillAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'name',
+        'color',
     )
     search_fields = ('name',)
 
@@ -68,3 +82,36 @@ class EmployeeStatusAdmin(admin.ModelAdmin):
         'color',
     )
     search_fields = ('name',)
+
+
+@admin.register(CompanyOffice)
+class CompanyOfficeAdmin(admin.ModelAdmin):
+    '''Admin panel for the CompanyOffice model.'''
+    list_display = (
+        'id',
+        'name',
+        'address',
+    )
+    empty_value_display = "-пусто-"
+    search_fields = ('name',)
+
+
+@admin.register(EmployeeTimeZone)
+class TimeZoneAdmin(admin.ModelAdmin):
+    '''Admin panel for the EmployeeTimeZone model.'''
+    list_display = (
+        'id',
+        'name',
+    )
+    empty_value_display = "-пусто-"
+
+
+@admin.register(SavedContact)
+class SavedContactAdmin(admin.ModelAdmin):
+    '''Admin panel for the EmployeeTimeZone model.'''
+    list_display = (
+        'id',
+        'employee',
+        'contact',
+    )
+    empty_value_display = "-пусто-"
