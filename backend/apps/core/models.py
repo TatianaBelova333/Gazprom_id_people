@@ -15,11 +15,14 @@ class NameBaseModel(models.Model):
         abstract = True
         ordering = ('name',)
         constraints = [
-            UniqueConstraint(Lower('name'),
-                             name='%(class)s_unique_name',
-                             violation_error_message=('Данное название уже '
-                                                      'существует.'),
-                             )
+            UniqueConstraint(
+                Lower('name'),
+                name='%(class)s_unique_name',
+                violation_error_message=(
+                    'Данное название уже '
+                    'существует.'
+                ),
+            )
         ]
 
     def __str__(self):
@@ -30,8 +33,7 @@ class ColorBaseModel(models.Model):
     '''Abstract model for models with the color field.'''
     color = ColorField(
         'Цвет тега',
-        default='#FF0000',
-        unique=True,
+        default='#D6E4FF',
 
     )
 

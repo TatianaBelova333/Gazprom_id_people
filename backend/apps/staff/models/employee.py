@@ -1,11 +1,18 @@
+from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser,
     PermissionsMixin,
 )
-from django.db import models
-from django.db.models import F, Q
+from django.core.validators import URLValidator
+from django.db.models.signals import post_delete, pre_save
+from django.dispatch import receiver
 from phonenumber_field.modelfields import PhoneNumberField
 
+from apps.core.utils import (
+    delete_old_model_image_edit,
+    delete_related_model_image,
+    images_directory_path,
+)
 from apps.staff.managers import CustomUserManager, UserRoles
 
 
@@ -17,6 +24,17 @@ class Employee(
     Custom User model for employees.
     Email and password required for authorization.
     '''
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
+
+    role = models.CharField(
+        'Тип учетной записи',
+        max_length=5,
+        choices=UserRoles.choices,
+        default=UserRoles.USER,
+    )
     first_name = models.CharField('Имя', max_length=50, blank=True)
     last_name = models.CharField('Фамилия', max_length=50, blank=True)
     middle_name = models.CharField('Отчество', max_length=50, blank=True)
@@ -28,6 +46,12 @@ class Employee(
         auto_now=True,
         verbose_name='Дата обновления',
     )
+    image = models.ImageField(
+        verbose_name='Изображение',
+        upload_to=images_directory_path,
+        null=True,
+        blank=True,
+    )
     is_active = models.BooleanField(default=True)
     email = models.EmailField('Email адрес', unique=True)
     phone_number = PhoneNumberField(
@@ -35,6 +59,7 @@ class Employee(
         blank=True,
         null=True,
         unique=True,
+        region="RU",
     )
     birthday = models.DateField(
         'День рождения',
@@ -45,11 +70,20 @@ class Employee(
         'О себе',
         blank=True,
     )
-    role = models.CharField(
-        'Тип учетной записи',
-        max_length=5,
-        choices=UserRoles.choices,
-        default=UserRoles.USER,
+    timezone = models.ForeignKey(
+        'EmployeeTimeZone',
+        verbose_name='Часовой пояс',
+        on_delete=models.SET_NULL,
+        null=True,
+    )
+    telegram = models.URLField(
+        verbose_name='Telegram-аккаунт',
+        null=True,
+        validators=(URLValidator(
+            regex=r'^https:\/\/t\.me\/\w{5,32}$',
+            message='Ссылка на телеграм аккуант должны быть '
+                    'в следующем формате: https://t.me/<tg-username>'
+        ),)
     )
     status = models.ForeignKey(
         'EmployeeStatus',
@@ -63,18 +97,12 @@ class Employee(
         related_name='employees',
         blank=True,
     )
-    manager = models.ForeignKey(
-        'self',
-        verbose_name='Руководитель',
-        on_delete=models.SET_NULL,
+    office = models.ForeignKey(
+        'CompanyOffice',
+        verbose_name='Офис',
         null=True,
-        blank=True,
+        on_delete=models.SET_NULL,
     )
-
-    objects = CustomUserManager()
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
 
     @property
     def is_admin(self):
@@ -101,12 +129,6 @@ class Employee(
     class Meta:
         verbose_name = "Сотрудник"
         verbose_name_plural = "Сотрудники"
-        constraints = [
-            models.CheckConstraint(
-                check=~Q(pk=F('manager')),
-                name='employee_manager_constraint',
-            )
-        ]
 
     def __str__(self):
         full_name = self.get_full_name()
@@ -120,3 +142,7 @@ class Employee(
         return full_name.strip().title()
 
     get_full_name.short_description = "ФИО"
+
+
+receiver(post_delete, sender=Employee)(delete_related_model_image)
+receiver(pre_save, sender=Employee)(delete_old_model_image_edit)

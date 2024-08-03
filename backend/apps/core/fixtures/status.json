@@ -4,7 +4,7 @@
   "pk": 1,
   "fields": {
     "name": "На работе",
-    "color": "#59FF1F"
+    "color": "#FFD666"
   }
 },
 {
@@ -12,7 +12,7 @@
   "pk": 2,
   "fields": {
     "name": "В декрете",
-    "color": "#FF0000"
+    "color": "#FFADD2"
   }
 },
 {
@@ -20,7 +20,7 @@
   "pk": 3,
   "fields": {
     "name": "На больничном",
-    "color": "#FF7915"
+    "color": "#D3ADF7"
   }
 },
 {
@@ -28,7 +28,7 @@
   "pk": 4,
   "fields": {
     "name": "В отпуске",
-    "color": "#FCFF6E"
+    "color": "#87E8DE"
   }
 }
 ]

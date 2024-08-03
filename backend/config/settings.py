@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'colorfield',
 
+    'apps.core.apps.CoreConfig',
     'apps.staff.apps.StaffConfig',
     'api.apps.ApiConfig',
 ]
@@ -120,27 +121,30 @@ SIMPLE_JWT = {
 AUTH_USER_MODEL = "staff.Employee"
 
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = os.getenv("EMAIL_HOST")
-EMAIL_PORT = os.getenv("EMAIL_PORT")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
 
 DJOSER = {
-    "PASSWORD_RESET_CONFIRM_URL": "/password/reset/confirm/{uid}/{token}",
-    "ACTIVATION_URL": "/users/activate/{uid}/{token}",
-    "USERNAME_RESET_CONFIRM_URL": "/username/reset/confirm/{uid}/{token}",
-    "PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND": True,
-    "PASSWORD_RESET_CONFIRM_RETYPE": True,
-    "SEND_ACTIVATION_EMAIL": True,
-    "LOGIN_FIELD": "email",
-    "SET_PASSWORD_RETYPE": True,
-    # "SERIALIZERS": {
-    #    "current_user": "api.serializers.UserSerializer",
-    #    'set_password': 'api.serializers.CustomSetPasswordSerializer',
-    # },
+    'PASSWORD_RESET_CONFIRM_URL': '/password/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': '/users/activate/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': '/username/reset/confirm/{uid}/{token}',
+    'PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND': True,
+    'PASSWORD_RESET_CONFIRM_RETYPE': True,
+    'SEND_ACTIVATION_EMAIL': True,
+    'LOGIN_FIELD': 'email',
+    'SET_PASSWORD_RETYPE': True,
+    'HIDE_USERS': False,
+    "SERIALIZERS": {
+        'current_user': 'api.serializers.EmployeeSerializer',
+        'contacts': 'api.serializers.SavedContactSerializer',
+        'my_contacts': 'api.serializers.SavedContactSerializer',
+        # 'set_password': 'api.serializers.CustomSetPasswordSerializer',
+    },
 }
 
 LANGUAGE_CODE = 'ru-ru'
@@ -158,3 +162,6 @@ FIXTURE_DIRS = (os.path.join(BASE_DIR, 'apps/core/fixtures/'),)
 STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
