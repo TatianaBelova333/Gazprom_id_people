@@ -34,6 +34,7 @@ INSTALLED_APPS = [
 
     'apps.core.apps.CoreConfig',
     'apps.staff.apps.StaffConfig',
+    'apps.company_structure.apps.CompanyStructureConfig',
     'api.apps.ApiConfig',
 ]
 
@@ -118,7 +119,7 @@ SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
-AUTH_USER_MODEL = "staff.Employee"
+AUTH_USER_MODEL = 'staff.Employee'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

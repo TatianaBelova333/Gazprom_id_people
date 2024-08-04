@@ -1,0 +1,34 @@
+[
+{
+  "model": "company_structure.companydepartment",
+  "pk": 1,
+  "fields": {
+    "name": "Департамент разработки",
+    "head": null
+  }
+},
+{
+  "model": "company_structure.companydepartment",
+  "pk": 2,
+  "fields": {
+    "name": "Департамент тестирования",
+    "head": null
+  }
+},
+{
+  "model": "company_structure.companydepartment",
+  "pk": 3,
+  "fields": {
+    "name": "Департамент аналитики",
+    "head": null
+  }
+},
+{
+  "model": "company_structure.companydepartment",
+  "pk": 4,
+  "fields": {
+    "name": "Департамент PMO",
+    "head": null
+  }
+}
+]

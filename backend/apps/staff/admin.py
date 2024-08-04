@@ -1,7 +1,6 @@
 from django.contrib import admin
 
 from apps.staff.models import (
-    CompanyOffice,
     Employee,
     EmployeeStatus,
     EmployeeTimeZone,
@@ -45,6 +44,7 @@ class EmployeeAdmin(BaseUserAdmin):
                 'status',
                 'skills',
                 'office',
+                'employment_type',
             )
         }),
         ('Доступы', {
@@ -81,18 +81,6 @@ class EmployeeStatusAdmin(admin.ModelAdmin):
         'name',
         'color',
     )
-    search_fields = ('name',)
-
-
-@admin.register(CompanyOffice)
-class CompanyOfficeAdmin(admin.ModelAdmin):
-    '''Admin panel for the CompanyOffice model.'''
-    list_display = (
-        'id',
-        'name',
-        'address',
-    )
-    empty_value_display = "-пусто-"
     search_fields = ('name',)
 
 

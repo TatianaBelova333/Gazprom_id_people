@@ -1,0 +1,362 @@
+[
+{
+  "model": "company_structure.position",
+  "pk": 1,
+  "fields": {
+    "name": "Product Owner",
+    "grade": 7
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 2,
+  "fields": {
+    "name": "Frontend Head",
+    "grade": 5
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 3,
+  "fields": {
+    "name": "Junior Product Manager",
+    "grade": 1
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 4,
+  "fields": {
+    "name": "Junior React Developer",
+    "grade": 1
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 5,
+  "fields": {
+    "name": "Frontend Team Lead",
+    "grade": 4
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 6,
+  "fields": {
+    "name": "Senior Frontend Developer",
+    "grade": 3
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 7,
+  "fields": {
+    "name": "Middle Frontend Developer",
+    "grade": 2
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 8,
+  "fields": {
+    "name": "Junior Frontend Developer",
+    "grade": 1
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 9,
+  "fields": {
+    "name": "Senior iOS Developer",
+    "grade": 3
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 10,
+  "fields": {
+    "name": "Middle iOS Developer",
+    "grade": 2
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 11,
+  "fields": {
+    "name": "iOS Team Lead",
+    "grade": 4
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 12,
+  "fields": {
+    "name": "iOS Head",
+    "grade": 5
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 13,
+  "fields": {
+    "name": "Junior Android Developer",
+    "grade": 1
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 14,
+  "fields": {
+    "name": "Middle Android Developer",
+    "grade": 2
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 15,
+  "fields": {
+    "name": "Senior Android Developer",
+    "grade": 3
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 16,
+  "fields": {
+    "name": "Android Team Lead",
+    "grade": 4
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 17,
+  "fields": {
+    "name": "Team Lead",
+    "grade": 4
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 18,
+  "fields": {
+    "name": "Junior Backend Developer",
+    "grade": 1
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 19,
+  "fields": {
+    "name": "Middle Backend Developer",
+    "grade": 2
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 20,
+  "fields": {
+    "name": "Senior Backend Developer",
+    "grade": 3
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 21,
+  "fields": {
+    "name": "Backend Team Lead",
+    "grade": 4
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 22,
+  "fields": {
+    "name": "Junior DevOps",
+    "grade": 1
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 23,
+  "fields": {
+    "name": "Middle DevOps",
+    "grade": 2
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 24,
+  "fields": {
+    "name": "Senior DevOps",
+    "grade": 3
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 25,
+  "fields": {
+    "name": "DevOps Team Lead",
+    "grade": 4
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 26,
+  "fields": {
+    "name": "Head",
+    "grade": 5
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 27,
+  "fields": {
+    "name": "Junior QA Engineer",
+    "grade": 1
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 28,
+  "fields": {
+    "name": "Middle QA Engineer",
+    "grade": 2
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 29,
+  "fields": {
+    "name": "Senior QA Engineer",
+    "grade": 3
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 30,
+  "fields": {
+    "name": "QA Engineer Head",
+    "grade": 5
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 31,
+  "fields": {
+    "name": "Junior SA",
+    "grade": 1
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 32,
+  "fields": {
+    "name": "Middle SA",
+    "grade": 2
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 33,
+  "fields": {
+    "name": "Senior SA",
+    "grade": 3
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 34,
+  "fields": {
+    "name": "SA Team Lead",
+    "grade": 4
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 35,
+  "fields": {
+    "name": "SA Head",
+    "grade": 5
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 36,
+  "fields": {
+    "name": "Backend Head",
+    "grade": 5
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 37,
+  "fields": {
+    "name": "Junior BA",
+    "grade": 1
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 38,
+  "fields": {
+    "name": "Middle BA",
+    "grade": 2
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 39,
+  "fields": {
+    "name": "Senior BA",
+    "grade": 3
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 40,
+  "fields": {
+    "name": "BA Team Lead",
+    "grade": 4
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 41,
+  "fields": {
+    "name": "BA Head",
+    "grade": 5
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 42,
+  "fields": {
+    "name": "Middle Product Manager",
+    "grade": 2
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 43,
+  "fields": {
+    "name": "Senior Product Manager",
+    "grade": 3
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 44,
+  "fields": {
+    "name": "PM Team Lead",
+    "grade": 4
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 45,
+  "fields": {
+    "name": "PM Head",
+    "grade": 5
+  }
+}
+]
