@@ -1,0 +1,79 @@
+[
+{
+  "model": "staff.employeetimezone",
+  "pk": 1,
+  "fields": {
+    "name": "Калининградское время (UTC+2)"
+  }
+},
+{
+  "model": "staff.employeetimezone",
+  "pk": 2,
+  "fields": {
+    "name": "Московское время (UTC+3)"
+  }
+},
+{
+  "model": "staff.employeetimezone",
+  "pk": 3,
+  "fields": {
+    "name": "Самарское время (UTC+4)"
+  }
+},
+{
+  "model": "staff.employeetimezone",
+  "pk": 4,
+  "fields": {
+    "name": "Екатеринбургское время (UTC+5)"
+  }
+},
+{
+  "model": "staff.employeetimezone",
+  "pk": 5,
+  "fields": {
+    "name": "Омское время (UTC+6)"
+  }
+},
+{
+  "model": "staff.employeetimezone",
+  "pk": 6,
+  "fields": {
+    "name": "Красноярское время (UTC+7)"
+  }
+},
+{
+  "model": "staff.employeetimezone",
+  "pk": 7,
+  "fields": {
+    "name": "Иркутское время (UTC+8)"
+  }
+},
+{
+  "model": "staff.employeetimezone",
+  "pk": 8,
+  "fields": {
+    "name": "Якутское время (UTC+9)"
+  }
+},
+{
+  "model": "staff.employeetimezone",
+  "pk": 9,
+  "fields": {
+    "name": "Владивостокское время (UTC+10)"
+  }
+},
+{
+  "model": "staff.employeetimezone",
+  "pk": 10,
+  "fields": {
+    "name": "Магаданское время (UTC+11)"
+  }
+},
+{
+  "model": "staff.employeetimezone",
+  "pk": 11,
+  "fields": {
+    "name": "Камчатское время (UTC+12)"
+  }
+}
+]

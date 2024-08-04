@@ -1,0 +1,34 @@
+[
+{
+  "model": "staff.employeestatus",
+  "pk": 1,
+  "fields": {
+    "name": "На работе",
+    "color": "#FFD666"
+  }
+},
+{
+  "model": "staff.employeestatus",
+  "pk": 2,
+  "fields": {
+    "name": "В декрете",
+    "color": "#FFADD2"
+  }
+},
+{
+  "model": "staff.employeestatus",
+  "pk": 3,
+  "fields": {
+    "name": "На больничном",
+    "color": "#D3ADF7"
+  }
+},
+{
+  "model": "staff.employeestatus",
+  "pk": 4,
+  "fields": {
+    "name": "В отпуске",
+    "color": "#87E8DE"
+  }
+}
+]

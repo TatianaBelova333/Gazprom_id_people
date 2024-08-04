@@ -1,0 +1,26 @@
+[
+{
+  "model": "company_structure.companyoffice",
+  "pk": 1,
+  "fields": {
+    "name": "",
+    "address": "г. Москва, ул. Лесная, 16, стр.1"
+  }
+},
+{
+  "model": "company_structure.companyoffice",
+  "pk": 2,
+  "fields": {
+    "name": "",
+    "address": "г. Санкт-Петербург, ул. Гагарина, д. 17/2"
+  }
+},
+{
+  "model": "company_structure.companyoffice",
+  "pk": 3,
+  "fields": {
+    "name": "",
+    "address": "г. Новосибирск, ул. Фрунзе, 16/3"
+  }
+}
+]
