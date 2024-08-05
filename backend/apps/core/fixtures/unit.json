@@ -1,0 +1,90 @@
+[
+{
+  "model": "company_structure.companyunit",
+  "pk": 1,
+  "fields": {
+    "name": "Frontend - Web",
+    "team": 1
+  }
+},
+{
+  "model": "company_structure.companyunit",
+  "pk": 2,
+  "fields": {
+    "name": "Frontend - iOS",
+    "team": 1
+  }
+},
+{
+  "model": "company_structure.companyunit",
+  "pk": 3,
+  "fields": {
+    "name": "Frontend - Android",
+    "team": 1
+  }
+},
+{
+  "model": "company_structure.companyunit",
+  "pk": 4,
+  "fields": {
+    "name": "Backend - iOS",
+    "team": 2
+  }
+},
+{
+  "model": "company_structure.companyunit",
+  "pk": 5,
+  "fields": {
+    "name": "DevOps",
+    "team": 3
+  }
+},
+{
+  "model": "company_structure.companyunit",
+  "pk": 6,
+  "fields": {
+    "name": "QA",
+    "team": 4
+  }
+},
+{
+  "model": "company_structure.companyunit",
+  "pk": 7,
+  "fields": {
+    "name": "Backend - Android",
+    "team": 2
+  }
+},
+{
+  "model": "company_structure.companyunit",
+  "pk": 8,
+  "fields": {
+    "name": "System Analysts",
+    "team": 5
+  }
+},
+{
+  "model": "company_structure.companyunit",
+  "pk": 9,
+  "fields": {
+    "name": "Business Analysts",
+    "team": 6
+  }
+},
+{
+  "model": "company_structure.companyunit",
+  "pk": 10,
+  "fields": {
+    "name": "Product managers",
+    "team": 7
+  }
+},
+{
+  "model": "company_structure.companyunit",
+  "pk": 11,
+  "fields": {
+    "name": "Project managers",
+    "team": 8
+  }
+}
+]

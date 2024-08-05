@@ -34,7 +34,7 @@ class SavedContact(models.Model):
             ),
             models.CheckConstraint(
                 check=~Q(employee=F('contact')),
-                name='employee_manager_constraint',
+                name='employee_contact_constraint',
                 violation_error_message=(
                     'Нельзя добавлять в контакты самого себя.'
                 ),

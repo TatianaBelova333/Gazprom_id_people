@@ -1,6 +1,6 @@
 [
 {
-  "model": "staff.companyoffice",
+  "model": "company_structure.companyoffice",
   "pk": 1,
   "fields": {
     "name": "",
@@ -8,7 +8,7 @@
   }
 },
 {
-  "model": "staff.companyoffice",
+  "model": "company_structure.companyoffice",
   "pk": 2,
   "fields": {
     "name": "",
@@ -16,7 +16,7 @@
   }
 },
 {
-  "model": "staff.companyoffice",
+  "model": "company_structure.companyoffice",
   "pk": 3,
   "fields": {
     "name": "",

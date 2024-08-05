@@ -4,7 +4,7 @@ from apps.staff.models import SavedContact
 
 
 class SavedContactSerializer(serializers.ModelSerializer):
-    """Serialiser for the saved contacts."""
+    """Serialiser for the employee's saved contacts."""
     user_id = serializers.CharField(source='contact.id')
     full_name = serializers.CharField(source='contact.get_full_name')
     phone_number = serializers.CharField(source='contact.phone_number')

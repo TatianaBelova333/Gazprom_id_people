@@ -24,6 +24,10 @@ class Employee(
     Custom User model for employees.
     Email and password required for authorization.
     '''
+    class EmployementTypes(models.IntegerChoices):
+        staff = 0, 'Штат'
+        outsource = 1, 'Аутсорс'
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
@@ -98,10 +102,23 @@ class Employee(
         blank=True,
     )
     office = models.ForeignKey(
-        'CompanyOffice',
+        'company_structure.CompanyOffice',
         verbose_name='Офис',
         null=True,
+        blank=True,
         on_delete=models.SET_NULL,
+    )
+    position = models.ForeignKey(
+        'company_structure.Position',
+        verbose_name='Должность',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
+    employment_type = models.PositiveSmallIntegerField(
+        verbose_name='Форма трудоустройства',
+        choices=EmployementTypes.choices,
+        default=EmployementTypes.staff,
     )
 
     @property

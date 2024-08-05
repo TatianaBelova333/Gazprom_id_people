@@ -46,6 +46,7 @@ class EmployeeSerializer(UserSerializer):
             'skills',
             'image',
             'is_saved_contact',
+            'employment_type',
             # position,
         ]
 
@@ -62,24 +63,3 @@ class EmployeeSerializer(UserSerializer):
         return False
 
 
-class SavedContactSerializer(UserSerializer):
-    """Serialiser for the saved contacts."""
-    full_name = serializers.CharField(source='contact.get_full_name')
-    phone_number = serializers.CharField(source='contact.phone_number')
-    email = serializers.CharField(source='contact.email')
-    image = serializers.CharField(source='contact.image')
-    telegram = serializers.CharField(source='contact.telegram')
-
-    class Meta:
-        model = SavedContact
-        fields = [
-            'id',
-            'full_name',
-            # 'position',
-            'phone_number',
-            'email',
-            'image',
-            # 'state',
-            'telegram',
-            #  'msteams',
-        ]

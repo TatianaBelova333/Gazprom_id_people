@@ -34,6 +34,8 @@ INSTALLED_APPS = [
 
     'apps.core.apps.CoreConfig',
     'apps.staff.apps.StaffConfig',
+    'apps.company_structure.apps.CompanyStructureConfig',
+    'apps.business.apps.BusinessConfig',
     'api.apps.ApiConfig',
 ]
 
@@ -104,9 +106,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-    #'DEFAULT_PERMISSION_CLASSES': (
-    #    'rest_framework.permissions.IsAuthenticated',
-    #),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -118,7 +120,7 @@ SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
-AUTH_USER_MODEL = "staff.Employee"
+AUTH_USER_MODEL = 'staff.Employee'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -139,8 +141,9 @@ DJOSER = {
     'LOGIN_FIELD': 'email',
     'SET_PASSWORD_RETYPE': True,
     'HIDE_USERS': False,
-    "SERIALIZERS": {
+    'SERIALIZERS': {
         'current_user': 'api.serializers.EmployeeSerializer',
+        'user': 'api.serializers.EmployeeSerializer',
         'contacts': 'api.serializers.SavedContactSerializer',
         'my_contacts': 'api.serializers.SavedContactSerializer',
         # 'set_password': 'api.serializers.CustomSetPasswordSerializer',
@@ -163,5 +166,16 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Газпром ID People',
+    'VERSION': '0.1.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SWAGGER_UI_SETTINGS': {
+        'filter': True,
+    },
+    'COMPONENT_SPLIT_REQUEST': True,
+}

@@ -1,0 +1,82 @@
+[
+{
+  "model": "business.progressstatus",
+  "pk": 1,
+  "fields": {
+    "name": "В работе",
+    "color": "#FFD666"
+  }
+},
+{
+  "model": "business.progressstatus",
+  "pk": 2,
+  "fields": {
+    "name": "Запланирован",
+    "color": "#FFF1B8"
+  }
+},
+{
+  "model": "business.progressstatus",
+  "pk": 3,
+  "fields": {
+    "name": "На ревью",
+    "color": "#87E8DE"
+  }
+},
+{
+  "model": "business.progressstatus",
+  "pk": 4,
+  "fields": {
+    "name": "Ожидает тестирования",
+    "color": "#BAE8DE"
+  }
+},
+{
+  "model": "business.progressstatus",
+  "pk": 5,
+  "fields": {
+    "name": "Тестируется",
+    "color": "#91D5FF"
+  }
+},
+{
+  "model": "business.progressstatus",
+  "pk": 6,
+  "fields": {
+    "name": "Протестирован",
+    "color": "#69C0FF"
+  }
+},
+{
+  "model": "business.progressstatus",
+  "pk": 7,
+  "fields": {
+    "name": "Готов к релизу",
+    "color": "#D9F7BE"
+  }
+},
+{
+  "model": "business.progressstatus",
+  "pk": 8,
+  "fields": {
+    "name": "Релиз",
+    "color": "#B7EB8F"
+  }
+},
+{
+  "model": "business.progressstatus",
+  "pk": 9,
+  "fields": {
+    "name": "Выполнен",
+    "color": "#73D13D"
+  }
+},
+{
+  "model": "business.progressstatus",
+  "pk": 10,
+  "fields": {
+    "name": "Заморожен",
+    "color": "#FFA39E"
+  }
+}
+]

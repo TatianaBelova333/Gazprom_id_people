@@ -1,0 +1,74 @@
+[
+{
+  "model": "company_structure.companyteam",
+  "pk": 1,
+  "fields": {
+    "name": "Frontend",
+    "team_lead": null,
+    "department": 1
+  }
+},
+{
+  "model": "company_structure.companyteam",
+  "pk": 2,
+  "fields": {
+    "name": "Backend",
+    "team_lead": null,
+    "department": 1
+  }
+},
+{
+  "model": "company_structure.companyteam",
+  "pk": 3,
+  "fields": {
+    "name": "DevOps",
+    "team_lead": null,
+    "department": 1
+  }
+},
+{
+  "model": "company_structure.companyteam",
+  "pk": 4,
+  "fields": {
+    "name": "QA",
+    "team_lead": null,
+    "department": 2
+  }
+},
+{
+  "model": "company_structure.companyteam",
+  "pk": 5,
+  "fields": {
+    "name": "System Analysts",
+    "team_lead": null,
+    "department": 3
+  }
+},
+{
+  "model": "company_structure.companyteam",
+  "pk": 6,
+  "fields": {
+    "name": "Business Analysts",
+    "team_lead": null,
+    "department": 3
+  }
+},
+{
+  "model": "company_structure.companyteam",
+  "pk": 7,
+  "fields": {
+    "name": "Product managers",
+    "team_lead": null,
+    "department": 4
+  }
+},
+{
+  "model": "company_structure.companyteam",
+  "pk": 8,
+  "fields": {
+    "name": "Project managers",
+    "team_lead": null,
+    "department": 4
+  }
+}
+]
