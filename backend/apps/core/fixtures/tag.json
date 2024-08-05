@@ -1,0 +1,66 @@
+[
+{
+  "model": "business.worktag",
+  "pk": 1,
+  "fields": {
+    "name": "Внутренний продукт",
+    "color": "#D6E4FF"
+  }
+},
+{
+  "model": "business.worktag",
+  "pk": 2,
+  "fields": {
+    "name": "Веб-сервис",
+    "color": "#D6E4FF"
+  }
+},
+{
+  "model": "business.worktag",
+  "pk": 3,
+  "fields": {
+    "name": "Структура организации",
+    "color": "#D6E4FF"
+  }
+},
+{
+  "model": "business.worktag",
+  "pk": 4,
+  "fields": {
+    "name": "Хакатон",
+    "color": "#D6E4FF"
+  }
+},
+{
+  "model": "business.worktag",
+  "pk": 5,
+  "fields": {
+    "name": "Справочник сотрудников",
+    "color": "#D6E4FF"
+  }
+},
+{
+  "model": "business.worktag",
+  "pk": 6,
+  "fields": {
+    "name": "Проекты",
+    "color": "#D6E4FF"
+  }
+},
+{
+  "model": "business.worktag",
+  "pk": 7,
+  "fields": {
+    "name": "Контакты сотрудника",
+    "color": "#D6E4FF"
+  }
+},
+{
+  "model": "business.worktag",
+  "pk": 8,
+  "fields": {
+    "name": "MVP",
+    "color": "#D6E4FF"
+  }
+}
+]
