@@ -19,9 +19,10 @@ class SavedContactSerializer(serializers.ModelSerializer):
             'full_name',
             # 'position',
             'phone_number',
+            'telegram',
             'email',
             'image',
-            # 'state',
+            'employment_type',
             'telegram',
             #  'msteams',
         ]

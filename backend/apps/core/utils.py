@@ -1,4 +1,4 @@
-def images_directory_path(instance, filename):
+def images_directory_path(instance, filename) -> str:
     '''Define structure for storing models' images.'''
     return '{0}/{1}/{2}'.format(
         instance.__class__.__name__,

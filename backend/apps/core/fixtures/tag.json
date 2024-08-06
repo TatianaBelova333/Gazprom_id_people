@@ -1,6 +1,6 @@
 [
 {
-  "model": "business.worktag",
+  "model": "projects.worktag",
   "pk": 1,
   "fields": {
     "name": "Внутренний продукт",
@@ -8,7 +8,7 @@
   }
 },
 {
-  "model": "business.worktag",
+  "model": "projects.worktag",
   "pk": 2,
   "fields": {
     "name": "Веб-сервис",
@@ -16,7 +16,7 @@
   }
 },
 {
-  "model": "business.worktag",
+  "model": "projects.worktag",
   "pk": 3,
   "fields": {
     "name": "Структура организации",
@@ -24,7 +24,7 @@
   }
 },
 {
-  "model": "business.worktag",
+  "model": "projects.worktag",
   "pk": 4,
   "fields": {
     "name": "Хакатон",
@@ -32,7 +32,7 @@
   }
 },
 {
-  "model": "business.worktag",
+  "model": "projects.worktag",
   "pk": 5,
   "fields": {
     "name": "Справочник сотрудников",
@@ -40,7 +40,7 @@
   }
 },
 {
-  "model": "business.worktag",
+  "model": "projects.worktag",
   "pk": 6,
   "fields": {
     "name": "Проекты",
@@ -48,7 +48,7 @@
   }
 },
 {
-  "model": "business.worktag",
+  "model": "projects.worktag",
   "pk": 7,
   "fields": {
     "name": "Контакты сотрудника",
@@ -56,7 +56,7 @@
   }
 },
 {
-  "model": "business.worktag",
+  "model": "projects.worktag",
   "pk": 8,
   "fields": {
     "name": "MVP",

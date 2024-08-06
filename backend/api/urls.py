@@ -3,8 +3,11 @@ from django.conf.urls.static import static
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-from api.views.employee import EmployeeViewSet
-from api.views.employee_status import EmployeeStatusViewset
+from api.views import (
+    EmployeeStatusListViewset,
+    EmployeeViewSet,
+    SkillListViewset,
+)
 
 app_name = 'api'
 VERSION = 'v1'
@@ -13,8 +16,13 @@ router_1 = DefaultRouter()
 router_1.register('users', EmployeeViewSet, basename='users')
 router_1.register(
     'user_statuses',
-    EmployeeStatusViewset,
-    basename='user_statuses'
+    EmployeeStatusListViewset,
+    basename='user_statuses',
+)
+router_1.register(
+    'skills',
+    SkillListViewset,
+    basename='skills',
 )
 
 

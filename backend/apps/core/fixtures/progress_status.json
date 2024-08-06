@@ -1,6 +1,6 @@
 [
 {
-  "model": "business.progressstatus",
+  "model": "projects.progressstatus",
   "pk": 1,
   "fields": {
     "name": "В работе",
@@ -8,7 +8,7 @@
   }
 },
 {
-  "model": "business.progressstatus",
+  "model": "projects.progressstatus",
   "pk": 2,
   "fields": {
     "name": "Запланирован",
@@ -16,7 +16,7 @@
   }
 },
 {
-  "model": "business.progressstatus",
+  "model": "projects.progressstatus",
   "pk": 3,
   "fields": {
     "name": "На ревью",
@@ -24,7 +24,7 @@
   }
 },
 {
-  "model": "business.progressstatus",
+  "model": "projects.progressstatus",
   "pk": 4,
   "fields": {
     "name": "Ожидает тестирования",
@@ -32,7 +32,7 @@
   }
 },
 {
-  "model": "business.progressstatus",
+  "model": "projects.progressstatus",
   "pk": 5,
   "fields": {
     "name": "Тестируется",
@@ -40,7 +40,7 @@
   }
 },
 {
-  "model": "business.progressstatus",
+  "model": "projects.progressstatus",
   "pk": 6,
   "fields": {
     "name": "Протестирован",
@@ -48,7 +48,7 @@
   }
 },
 {
-  "model": "business.progressstatus",
+  "model": "projects.progressstatus",
   "pk": 7,
   "fields": {
     "name": "Готов к релизу",
@@ -56,7 +56,7 @@
   }
 },
 {
-  "model": "business.progressstatus",
+  "model": "projects.progressstatus",
   "pk": 8,
   "fields": {
     "name": "Релиз",
@@ -64,7 +64,7 @@
   }
 },
 {
-  "model": "business.progressstatus",
+  "model": "projects.progressstatus",
   "pk": 9,
   "fields": {
     "name": "Выполнен",
@@ -72,7 +72,7 @@
   }
 },
 {
-  "model": "business.progressstatus",
+  "model": "projects.progressstatus",
   "pk": 10,
   "fields": {
     "name": "Заморожен",

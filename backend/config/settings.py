@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'apps.core.apps.CoreConfig',
     'apps.staff.apps.StaffConfig',
     'apps.company_structure.apps.CompanyStructureConfig',
-    'apps.business.apps.BusinessConfig',
+    'apps.projects.apps.ProjectsConfig',
     'api.apps.ApiConfig',
 ]
 
