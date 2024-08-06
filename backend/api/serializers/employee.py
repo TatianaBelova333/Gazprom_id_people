@@ -61,5 +61,3 @@ class EmployeeSerializer(UserSerializer):
                         contact=other_user
                     ).exists())
         return False
-
-

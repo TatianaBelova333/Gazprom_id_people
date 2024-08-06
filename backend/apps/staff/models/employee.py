@@ -89,6 +89,11 @@ class Employee(
                     'в следующем формате: https://t.me/<tg-username>'
         ),)
     )
+    ms_teams = models.EmailField(
+        verbose_name='MS Teams',
+        unique=True,
+        null=True,
+    )
     status = models.ForeignKey(
         'EmployeeStatus',
         verbose_name='Статус',

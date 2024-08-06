@@ -37,6 +37,7 @@ class EmployeeAdmin(BaseUserAdmin):
                 'timezone',
                 'birthday',
                 'image',
+                'telegram',
             )
         }),
         ('Рабочая информация', {
@@ -45,6 +46,7 @@ class EmployeeAdmin(BaseUserAdmin):
                 'skills',
                 'office',
                 'employment_type',
+                'ms_teams',
             )
         }),
         ('Доступы', {

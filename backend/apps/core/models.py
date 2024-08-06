@@ -10,7 +10,7 @@ class NameBaseModel(models.Model):
     name = models.CharField(
         max_length=50,
         verbose_name='Название',
-        validators=[MinLengthValidator(limit_value=2)]
+        validators=(MinLengthValidator(limit_value=2),)
     )
 
     class Meta:
@@ -44,22 +44,48 @@ class ColorBaseModel(models.Model):
 
 
 class BusinessBaseModel(models.Model):
-    '''Abstract model for projects, services and tags.'''
+    '''Abstract model for projects, services and components.'''
+    name = models.CharField(
+        max_length=50,
+        verbose_name='Название',
+        unique=True,
+        validators=(MinLengthValidator(limit_value=2),)
+    )
     description = models.TextField(
         verbose_name='Описание',
         max_length=3000,
-        blank=True,
+        validators=(MinLengthValidator(limit_value=2),)
     )
-    date_start = models.DateField(
+    start_date = models.DateField(
         verbose_name='Дата начала',
-        blank=True,
-        null=True,
+        db_index=True,
     )
-    date_end = models.DateField(
+    end_date = models.DateField(
         verbose_name='Дата окончания',
+        db_index=True,
+    )
+    status = models.ForeignKey(
+        'projects.ProgressStatus',
+        verbose_name='Статус работы',
+        on_delete=models.PROTECT,
+        related_name='%(class)ss',
+    )
+    tags = models.ManyToManyField(
+        'projects.WorkTag',
+        verbose_name='Теги',
         blank=True,
-        null=True,
+        related_name='%(class)ss',
     )
 
     class Meta:
+        ordering = ('-start_date',)
         abstract = True
+        constraints = [
+            models.CheckConstraint(
+                check=models.Q(end_date__gt=models.F('start_date')),
+                name='%(class)s_end_date_greater_start_date',
+                violation_error_message=(
+                    'Дата окончания должны быть позднее даты начала.'
+                ),
+            )
+        ]
