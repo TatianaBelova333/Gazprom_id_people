@@ -144,9 +144,12 @@ DJOSER = {
     'SERIALIZERS': {
         'current_user': 'api.serializers.EmployeeSerializer',
         'user': 'api.serializers.EmployeeSerializer',
+        'user_list': 'api.serializers.EmployeeListSerializer',
         'contacts': 'api.serializers.SavedContactSerializer',
         'my_contacts': 'api.serializers.SavedContactSerializer',
-        # 'set_password': 'api.serializers.CustomSetPasswordSerializer',
+    },
+    'PERMISSIONS': {
+        'user': ['djoser.permissions.CurrentUserOrAdmin'],
     },
 }
 

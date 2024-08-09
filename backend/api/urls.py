@@ -4,9 +4,14 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
 from api.views import (
+    OfficeListViewset,
     EmployeeStatusListViewset,
     EmployeeViewSet,
+    PositionListViewset,
+    ProgressStatusListViewset,
     SkillListViewset,
+    TagListViewset,
+    TimeZoneListViewset,
 )
 
 app_name = 'api'
@@ -23,6 +28,31 @@ router_1.register(
     'skills',
     SkillListViewset,
     basename='skills',
+)
+router_1.register(
+    'progress_statuses',
+    ProgressStatusListViewset,
+    basename='progress_statuses',
+)
+router_1.register(
+    'tags',
+    TagListViewset,
+    basename='tags',
+)
+router_1.register(
+    'timezones',
+    TimeZoneListViewset,
+    basename='timezones',
+)
+router_1.register(
+    'positions',
+    PositionListViewset,
+    basename='positions',
+)
+router_1.register(
+    'offices',
+    OfficeListViewset,
+    basename='offices',
 )
 
 

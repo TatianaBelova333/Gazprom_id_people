@@ -5,7 +5,7 @@ from apps.staff.models import EmployeeStatus
 from api.serializers import EmployeeStatusSerializer
 
 
-@extend_schema(tags=["Employee's Profile Editing"])
+@extend_schema(tags=["Employee's Profile editing"])
 @extend_schema_view(
     list=extend_schema(summary='List all employee statuses'),
 )

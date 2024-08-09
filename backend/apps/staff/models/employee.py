@@ -83,11 +83,14 @@ class Employee(
     telegram = models.URLField(
         verbose_name='Telegram-аккаунт',
         null=True,
+        blank=True,
         validators=(URLValidator(
             regex=r'^https:\/\/t\.me\/\w{5,32}$',
             message='Ссылка на телеграм аккуант должны быть '
                     'в следующем формате: https://t.me/<tg-username>'
-        ),)
+        ),),
+        help_text=('Введите телеграм аккуант в следующем формате: '
+                   'https://t.me/<tg-username>')
     )
     ms_teams = models.EmailField(
         verbose_name='MS Teams',
@@ -116,9 +119,15 @@ class Employee(
     position = models.ForeignKey(
         'company_structure.Position',
         verbose_name='Должность',
+        on_delete=models.PROTECT,
+        null=True,
+    )
+    unit = models.ForeignKey(
+        'company_structure.CompanyUnit',
+        verbose_name='Подразделение',
+        on_delete=models.PROTECT,
         null=True,
         blank=True,
-        on_delete=models.SET_NULL,
     )
     employment_type = models.PositiveSmallIntegerField(
         verbose_name='Форма трудоустройства',
@@ -153,8 +162,10 @@ class Employee(
         verbose_name_plural = "Сотрудники"
 
     def __str__(self):
-        full_name = self.get_full_name()
-        return full_name or self.email
+        short_name = self.get_short_name()
+        user_indenity = short_name or self.email
+        position = self.position or '-'
+        return f'{user_indenity}, {position}'
 
     def get_full_name(self):
         '''Returns employee's full name.'''
@@ -162,6 +173,18 @@ class Employee(
             (self.last_name, self.first_name, self.middle_name)
         )
         return full_name.strip().title()
+
+    def get_short_name(self):
+        '''Returns employee's short name.'''
+        short_name = []
+        if self.last_name:
+            short_name.append(self.last_name)
+        if self.first_name:
+            short_name.append(f'{self.first_name[0]}.')
+        if self.middle_name:
+            short_name.append(f'{self.middle_name[0]}.')
+
+        return ' '.join(short_name).title()
 
     get_full_name.short_description = "ФИО"
 

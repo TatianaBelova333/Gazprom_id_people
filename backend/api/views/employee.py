@@ -1,13 +1,16 @@
 from django.contrib.auth import get_user_model
+from django_filters.rest_framework import DjangoFilterBackend
 from djoser.conf import settings
 from djoser.views import UserViewSet as DjoserUserViewSet
 from rest_framework import status
+from rest_framework import filters
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema_view, extend_schema
 
 from apps.staff.models.contacts import SavedContact
+from api.pagination import EmployeeListPaginationClass
 
 Employee = get_user_model()
 
@@ -33,9 +36,21 @@ class EmployeeViewSet(DjoserUserViewSet):
     list the current employee's saved contacts.
 
     '''
+    filter_backends = (
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    )
+    filterset_fields = ('skills', 'employment_type')
+    search_fields = ('first_name', 'last_name', 'middle_name', 'email')
+    ordering_fields = ('last_name', 'position')
+    pagination_class = EmployeeListPaginationClass
+
     def get_serializer_class(self):
         if self.action in ('contacts', 'my_contacts'):
             return settings.SERIALIZERS.contacts
+        if self.action == 'list':
+            return settings.SERIALIZERS.user_list
         return super().get_serializer_class()
 
     def get_queryset(self):
@@ -109,14 +124,17 @@ class EmployeeViewSet(DjoserUserViewSet):
                     }
                 )
 
-    @extend_schema(
-        summary="List the current user's contacts",
-        tags=['Main'],
-    )
-    @action(["get"], detail=False, url_path='me/contacts')
+    @extend_schema(summary="List the current user's contacts",
+                   tags=['Main'])
+    @action(["get"],
+            detail=False,
+            url_path='me/contacts',
+            pagination_class=None,
+            filter_backends=[])
     def my_contacts(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
+    # Deactivating other Djoser endpoints
     @extend_schema(exclude=True)
     @action(["post"], detail=False)
     def resend_activation(self, request, *args, **kwargs):

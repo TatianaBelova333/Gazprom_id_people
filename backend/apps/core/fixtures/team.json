@@ -4,7 +4,7 @@
   "pk": 1,
   "fields": {
     "name": "Frontend",
-    "team_lead": null,
+    "team_lead": 8,
     "department": 1
   }
 },
@@ -13,7 +13,7 @@
   "pk": 2,
   "fields": {
     "name": "Backend",
-    "team_lead": null,
+    "team_lead": 2,
     "department": 1
   }
 },
