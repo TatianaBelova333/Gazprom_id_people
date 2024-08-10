@@ -1,13 +1,13 @@
 # Gazprom_id_people
 
-`python3 -m venv venv`
-`source venv/bin/activate`
-`pip install poetry`
-`poetry install`
-`python3 manage.oy makemigrations`
-`python3 manage.py migrate`
-`python3 manage.py createsuperuser`
-`python3 manage.py runserver`
+`python3 -m venv venv`<br>
+`source venv/bin/activate`<br>
+`pip install poetry`<br>
+`poetry install`<br>
+`python3 manage.py makemigrations`<br>
+`python3 manage.py migrate`<br>
+`python3 manage.py createsuperuser`<br>
+`python3 manage.py runserver`<br>
 
 
 ```
