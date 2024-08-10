@@ -1,5 +1,5 @@
 from drf_spectacular.utils import extend_schema_view, extend_schema
-from rest_framework import filters, mixins, viewsets
+from rest_framework import filters, viewsets
 
 from apps.projects.models import WorkTag
 from api.serializers import WorkTagSerializer
@@ -9,11 +9,13 @@ from api.serializers import WorkTagSerializer
 @extend_schema_view(
     list=extend_schema(summary='List all work tags'),
 )
-class TagListViewset(mixins.ListModelMixin,
-                     viewsets.GenericViewSet):
+class TagReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
     '''
     list:
     Return a list of all existing tags.
+
+    retrieve:
+    Return a single tag.
 
     '''
     queryset = WorkTag.objects.all()

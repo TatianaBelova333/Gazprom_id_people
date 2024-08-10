@@ -3,12 +3,35 @@ from django.urls import reverse
 from django.utils.html import format_html
 
 from apps.company_structure.models import (
+    Company,
     CompanyDepartment,
     CompanyOffice,
     CompanyTeam,
     CompanyUnit,
     Position
 )
+
+
+@admin.register(Company)
+class CompanyAdmin(admin.ModelAdmin):
+    '''Admin panel for the CompanyDepartment model.'''
+    list_display = (
+        'id',
+        'name',
+        'description',
+        'director_link',
+    )
+    empty_value_display = "-пусто-"
+
+    def director_link(self, obj):
+        director = obj.director
+        if director:
+            url = reverse(
+                'admin:staff_employee_changelist'
+            ) + str(director.id)
+            return format_html(f'<a href="{url}">{director}</a>')
+
+    director_link.short_description = 'Руководитель компании'
 
 
 @admin.register(Position)
@@ -30,6 +53,7 @@ class OfficeAdmin(admin.ModelAdmin):
         'id',
         'name',
         'address',
+        'company',
     )
     empty_value_display = "-пусто-"
     search_fields = ('name',)
@@ -89,7 +113,7 @@ class DepartmentAdmin(admin.ModelAdmin):
         'id',
         'name',
         'head_link',
-        'product_owner_link',
+        'company',
     )
     empty_value_display = "-пусто-"
     search_fields = ('name',)
@@ -103,13 +127,3 @@ class DepartmentAdmin(admin.ModelAdmin):
             return format_html(f'<a href="{url}">{head}</a>')
 
     head_link.short_description = 'Руководитель департамента'
-
-    def product_owner_link(self, obj):
-        product_owner = obj.product_owner
-        if product_owner:
-            url = reverse(
-                'admin:staff_employee_changelist'
-            ) + str(product_owner.id)
-            return format_html(f'<a href="{url}">{product_owner}</a>')
-
-    product_owner_link.short_description = 'Владелец продукта'

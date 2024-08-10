@@ -5,7 +5,7 @@
   "fields": {
     "name": "Департамент разработки",
     "head": 3,
-    "product_owner": 9
+    "company": 2
   }
 },
 {
@@ -14,7 +14,7 @@
   "fields": {
     "name": "Департамент тестирования",
     "head": 4,
-    "product_owner": 9
+    "company": 2
   }
 },
 {
@@ -23,7 +23,7 @@
   "fields": {
     "name": "Департамент аналитики",
     "head": 5,
-    "product_owner": 9
+    "company": 2
   }
 },
 {
@@ -32,7 +32,7 @@
   "fields": {
     "name": "Департамент PMO",
     "head": 6,
-    "product_owner": 9
+    "company": 2
   }
 }
 ]

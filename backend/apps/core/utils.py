@@ -11,7 +11,7 @@ def images_directory_path(instance, filename) -> str:
 
 
 def delete_related_model_image(sender, instance, **kwargs):
-    '''Delete model's image when deleting the model.'''
+    '''Delete model's image when deleting a model instance.'''
     if instance.image:
         storage, path = instance.image.storage, instance.image.path
         storage.delete(path)

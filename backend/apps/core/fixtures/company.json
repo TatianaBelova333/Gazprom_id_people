@@ -1,0 +1,11 @@
+[
+{
+  "model": "company_structure.company",
+  "pk": 2,
+  "fields": {
+    "name": "Gazprom ID",
+    "description": "",
+    "director": 9
+  }
+}
+]

@@ -1,5 +1,5 @@
 from drf_spectacular.utils import extend_schema_view, extend_schema
-from rest_framework import mixins, viewsets
+from rest_framework import viewsets
 
 from apps.company_structure.models import CompanyOffice
 from api.serializers import OfficeSerializer
@@ -9,11 +9,13 @@ from api.serializers import OfficeSerializer
 @extend_schema_view(
     list=extend_schema(summary='List all company offices'),
 )
-class OfficeListViewset(mixins.ListModelMixin,
-                        viewsets.GenericViewSet):
+class OfficeReadOnlyViewset(viewsets.ReadOnlyModelViewSet):
     '''
     list:
     Return a list of all company offices.
+
+    retrieve:
+    Return a single company office.
 
     '''
     queryset = CompanyOffice.objects.all()

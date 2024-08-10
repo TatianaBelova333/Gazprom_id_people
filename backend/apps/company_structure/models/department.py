@@ -14,14 +14,11 @@ class CompanyDepartment(NameBaseModel):
         blank=True,
         related_name='department',
      )
-    product_owner = models.ForeignKey(
-        'staff.Employee',
-        verbose_name='Владелец продукта',
+    company = models.ForeignKey(
+        'Company',
+        verbose_name='Компания',
         on_delete=models.PROTECT,
-        null=True,
-        blank=True,
         related_name='departments',
-
     )
 
     class Meta(NameBaseModel.Meta):

@@ -1,5 +1,5 @@
 from drf_spectacular.utils import extend_schema_view, extend_schema
-from rest_framework import mixins, viewsets
+from rest_framework import viewsets
 
 from apps.staff.models import EmployeeTimeZone
 from api.serializers import EmployeeTimeZoneSerializer
@@ -9,11 +9,13 @@ from api.serializers import EmployeeTimeZoneSerializer
 @extend_schema_view(
     list=extend_schema(summary='List all timezones'),
 )
-class TimeZoneListViewset(mixins.ListModelMixin,
-                          viewsets.GenericViewSet):
+class TimeZoneReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
     '''
     list:
     Return a list of all timezones for employee's profile.
+
+    retrieve:
+    Return a single timezone.
 
     '''
     queryset = EmployeeTimeZone.objects.all()
