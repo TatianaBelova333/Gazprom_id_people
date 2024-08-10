@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'djoser',
     'phonenumber_field',
     'colorfield',
+    'debug_toolbar',
 
     'apps.core.apps.CoreConfig',
     'apps.staff.apps.StaffConfig',
@@ -47,9 +48,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
 
 TEMPLATES = [
     {
@@ -144,9 +150,12 @@ DJOSER = {
     'SERIALIZERS': {
         'current_user': 'api.serializers.EmployeeSerializer',
         'user': 'api.serializers.EmployeeSerializer',
+        'user_list': 'api.serializers.EmployeeListSerializer',
         'contacts': 'api.serializers.SavedContactSerializer',
         'my_contacts': 'api.serializers.SavedContactSerializer',
-        # 'set_password': 'api.serializers.CustomSetPasswordSerializer',
+    },
+    'PERMISSIONS': {
+        'user': ['djoser.permissions.CurrentUserOrAdmin'],
     },
 }
 

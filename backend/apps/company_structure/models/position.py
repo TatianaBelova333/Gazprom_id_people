@@ -21,12 +21,6 @@ class Position(NameBaseModel):
         choices=GradingScale.choices,
         default=GradingScale.L1,
     )
-    unit = models.ForeignKey(
-        'CompanyUnit',
-        on_delete=models.SET_NULL,
-        verbose_name='Подразделение',
-        null=True,
-    )
 
     class Meta(NameBaseModel.Meta):
         verbose_name = 'Должность'

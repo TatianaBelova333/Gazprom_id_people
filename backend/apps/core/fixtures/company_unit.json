@@ -86,5 +86,13 @@
     "name": "Project managers",
     "team": 8
   }
+},
+{
+  "model": "company_structure.companyunit",
+  "pk": 12,
+  "fields": {
+    "name": "Backend",
+    "team": 2
+  }
 }
 ]

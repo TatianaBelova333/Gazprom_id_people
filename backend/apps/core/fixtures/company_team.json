@@ -4,7 +4,7 @@
   "pk": 1,
   "fields": {
     "name": "Frontend",
-    "team_lead": null,
+    "team_lead": 8,
     "department": 1
   }
 },
@@ -13,7 +13,7 @@
   "pk": 2,
   "fields": {
     "name": "Backend",
-    "team_lead": null,
+    "team_lead": 25,
     "department": 1
   }
 },
@@ -22,7 +22,7 @@
   "pk": 3,
   "fields": {
     "name": "DevOps",
-    "team_lead": null,
+    "team_lead": 28,
     "department": 1
   }
 },
@@ -31,7 +31,7 @@
   "pk": 4,
   "fields": {
     "name": "QA",
-    "team_lead": null,
+    "team_lead": 65,
     "department": 2
   }
 },
@@ -40,7 +40,7 @@
   "pk": 5,
   "fields": {
     "name": "System Analysts",
-    "team_lead": null,
+    "team_lead": 26,
     "department": 3
   }
 },
@@ -49,7 +49,7 @@
   "pk": 6,
   "fields": {
     "name": "Business Analysts",
-    "team_lead": null,
+    "team_lead": 27,
     "department": 3
   }
 },
@@ -58,7 +58,7 @@
   "pk": 7,
   "fields": {
     "name": "Product managers",
-    "team_lead": null,
+    "team_lead": 61,
     "department": 4
   }
 },
@@ -67,7 +67,7 @@
   "pk": 8,
   "fields": {
     "name": "Project managers",
-    "team_lead": null,
+    "team_lead": 62,
     "department": 4
   }
 }

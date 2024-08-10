@@ -16,15 +16,23 @@ class EmployeeAdmin(BaseUserAdmin):
     list_display = (
         'id',
         'get_full_name',
+        'position',
+        'unit',
         'email',
         'date_joined',
         'role',
         'status',
     )
-    list_filter = ('role', 'status')
+    list_filter = (
+        'role',
+        'status',
+        'unit',
+        'unit__team',
+        'unit__team__department',
+    )
     ordering = ('last_name',)
     empty_value_display = "-пусто-"
-    search_fields = ('last_name', 'skills__name')
+    search_fields = ('last_name', 'skills__name', 'position__name')
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Личная информация', {
@@ -47,6 +55,8 @@ class EmployeeAdmin(BaseUserAdmin):
                 'office',
                 'employment_type',
                 'ms_teams',
+                'position',
+                'unit',
             )
         }),
         ('Доступы', {
@@ -57,11 +67,16 @@ class EmployeeAdmin(BaseUserAdmin):
         (None, {
             'classes': ('wide',),
             'fields': (
-                'email', 'password1', 'password2'
+                'email', 'role', 'password1', 'password2'
             ),
         }),
     )
-    list_select_related = ('status', 'office')
+    list_select_related = (
+        'status',
+        'office',
+        'unit',
+        'position',
+    )
 
 
 @admin.register(Skill)

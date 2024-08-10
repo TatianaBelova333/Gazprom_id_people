@@ -4,7 +4,8 @@
   "pk": 1,
   "fields": {
     "name": "Департамент разработки",
-    "head": null
+    "head": 3,
+    "company": 2
   }
 },
 {
@@ -12,7 +13,8 @@
   "pk": 2,
   "fields": {
     "name": "Департамент тестирования",
-    "head": null
+    "head": 4,
+    "company": 2
   }
 },
 {
@@ -20,7 +22,8 @@
   "pk": 3,
   "fields": {
     "name": "Департамент аналитики",
-    "head": null
+    "head": 5,
+    "company": 2
   }
 },
 {
@@ -28,7 +31,8 @@
   "pk": 4,
   "fields": {
     "name": "Департамент PMO",
-    "head": null
+    "head": 6,
+    "company": 2
   }
 }
 ]

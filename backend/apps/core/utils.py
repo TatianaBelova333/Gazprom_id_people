@@ -1,14 +1,17 @@
+from pytils.translit import slugify
+
+
 def images_directory_path(instance, filename) -> str:
     '''Define structure for storing models' images.'''
     return '{0}/{1}/{2}'.format(
         instance.__class__.__name__,
-        instance,
+        slugify(instance),
         filename
     )
 
 
 def delete_related_model_image(sender, instance, **kwargs):
-    '''Delete model's image when deleting the model.'''
+    '''Delete model's image when deleting a model instance.'''
     if instance.image:
         storage, path = instance.image.storage, instance.image.path
         storage.delete(path)

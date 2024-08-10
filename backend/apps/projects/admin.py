@@ -49,10 +49,11 @@ class ProjectAdmin(admin.ModelAdmin):
 
     def director_link(self, obj):
         director = obj.director
-        url = reverse(
-            'admin:staff_employee_changelist'
-        ) + str(director.id)
-        return format_html(f'<a href="{url}">{director}</a>')
+        if director:
+            url = reverse(
+                'admin:staff_employee_changelist'
+            ) + str(director.id)
+            return format_html(f'<a href="{url}">{director}</a>')
 
     director_link.short_description = 'Руководитель'
 

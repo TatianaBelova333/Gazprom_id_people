@@ -347,7 +347,7 @@
   "model": "company_structure.position",
   "pk": 44,
   "fields": {
-    "name": "PM Team Lead",
+    "name": "Project Managers Team Lead",
     "grade": 4
   }
 },
@@ -357,6 +357,78 @@
   "fields": {
     "name": "PM Head",
     "grade": 5
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 46,
+  "fields": {
+    "name": "Junior Fullstack Developer",
+    "grade": 1
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 47,
+  "fields": {
+    "name": "Middle Fulllstack Developer",
+    "grade": 2
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 48,
+  "fields": {
+    "name": "Senior Fullstack Developer",
+    "grade": 3
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 49,
+  "fields": {
+    "name": "Junior iOS Developer",
+    "grade": 1
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 50,
+  "fields": {
+    "name": "Product Managers Team Lead",
+    "grade": 4
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 51,
+  "fields": {
+    "name": "Junior Project Manager",
+    "grade": 1
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 52,
+  "fields": {
+    "name": "Middle Project Manager",
+    "grade": 2
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 53,
+  "fields": {
+    "name": "Senior Project Manager",
+    "grade": 3
+  }
+},
+{
+  "model": "company_structure.position",
+  "pk": 54,
+  "fields": {
+    "name": "QA Team Lead",
+    "grade": 4
   }
 }
 ]

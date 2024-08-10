@@ -5,15 +5,17 @@ from apps.staff.models import EmployeeStatus
 from api.serializers import EmployeeStatusSerializer
 
 
-@extend_schema(tags=["Employee's Profile Editing"])
+@extend_schema(tags=["Employee's Profile editing"])
 @extend_schema_view(
     list=extend_schema(summary='List all employee statuses'),
 )
-class EmployeeStatusListViewset(mixins.ListModelMixin,
-                                viewsets.GenericViewSet):
+class EmployeeStatusReadOnlyViewset(viewsets.ReadOnlyModelViewSet):
     '''
     list:
     Return a list of all existing employee statuses.
+
+    retrieve:
+    Return a single employee status.
 
     '''
     queryset = EmployeeStatus.objects.all()
