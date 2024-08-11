@@ -11,4 +11,6 @@ from api.serializers.timezone import EmployeeTimeZoneSerializer  # noqa
 from api.serializers.tag import WorkTagSerializer  # noqa
 from api.serializers.position import PositionSerializer  # noqa
 from api.serializers.office import OfficeSerializer  # noqa
-from api.serializers.company_structure import CompanyStructureSerializer # noqa
+from api.serializers.company_structure import CompanyStructureSerializer  # noqa
+from api.serializers.company_team import CompanyTeamBriefInfoSerializer  # noqa
+from api.serializers.company_unit import CompanyUnitBriefInfoSerializer  # noqa

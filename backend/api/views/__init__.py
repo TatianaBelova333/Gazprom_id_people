@@ -7,3 +7,5 @@ from api.views.timezone import TimeZoneReadOnlyViewSet  # noqa
 from api.views.position import PositionReadOnlyViewSet  # noqa
 from api.views.office import OfficeReadOnlyViewset  # noqa
 from api.views.company_structure import CompanyStructureViewset  # noqa
+from api.views.company_team import CompanyTeamViewset  # noqa
+from api.views.company_unit import  CompanyUnitViewset  # noqa

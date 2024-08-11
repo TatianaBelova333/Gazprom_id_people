@@ -1,5 +1,5 @@
 from drf_spectacular.utils import extend_schema_view, extend_schema
-from rest_framework import mixins, viewsets
+from rest_framework import viewsets
 
 from apps.staff.models import EmployeeStatus
 from api.serializers import EmployeeStatusSerializer

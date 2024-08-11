@@ -22,6 +22,9 @@ Employee = get_user_model()
     partial_update=extend_schema(
         summary='Partially update a user',
     ),
+    list=extend_schema(
+        summary='List all employees (Справочник)',
+    ),
 )
 class EmployeeViewSet(DjoserUserViewSet):
     '''
