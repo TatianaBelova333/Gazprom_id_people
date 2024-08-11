@@ -76,6 +76,11 @@ class BusinessBaseModel(models.Model):
         blank=True,
         related_name='%(class)ss',
     )
+    team_members = models.ManyToManyField(
+        'staff.Employee',
+        verbose_name='Команда',
+        related_name='%(class)ss'
+    )
 
     class Meta:
         ordering = ('-start_date',)
@@ -89,3 +94,6 @@ class BusinessBaseModel(models.Model):
                 ),
             )
         ]
+
+    def __str__(self):
+        return self.name

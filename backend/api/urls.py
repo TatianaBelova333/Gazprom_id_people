@@ -3,6 +3,8 @@ from rest_framework.routers import DefaultRouter
 
 from api.views import (
     CompanyStructureViewset,
+    CompanyTeamViewset,
+    CompanyUnitViewset,
     EmployeeStatusReadOnlyViewset,
     EmployeeViewSet,
     OfficeReadOnlyViewset,
@@ -36,6 +38,12 @@ router_1.register(
     CompanyStructureViewset,
     basename='structures',
 ),
+router_1.register(
+    'company_teams', CompanyTeamViewset, basename='company_teams',
+)
+router_1.register(
+    'company_units', CompanyUnitViewset, basename='company_units',
+)
 
 
 urlpatterns = [

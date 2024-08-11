@@ -1,6 +1,5 @@
 from drf_spectacular.utils import extend_schema_view, extend_schema
 from rest_framework import viewsets, mixins
-from rest_framework.permissions import AllowAny
 
 from apps.company_structure.models import Company
 from api.serializers import CompanyStructureSerializer
@@ -20,4 +19,3 @@ class CompanyStructureViewset(mixins.ListModelMixin,
         ).all()
     serializer_class = CompanyStructureSerializer
     pagination_class = None
-    permission_classes = (AllowAny,)
