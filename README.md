@@ -11,6 +11,6 @@
 
 
 ```
-python3 manage.py loaddata skill.json status.json office.json timezone.json position.json progress_status.json tag.json department.json company_team.json company_unit.json company.json employee.json
+python3 manage.py loaddata skill.json status.json company.json office.json timezone.json position.json progress_status.json tag.json department.json company_team.json company_unit.json employee.json project.json
 
 ```
