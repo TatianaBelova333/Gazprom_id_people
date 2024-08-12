@@ -1,4 +1,5 @@
 import base64
+from typing import Optional
 
 from django.core.files.base import ContentFile
 from django.contrib.auth import get_user_model

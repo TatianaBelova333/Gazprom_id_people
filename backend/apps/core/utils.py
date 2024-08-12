@@ -19,7 +19,8 @@ def delete_related_model_image(sender, instance, **kwargs):
 
 def delete_old_model_image_edit(sender, instance, **kwargs):
     '''Delete the model's old image when adding a new image.'''
-    if instance.id:
+    if instance and instance.id:
         old_instance = sender.objects.filter(pk=instance.id).first()
-        if old_instance.image != instance.image:
-            old_instance.image.delete(save=False)
+        if old_instance:
+            if old_instance.image != instance.image:
+                old_instance.image.delete(save=False)
