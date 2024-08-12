@@ -1,9 +1,10 @@
 from django.contrib.auth import get_user_model
+
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.permissions import AllowAny
 from djoser.conf import settings
 from djoser.views import UserViewSet as DjoserUserViewSet
-from rest_framework import status
-from rest_framework import filters
+from rest_framework import filters, status
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -11,6 +12,7 @@ from drf_spectacular.utils import extend_schema_view, extend_schema
 
 from apps.staff.models.contacts import SavedContact
 from api.pagination import EmployeeListPaginationClass
+from api.serializers import ProjectMainPageSerializer
 
 Employee = get_user_model()
 
@@ -58,8 +60,15 @@ class EmployeeViewSet(DjoserUserViewSet):
 
     def get_queryset(self):
         current_employee = self.request.user
+
         if self.action == 'my_contacts':
-            return current_employee.contacts.all()
+            return current_employee.contacts.select_related('contact').all()
+
+        if self.action == 'projects':
+            return current_employee.projects.select_related(
+                'director', 'status').prefetch_related(
+                'tags', 'team_members').all()
+
         return super().get_queryset()
 
     @extend_schema(
@@ -129,7 +138,7 @@ class EmployeeViewSet(DjoserUserViewSet):
 
     @extend_schema(summary="List the current user's contacts",
                    tags=['Main'])
-    @action(["get"],
+    @action(['get'],
             detail=False,
             url_path='me/contacts',
             pagination_class=None,
@@ -137,29 +146,41 @@ class EmployeeViewSet(DjoserUserViewSet):
     def my_contacts(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
+    @extend_schema(summary="List the current user's projects",
+                   tags=['Main'])
+    @action(['get'],
+            detail=False,
+            url_path='me/projects',
+            pagination_class=None,
+            filter_backends=[],
+            permission_classes=(AllowAny,),
+            serializer_class=ProjectMainPageSerializer)
+    def projects(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
     # Deactivating other Djoser endpoints
     @extend_schema(exclude=True)
-    @action(["post"], detail=False)
+    @action(['post'], detail=False)
     def resend_activation(self, request, *args, **kwargs):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
     @extend_schema(exclude=True)
-    @action(["post"], detail=False)
+    @action(['post'], detail=False)
     def activation(self, request, *args, **kwargs):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
     @extend_schema(exclude=True)
-    @action(["post"], detail=False)
+    @action(['post'], detail=False)
     def set_email(self, request, *args, **kwargs):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
     @extend_schema(exclude=True)
-    @action(["post"], detail=False)
+    @action(['post'], detail=False)
     def reset_email(self, request, *args, **kwargs):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
     @extend_schema(exclude=True)
-    @action(["post"], detail=False)
+    @action(['post'], detail=False)
     def reset_email_confirm(self, request, *args, **kwargs):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 

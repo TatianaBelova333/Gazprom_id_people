@@ -25,7 +25,6 @@ class Employee(
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-
     role = models.CharField(
         'Тип учетной записи',
         max_length=5,
