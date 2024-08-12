@@ -81,6 +81,14 @@ class BusinessBaseModel(models.Model):
         verbose_name='Команда',
         related_name='%(class)ss'
     )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата создания',
+    )
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        verbose_name='Дата обновления',
+    )
 
     class Meta:
         ordering = ('-start_date',)

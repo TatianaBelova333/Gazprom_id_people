@@ -41,8 +41,10 @@ class ProjectAdmin(admin.ModelAdmin):
         'name',
         'description',
         'start_date',
-        'director_link',
         'end_date',
+        'director_link',
+        'created_at',
+        'updated_at',
     )
     search_fields = ('name', 'description')
     ordering = ('start_date', 'end_date')

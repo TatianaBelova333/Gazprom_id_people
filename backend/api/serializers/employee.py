@@ -6,6 +6,7 @@ from djoser.serializers import UserSerializer
 from rest_framework import serializers
 
 from apps.staff.models import EmployeeStatus, SavedContact, Skill
+from apps.projects.models import Project
 
 
 Employee = get_user_model()
@@ -53,23 +54,47 @@ class Base64ImageField(serializers.ImageField):
         return super().to_internal_value(data)
 
 
+class ProjectNameSerializer(serializers.ModelSerializer):
+    '''Serialiser for listing employee projects in the employee catalogue.'''
+
+    class Meta:
+        model = Project
+        fields = (
+            'id',
+            'name',
+        )
+
+
+class LeaderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Employee
+        fields = (
+            'id',
+            'last_name',
+            'first_name',
+            'image',
+            'employment_type',
+        )
+
+
 class EmployeeListSerializer(UserSerializer):
     '''Serialiser for a list of all Employees.'''
     skills = SkillSerializer(many=True, read_only=True)
     full_name = serializers.CharField(source='get_full_name')
     position = serializers.StringRelatedField()
-    # projects
+    projects = ProjectNameSerializer(many=True, read_only=True)
 
     class Meta:
         model = Employee
-        fields = [
+        fields = (
             'id',
             'full_name',
             'image',
             'employment_type',
             'position',
             'skills',
-        ]
+            'projects',
+        )
 
 
 class EmployeeSerializer(UserSerializer):
@@ -82,10 +107,11 @@ class EmployeeSerializer(UserSerializer):
     unit = UnitSerializer()
     leader = serializers.SerializerMethodField()
     image = Base64ImageField(required=False, allow_null=True)
+    leader = serializers.SerializerMethodField()
 
     class Meta:
         model = Employee
-        fields = [
+        fields = (
             'id',
             'first_name',
             'last_name',
@@ -105,7 +131,7 @@ class EmployeeSerializer(UserSerializer):
             'position',
             'unit',
             'leader',
-        ]
+        )
 
     def _get_current_user(self):
         request = self.context.get('request')
@@ -127,7 +153,7 @@ class EmployeeSerializer(UserSerializer):
                     ).exists())
         return False
 
-    def get_leader(self, obj):
+    def get_leader(self, obj) -> LeaderSerializer:
         '''Return the employee's manager or None.'''
         request_user = self._get_current_user()
 
@@ -139,17 +165,17 @@ class EmployeeSerializer(UserSerializer):
 
                 team_lead = obj.unit.team.team_lead
                 if team_lead:
-                    return obj.unit.team.team_lead.get_full_name()
+                    return LeaderSerializer(obj.unit.team.team_lead) if team_lead else None
             # if the employee is a team lead,
             # their leader is the department head
             if hasattr(obj, 'team'):
                 team = obj.team
                 if team.department is not None:
                     head = team.department.head
-                    return head.get_full_name() if head else None
+                    return LeaderSerializer(head) if head else None
 
             # if the employee is a department head,
             # their leader is the product_owner
             if hasattr(obj, 'department'):
                 product_owner = obj.department.product_owner
-                return product_owner.get_full_name() if product_owner else None
+                return LeaderSerializer(product_owner)
