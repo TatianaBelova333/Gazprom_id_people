@@ -190,6 +190,7 @@ class EmployeeUpdateSerializer(UserSerializer):
     employment_type = serializers.ChoiceField(
         choices=Employee.EmployementTypes
     )
+    image = Base64ImageField(required=False, allow_null=True)
 
     class Meta:
         model = Employee
@@ -216,14 +217,28 @@ class EmployeeUpdateSerializer(UserSerializer):
         if request:
             return request.user
 
-    def to_representation(self, employee) -> EmployeeDetailSerializer:
-        return EmployeeDetailSerializer(employee).data
-
     @transaction.atomic
     def update(self, employee, validated_data):
         skills = validated_data.pop('skills', None)
+        unit = validated_data.pop('unit', None)
+        team = validated_data.pop('team', None)
 
         employee = super().update(employee, validated_data)
+        # если пользователь меняет unit(подразделение),
+        # то поле team(отдел) игнорируется и подтягивается из базы данных
+        if unit is not None:
+            employee.unit = unit
+
+        # при выборе отдела(team) пользователь становится его руководилем,
+        # поэтому осуществляется проверка текущего руководителя отдела
+        elif team is not None:
+            current_team_lead = team.team_lead
+            if current_team_lead is None:
+                employee.team = team
+            else:
+                raise serializers.ValidationError(
+                    f'У отдела {team} уже есть руководитель {current_team_lead}.'
+                )
 
         if skills:
             employee.skills.clear()
@@ -231,3 +246,6 @@ class EmployeeUpdateSerializer(UserSerializer):
 
         employee.save()
         return employee
+
+    def to_representation(self, employee) -> EmployeeDetailSerializer:
+        return EmployeeDetailSerializer(employee).data

@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.permissions import AllowAny
 from djoser.conf import settings
 from djoser.views import UserViewSet as DjoserUserViewSet
 from rest_framework import filters, status
@@ -58,13 +57,9 @@ class EmployeeViewSet(DjoserUserViewSet):
         if self.action == 'list':
             return settings.SERIALIZERS.user_list
 
-        if (self.action == "me"
-                and self.request
-                and self.request.method == 'PATCH'):
+        if self.request and self.request.method == 'PATCH':
             return settings.SERIALIZERS.user_update
 
-        if self.action == 'update':
-            return settings.SERIALIZERS.user_update
         return super().get_serializer_class()
 
     def get_queryset(self):
@@ -162,7 +157,6 @@ class EmployeeViewSet(DjoserUserViewSet):
             url_path='me/projects',
             pagination_class=None,
             filter_backends=[],
-            permission_classes=(AllowAny,),
             serializer_class=ProjectMainPageSerializer)
     def projects(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
