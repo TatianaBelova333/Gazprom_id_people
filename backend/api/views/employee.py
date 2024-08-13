@@ -54,8 +54,17 @@ class EmployeeViewSet(DjoserUserViewSet):
     def get_serializer_class(self):
         if self.action in ('contacts', 'my_contacts'):
             return settings.SERIALIZERS.contacts
+
         if self.action == 'list':
             return settings.SERIALIZERS.user_list
+
+        if (self.action == "me"
+                and self.request
+                and self.request.method == 'PATCH'):
+            return settings.SERIALIZERS.user_update
+
+        if self.action == 'update':
+            return settings.SERIALIZERS.user_update
         return super().get_serializer_class()
 
     def get_queryset(self):

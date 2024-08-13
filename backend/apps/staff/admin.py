@@ -29,6 +29,7 @@ class EmployeeAdmin(BaseUserAdmin):
         'unit',
         'unit__team',
         'unit__team__department',
+        'is_active',
     )
     ordering = ('last_name',)
     empty_value_display = "-пусто-"
@@ -60,7 +61,7 @@ class EmployeeAdmin(BaseUserAdmin):
             )
         }),
         ('Доступы', {
-            'fields': ("role",)
+            'fields': ('role', 'is_active')
         }),
     )
     add_fieldsets = (

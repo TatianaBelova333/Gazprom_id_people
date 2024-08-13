@@ -1,14 +1,19 @@
 import base64
-from typing import Optional
 
 from django.core.files.base import ContentFile
 from django.contrib.auth import get_user_model
+from django.db import transaction
 from djoser.serializers import UserSerializer
+from djoser.conf import settings
 from rest_framework import serializers
 
+from api.serializers.company_team import CompanyTeamBriefInfoSerializer
+from api.serializers.office import OfficeSerializer
+from api.serializers.position import PositionSerializer
+from api.serializers.skill import SkillSerializer
+from api.serializers.timezone import EmployeeTimeZoneSerializer
 from apps.staff.models import EmployeeStatus, SavedContact, Skill
 from apps.projects.models import Project
-
 
 Employee = get_user_model()
 
@@ -19,22 +24,6 @@ class EmployeeStatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = EmployeeStatus
         fields = ('id', 'name', 'color')
-
-
-class SkillSerializer(serializers.ModelSerializer):
-    '''Serializer for Employee's skills.'''
-
-    class Meta:
-        model = Skill
-        fields = ('id', 'name', 'color')
-
-
-class PositionSerializer(serializers.ModelSerializer):
-    '''Serializer for Employee's position.'''
-
-    class Meta:
-        model = Skill
-        fields = ('id', 'name')
 
 
 class UnitSerializer(serializers.ModelSerializer):
@@ -66,7 +55,7 @@ class ProjectNameSerializer(serializers.ModelSerializer):
         )
 
 
-class LeaderSerializer(serializers.ModelSerializer):
+class ManagerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
         fields = (
@@ -79,7 +68,7 @@ class LeaderSerializer(serializers.ModelSerializer):
 
 
 class EmployeeListSerializer(UserSerializer):
-    '''Serialiser for a list of all Employees.'''
+    '''Serialiser for listing all Employees.'''
     skills = SkillSerializer(many=True, read_only=True)
     full_name = serializers.CharField(source='get_full_name')
     position = serializers.StringRelatedField()
@@ -98,17 +87,21 @@ class EmployeeListSerializer(UserSerializer):
         )
 
 
-class EmployeeSerializer(UserSerializer):
-    '''Serialiser for Employee's profile.'''
+class EmployeeDetailSerializer(UserSerializer):
+    '''Serialiser for retrieving Employee's profile.'''
     is_saved_contact = serializers.SerializerMethodField()
-    office = serializers.StringRelatedField(read_only=True)
-    status = EmployeeStatusSerializer()
-    skills = SkillSerializer(many=True, read_only=True)
-    position = PositionSerializer()
-    unit = UnitSerializer()
-    leader = serializers.SerializerMethodField()
     image = Base64ImageField(required=False, allow_null=True)
-    leader = serializers.SerializerMethodField()
+    manager = serializers.SerializerMethodField()
+    employment_type = serializers.ChoiceField(
+        choices=Employee.EmployementTypes
+    )
+    team = serializers.SerializerMethodField()
+    office = OfficeSerializer()
+    position = PositionSerializer()
+    status = EmployeeStatusSerializer()
+    unit = UnitSerializer()
+    skills = SkillSerializer(many=True)
+    timezone = EmployeeTimeZoneSerializer()
 
     class Meta:
         model = Employee
@@ -121,7 +114,6 @@ class EmployeeSerializer(UserSerializer):
             'about_me',
             'phone_number',
             'email',
-            'office',
             'status',
             'skills',
             'image',
@@ -130,18 +122,21 @@ class EmployeeSerializer(UserSerializer):
             'employment_type',
             'office',
             'position',
+            'timezone',
             'unit',
-            'leader',
+            'team',
+            'manager',
         )
+        read_only_fields = (settings.LOGIN_FIELD, 'id', 'team')
 
     def _get_current_user(self):
         request = self.context.get('request')
         if request:
             return request.user
 
-    def get_is_saved_contact(self, obj):
+    def get_is_saved_contact(self, employee) -> bool:
         '''
-        Return True of the obj in the request user's saved contacts.
+        Return True of the employee is in the request user's saved contacts.
         False, otherwise.
 
         '''
@@ -150,33 +145,89 @@ class EmployeeSerializer(UserSerializer):
             return (request_user.is_authenticated
                     and SavedContact.objects.filter(
                         employee=request_user,
-                        contact=obj
+                        contact=employee,
                     ).exists())
         return False
 
-    def get_leader(self, obj) -> LeaderSerializer:
+    def get_manager(self, employee) -> ManagerSerializer:
         '''Return the employee's manager or None.'''
-        request_user = self._get_current_user()
+        # if employee belongs to a certain unit,
+        # their manager is the team lead
+        unit = employee.unit
+        if unit is not None and unit.team is not None:
+            team_lead = employee.unit.team.team_lead
+            if team_lead:
+                return ManagerSerializer(team_lead).data
 
-        if request_user:
-            # if employee belongs to a certain unit,
-            # their leader is the team lead
-            if (obj.unit is not None
-                    and obj.unit.team is not None):
+        # if employee is a team lead,
+        # their manager is the department head
+        if hasattr(employee, 'team'):
+            team = employee.team
+            if team.department is not None:
+                head = team.department.head
+                if head:
+                    return ManagerSerializer(head).data
 
-                team_lead = obj.unit.team.team_lead
-                if team_lead:
-                    return LeaderSerializer(obj.unit.team.team_lead) if team_lead else None
-            # if the employee is a team lead,
-            # their leader is the department head
-            if hasattr(obj, 'team'):
-                team = obj.team
-                if team.department is not None:
-                    head = team.department.head
-                    return LeaderSerializer(head) if head else None
+        # if the employee is a department head,
+        # their manager is the company director
+        if hasattr(employee, 'department'):
+            company_director = employee.department.company.director
+            if company_director:
+                return ManagerSerializer(company_director).data
 
-            # if the employee is a department head,
-            # their leader is the product_owner
-            if hasattr(obj, 'department'):
-                product_owner = obj.department.product_owner
-                return LeaderSerializer(product_owner)
+    def get_team(self, employee) -> CompanyTeamBriefInfoSerializer:
+        unit = employee.unit
+        if unit is not None:
+            return CompanyTeamBriefInfoSerializer(unit.team).data
+
+        if hasattr(employee, 'team'):
+            return CompanyTeamBriefInfoSerializer(employee.team).data
+
+
+class EmployeeUpdateSerializer(UserSerializer):
+    '''Serialiser for updating Employee's profile.'''
+    image = Base64ImageField(required=False, allow_null=True)
+    employment_type = serializers.ChoiceField(
+        choices=Employee.EmployementTypes
+    )
+
+    class Meta:
+        model = Employee
+        fields = (
+            'first_name',
+            'last_name',
+            'middle_name',
+            'birthday',
+            'about_me',
+            'phone_number',
+            'status',
+            'skills',
+            'image',
+            'employment_type',
+            'office',
+            'position',
+            'timezone',
+            'unit',
+            'team',
+        )
+
+    def _get_current_user(self):
+        request = self.context.get('request')
+        if request:
+            return request.user
+
+    def to_representation(self, employee) -> EmployeeDetailSerializer:
+        return EmployeeDetailSerializer(employee).data
+
+    @transaction.atomic
+    def update(self, employee, validated_data):
+        skills = validated_data.pop('skills', None)
+
+        employee = super().update(employee, validated_data)
+
+        if skills:
+            employee.skills.clear()
+            employee.skills.add(*skills)
+
+        employee.save()
+        return employee

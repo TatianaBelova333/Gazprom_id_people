@@ -1,6 +1,6 @@
 from api.serializers.employee import (  # noqa
-    PositionSerializer,  # noqa
-    EmployeeSerializer,  # noqa
+    EmployeeDetailSerializer,  # noqa
+    EmployeeUpdateSerializer,  # noqa
     SkillSerializer,  # noqa
     EmployeeStatusSerializer,  # noqa
     EmployeeListSerializer,  # noqa

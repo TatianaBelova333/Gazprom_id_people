@@ -148,9 +148,10 @@ DJOSER = {
     'SET_PASSWORD_RETYPE': True,
     'HIDE_USERS': False,
     'SERIALIZERS': {
-        'current_user': 'api.serializers.EmployeeSerializer',
-        'user': 'api.serializers.EmployeeSerializer',
+        'current_user': 'api.serializers.EmployeeDetailSerializer',
+        'user': 'api.serializers.EmployeeDetailSerializer',
         'user_list': 'api.serializers.EmployeeListSerializer',
+        'user_update': 'api.serializers.EmployeeUpdateSerializer',
         'contacts': 'api.serializers.SavedContactSerializer',
         'my_contacts': 'api.serializers.SavedContactSerializer',
     },
