@@ -28,5 +28,4 @@ class SavedContactSerializer(serializers.ModelSerializer):
             'employment_type',
             'telegram',
             'ms_teams',
-            'position',
         ]

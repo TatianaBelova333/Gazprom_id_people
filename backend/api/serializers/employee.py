@@ -8,12 +8,16 @@ from djoser.conf import settings
 from rest_framework import serializers
 
 from api.serializers.company_team import CompanyTeamBriefInfoSerializer
+from api.serializers.company_unit import CompanyUnitBriefInfoSerializer
 from api.serializers.office import OfficeSerializer
 from api.serializers.position import PositionSerializer
+from api.serializers.project import (
+    ProjectMainPageSerializer,
+    ProjectNameSerializer,
+)
 from api.serializers.skill import SkillSerializer
 from api.serializers.timezone import EmployeeTimeZoneSerializer
-from apps.staff.models import EmployeeStatus, SavedContact, Skill
-from apps.projects.models import Project
+from apps.staff.models import EmployeeStatus, SavedContact
 
 Employee = get_user_model()
 
@@ -26,14 +30,6 @@ class EmployeeStatusSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'color')
 
 
-class UnitSerializer(serializers.ModelSerializer):
-    '''Serializer for Employee's unit.'''
-
-    class Meta:
-        model = Skill
-        fields = ('id', 'name')
-
-
 class Base64ImageField(serializers.ImageField):
     def to_internal_value(self, data):
         if isinstance(data, str) and data.startswith('data:image'):
@@ -42,17 +38,6 @@ class Base64ImageField(serializers.ImageField):
             data = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
 
         return super().to_internal_value(data)
-
-
-class ProjectNameSerializer(serializers.ModelSerializer):
-    '''Serialiser for listing employee projects in the employee catalogue.'''
-
-    class Meta:
-        model = Project
-        fields = (
-            'id',
-            'name',
-        )
 
 
 class ManagerSerializer(serializers.ModelSerializer):
@@ -95,13 +80,14 @@ class EmployeeDetailSerializer(UserSerializer):
     employment_type = serializers.ChoiceField(
         choices=Employee.EmployementTypes
     )
-    team = serializers.SerializerMethodField()
+    company_team = serializers.SerializerMethodField()
     office = OfficeSerializer()
     position = PositionSerializer()
     status = EmployeeStatusSerializer()
-    unit = UnitSerializer()
+    unit = CompanyUnitBriefInfoSerializer()
     skills = SkillSerializer(many=True)
     timezone = EmployeeTimeZoneSerializer()
+    projects = serializers.SerializerMethodField()
 
     class Meta:
         model = Employee
@@ -124,8 +110,9 @@ class EmployeeDetailSerializer(UserSerializer):
             'position',
             'timezone',
             'unit',
-            'team',
+            'company_team',
             'manager',
+            'projects',
         )
         read_only_fields = (settings.LOGIN_FIELD, 'id', 'team')
 
@@ -133,6 +120,19 @@ class EmployeeDetailSerializer(UserSerializer):
         request = self.context.get('request')
         if request:
             return request.user
+
+    def get_projects(self, employee) -> ProjectMainPageSerializer:
+        '''
+        Return all employee projects as a team member and director.
+
+        '''
+        queryset = employee.projects.all() | employee.directed_projects.all()
+        all_projects = queryset.select_related(
+                'director', 'status'
+            ).prefetch_related(
+                'tags', 'team_members',
+            ).exclude(is_archived=True).distinct()
+        return ProjectMainPageSerializer(all_projects, many=True).data
 
     def get_is_saved_contact(self, employee) -> bool:
         '''
@@ -175,7 +175,8 @@ class EmployeeDetailSerializer(UserSerializer):
             if company_director:
                 return ManagerSerializer(company_director).data
 
-    def get_team(self, employee) -> CompanyTeamBriefInfoSerializer:
+    def get_company_team(self, employee) -> CompanyTeamBriefInfoSerializer:
+        '''Return employee company team (Отдел).'''
         unit = employee.unit
         if unit is not None:
             return CompanyTeamBriefInfoSerializer(unit.team).data
@@ -211,6 +212,7 @@ class EmployeeUpdateSerializer(UserSerializer):
             'unit',
             'team',
         )
+        read_only_fields = (settings.LOGIN_FIELD, 'id')
 
     def _get_current_user(self):
         request = self.context.get('request')
@@ -237,7 +239,8 @@ class EmployeeUpdateSerializer(UserSerializer):
                 employee.team = team
             else:
                 raise serializers.ValidationError(
-                    f'У отдела {team} уже есть руководитель {current_team_lead}.'
+                    (f'У отдела {team} уже есть '
+                     f'руководитель {current_team_lead}.')
                 )
 
         if skills:

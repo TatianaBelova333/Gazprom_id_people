@@ -45,9 +45,18 @@ class ProjectAdmin(admin.ModelAdmin):
         'director_link',
         'created_at',
         'updated_at',
+        'created_by',
+        'updated_by',
     )
     search_fields = ('name', 'description')
     ordering = ('start_date', 'end_date')
+    list_filter = ('is_archived', 'status')
+    list_select_related = (
+        'status',
+        'director__position',
+        'created_by',
+        'updated_by',
+    )
 
     def director_link(self, obj):
         director = obj.director
@@ -67,12 +76,22 @@ class ServiceAdmin(admin.ModelAdmin):
         'id',
         'name',
         'project',
+        'status',
         'description',
         'start_date',
         'end_date',
+        'created_by',
+        'updated_by',
     )
     search_fields = ('name', 'description')
     ordering = ('start_date', 'end_date')
+    list_filter = ('is_archived', 'status')
+    list_select_related = (
+        'status',
+        'project',
+        'created_by',
+        'updated_by',
+    )
 
 
 @admin.register(Component)
@@ -82,11 +101,20 @@ class ComponentAdmin(admin.ModelAdmin):
         'id',
         'name',
         'service',
+        'status',
         'priority',
         'description',
         'start_date',
         'end_date',
+        'created_by',
+        'updated_by',
     )
     search_fields = ('name', 'description')
     ordering = ('start_date', 'end_date')
-    list_filter = ('priority',)
+    list_filter = ('priority', 'is_archived', 'status')
+    list_select_related = (
+        'status',
+        'service',
+        'created_by',
+        'updated_by',
+    )

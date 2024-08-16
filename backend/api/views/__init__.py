@@ -9,3 +9,6 @@ from api.views.office import OfficeReadOnlyViewset  # noqa
 from api.views.company_structure import CompanyStructureViewset  # noqa
 from api.views.company_team import CompanyTeamViewset  # noqa
 from api.views.company_unit import  CompanyUnitViewset  # noqa
+from api.views.project import ProjectViewSet  # noqa
+from api.views.service import ServiceViewSet  # noqa
+from api.views.component import ComponentViewSet  # noqa
