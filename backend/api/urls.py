@@ -5,11 +5,14 @@ from api.views import (
     CompanyStructureViewset,
     CompanyTeamViewset,
     CompanyUnitViewset,
+    ComponentViewSet,
     EmployeeStatusReadOnlyViewset,
     EmployeeViewSet,
     OfficeReadOnlyViewset,
     PositionReadOnlyViewSet,
     ProgressStatusReadOnlyViewset,
+    ProjectViewSet,
+    ServiceViewSet,
     SkillReadOnlyViewSet,
     TagReadOnlyViewSet,
     TimeZoneReadOnlyViewSet,
@@ -43,6 +46,16 @@ router_1.register(
 )
 router_1.register(
     'company_units', CompanyUnitViewset, basename='company_units',
+)
+
+router_1.register(
+    'projects', ProjectViewSet, basename='projects',
+)
+router_1.register(
+    'services', ServiceViewSet, basename='services',
+)
+router_1.register(
+    'components', ComponentViewSet, basename='components',
 )
 
 

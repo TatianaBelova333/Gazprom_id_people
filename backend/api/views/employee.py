@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-
+from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
 from djoser.conf import settings
 from djoser.views import UserViewSet as DjoserUserViewSet
@@ -9,7 +9,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema_view, extend_schema
 
-from apps.staff.models.contacts import SavedContact
+from apps.staff.models import SavedContact
+from apps.projects.models import Project
 from api.pagination import EmployeeListPaginationClass
 from api.serializers import ProjectMainPageSerializer
 
@@ -45,10 +46,17 @@ class EmployeeViewSet(DjoserUserViewSet):
         filters.SearchFilter,
         filters.OrderingFilter,
     )
-    filterset_fields = ('skills', 'employment_type')
+    filterset_fields = ('skills', 'employment_type', 'projects')
     search_fields = ('first_name', 'last_name', 'middle_name', 'email')
     ordering_fields = ('last_name', 'position')
     pagination_class = EmployeeListPaginationClass
+    queryset = Employee.objects.select_related(
+        'position',
+        'unit__team__team_lead',
+        'timezone',
+        'status',
+        'office',
+    ).prefetch_related('skills', 'projects', 'directed_projects').all()
 
     def get_serializer_class(self):
         if self.action in ('contacts', 'my_contacts'):
@@ -57,7 +65,7 @@ class EmployeeViewSet(DjoserUserViewSet):
         if self.action == 'list':
             return settings.SERIALIZERS.user_list
 
-        if self.request and self.request.method == 'PATCH':
+        if self.request and self.request.method in ('PATCH', 'PUT'):
             return settings.SERIALIZERS.user_update
 
         return super().get_serializer_class()
@@ -66,12 +74,19 @@ class EmployeeViewSet(DjoserUserViewSet):
         current_employee = self.request.user
 
         if self.action == 'my_contacts':
-            return current_employee.contacts.select_related('contact').all()
+            return current_employee.contacts.select_related(
+                'contact__position'
+            ).all()
 
         if self.action == 'projects':
-            return current_employee.projects.select_related(
-                'director', 'status').prefetch_related(
-                'tags', 'team_members').all()
+            queryset = Project.objects.select_related(
+                'director', 'status'
+            ).prefetch_related(
+                'tags', 'team_members',
+            ).filter(
+                Q(director=current_employee) | Q(team_members=current_employee)
+            ).exclude(is_archived=True).distinct()
+            return queryset
 
         return super().get_queryset()
 
@@ -82,9 +97,11 @@ class EmployeeViewSet(DjoserUserViewSet):
     def me(self, request, *args, **kwargs):
         '''The current user's profile.'''
         self.get_object = self.get_instance
-        if request.method == "GET":
+
+        if request.method == 'GET':
             return super().retrieve(request, *args, **kwargs)
-        elif request.method == "PATCH":
+
+        elif request.method == 'PATCH':
             return super().partial_update(request, *args, **kwargs)
 
     @extend_schema(
@@ -132,6 +149,7 @@ class EmployeeViewSet(DjoserUserViewSet):
             if saved_contact.exists():
                 saved_contact.delete()
                 return Response(status=status.HTTP_204_NO_CONTENT)
+
             return Response(
                 status=status.HTTP_400_BAD_REQUEST,
                 data={
@@ -161,7 +179,7 @@ class EmployeeViewSet(DjoserUserViewSet):
     def projects(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
-    # Deactivating other Djoser endpoints
+    # Deactivate other Djoser endpoints
     @extend_schema(exclude=True)
     @action(['post'], detail=False)
     def resend_activation(self, request, *args, **kwargs):

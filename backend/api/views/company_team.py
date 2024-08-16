@@ -17,7 +17,7 @@ class CompanyTeamViewset(viewsets.ReadOnlyModelViewSet):
     '''
     list:
     Return a list of all teams (отделы) in the company.
-    Search by the name of the team and filter by company units.
+    Search by the company team name and filter by company units.
 
     retrieve:
     Return a single company team (отдел).

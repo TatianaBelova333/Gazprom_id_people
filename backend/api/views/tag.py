@@ -5,7 +5,7 @@ from apps.projects.models import WorkTag
 from api.serializers import WorkTagSerializer
 
 
-@extend_schema(tags=['Project/component/service editing'])
+@extend_schema(tags=['Tags and progress statuses'])
 @extend_schema_view(
     list=extend_schema(summary='List all work tags'),
 )

@@ -11,6 +11,9 @@ class Project(BusinessBaseModel):
         'staff.Employee',
         verbose_name='Руководитель проекта',
         on_delete=models.PROTECT,
+        related_name='directed_projects',
+        blank=True,
+        null=True,
     )
 
     class Meta(BusinessBaseModel.Meta):
@@ -49,7 +52,9 @@ class Component(BusinessBaseModel):
     release_type = models.CharField(
         verbose_name='Тип релиза',
         max_length=50,
-        validators=[MinLengthValidator(limit_value=2)]
+        validators=[MinLengthValidator(limit_value=2)],
+        null=True,
+        blank=True,
     )
     priority = models.PositiveSmallIntegerField(
         verbose_name='Приоритет',

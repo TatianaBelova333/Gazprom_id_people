@@ -10,7 +10,7 @@ class NameBaseModel(models.Model):
     name = models.CharField(
         max_length=50,
         verbose_name='Название',
-        validators=(MinLengthValidator(limit_value=2),)
+        validators=(MinLengthValidator(limit_value=2),),
     )
 
     class Meta:
@@ -43,14 +43,9 @@ class ColorBaseModel(models.Model):
         abstract = True
 
 
-class BusinessBaseModel(models.Model):
+class BusinessBaseModel(NameBaseModel):
     '''Abstract model for projects, services and components.'''
-    name = models.CharField(
-        max_length=50,
-        verbose_name='Название',
-        unique=True,
-        validators=(MinLengthValidator(limit_value=2),)
-    )
+
     description = models.TextField(
         verbose_name='Описание',
         max_length=3000,
@@ -59,16 +54,21 @@ class BusinessBaseModel(models.Model):
     start_date = models.DateField(
         verbose_name='Дата начала',
         db_index=True,
+        null=True,
+        blank=True,
     )
     end_date = models.DateField(
         verbose_name='Дата окончания',
         db_index=True,
+        null=True,
+        blank=True,
     )
     status = models.ForeignKey(
         'projects.ProgressStatus',
         verbose_name='Статус работы',
         on_delete=models.PROTECT,
         related_name='%(class)ss',
+        null=True,
     )
     tags = models.ManyToManyField(
         'projects.WorkTag',
@@ -79,7 +79,8 @@ class BusinessBaseModel(models.Model):
     team_members = models.ManyToManyField(
         'staff.Employee',
         verbose_name='Команда',
-        related_name='%(class)ss'
+        related_name='%(class)ss',
+        blank=True,
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
@@ -88,6 +89,28 @@ class BusinessBaseModel(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True,
         verbose_name='Дата обновления',
+    )
+    is_archived = models.BooleanField(
+        verbose_name='В архиве',
+        default=False,
+    )
+    created_by = models.ForeignKey(
+        'staff.Employee',
+        verbose_name='Добавлен',
+        related_name='%(class)ss_created',
+        on_delete=models.SET_NULL,
+        editable=False,
+        blank=True,
+        null=True,
+    )
+    updated_by = models.ForeignKey(
+        'staff.Employee',
+        verbose_name='Обновлен',
+        related_name='%(class)ss_updated',
+        on_delete=models.SET_NULL,
+        editable=False,
+        blank=True,
+        null=True,
     )
 
     class Meta:

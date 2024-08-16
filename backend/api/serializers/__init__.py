@@ -14,4 +14,20 @@ from api.serializers.office import OfficeSerializer  # noqa
 from api.serializers.company_structure import CompanyStructureSerializer  # noqa
 from api.serializers.company_team import CompanyTeamBriefInfoSerializer  # noqa
 from api.serializers.company_unit import CompanyUnitBriefInfoSerializer  # noqa
-from api.serializers.project import ProjectMainPageSerializer  # noqa
+from api.serializers.project import (  # noqa
+    ProjectCreateUpdateSerializer,  # noqa
+    ProjectDetailSerializer,  # noqa
+    ProjectNameSerializer,  # noqa
+    ProjectListSerializer,  # noqa
+    ProjectMainPageSerializer,  # noqa
+  )  # noqa
+from api.serializers.service import (  # noqa
+    ServiceCreateUpdateSerializer,  # noqa
+    ServiceDetailSerializer, # noqa
+    ServiceListSerializer  # noqa
+)  # noqa
+from api.serializers.component import (  # noqa
+    ComponentCreateUpdateSerializer,  # noqa
+    ComponentDetailSerializer,  # noqa
+    ComponentListSerializer,  # noqa
+  )  # noqa
