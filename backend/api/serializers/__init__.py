@@ -31,3 +31,4 @@ from api.serializers.component import (  # noqa
     ComponentDetailSerializer,  # noqa
     ComponentListSerializer,  # noqa
   )  # noqa
+from api.serializers.team_member import TeamMemberSerializer  # noqa

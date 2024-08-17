@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
 from api.serializers.progress_status import ProgressStatusSerializer
-from api.serializers.project import TeamMemberSerializer
 from api.serializers.tag import WorkTagSerializer
+from api.utils import get_team_groups
 from apps.projects.models import Component
 
 
@@ -23,7 +23,7 @@ class ComponentDetailSerializer(serializers.ModelSerializer):
     '''Serialiser for retrieving a single component.'''
     tags = WorkTagSerializer(many=True)
     status = ProgressStatusSerializer()
-    team_members = TeamMemberSerializer(many=True)
+    company_teams = serializers.SerializerMethodField()
     priority = serializers.ChoiceField(
         choices=Component.Priority
     )
@@ -41,8 +41,12 @@ class ComponentDetailSerializer(serializers.ModelSerializer):
             'release_type',
             'priority',
             'service',
-            'team_members',
+            'company_teams',
         )
+
+    def get_company_teams(self, component):
+        '''Return component members grouped by company teams(отделы).'''
+        return get_team_groups(component)
 
 
 class ComponentCreateUpdateSerializer(serializers.ModelSerializer):

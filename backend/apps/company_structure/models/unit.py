@@ -3,7 +3,7 @@ from apps.core.models import NameBaseModel
 
 
 class CompanyUnit(NameBaseModel):
-    '''Company Unit model.'''
+    '''Company Unit model (Подразделения).'''
 
     team = models.ForeignKey(
         'CompanyTeam',

@@ -65,6 +65,7 @@ class Employee(
     about_me = models.TextField(
         'О себе',
         blank=True,
+        max_length=600,
     )
     timezone = models.ForeignKey(
         'EmployeeTimeZone',

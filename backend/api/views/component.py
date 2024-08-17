@@ -2,7 +2,11 @@ from drf_spectacular.utils import extend_schema_view, extend_schema
 from rest_framework import viewsets
 
 from api.permissions import IsAdminOrReadOnly
-from api.serializers import ComponentCreateUpdateSerializer, ComponentDetailSerializer, ComponentListSerializer
+from api.serializers import (
+    ComponentCreateUpdateSerializer,
+    ComponentDetailSerializer,
+    ComponentListSerializer
+)
 from apps.projects.models import Component
 
 

@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
 from api.serializers.progress_status import ProgressStatusSerializer
-from api.serializers.project import TeamMemberSerializer
 from api.serializers.tag import WorkTagSerializer
+from api.utils import get_team_groups
 from apps.projects.models import Service
 
 
@@ -24,7 +24,7 @@ class ServiceDetailSerializer(serializers.ModelSerializer):
     Serializer for return information about a single service.
 
     '''
-    service_members = TeamMemberSerializer(many=True, source='team_members')
+    company_teams = serializers.SerializerMethodField()
     tags = WorkTagSerializer(many=True)
     status = ProgressStatusSerializer()
 
@@ -37,17 +37,18 @@ class ServiceDetailSerializer(serializers.ModelSerializer):
             'status',
             'description',
             'tags',
-            'service_members',
+            'company_teams',
             'start_date',
             'end_date',
         )
 
+    def get_company_teams(self, service):
+        '''Return service members grouped by company teams(отделы).'''
+        return get_team_groups(service)
+
 
 class ServiceCreateUpdateSerializer(serializers.ModelSerializer):
-    '''
-    Serializer for creating and updating services.
-
-    '''
+    '''Serializer for creating and updating services.'''
 
     class Meta:
         model = Service

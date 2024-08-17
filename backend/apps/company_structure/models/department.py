@@ -4,7 +4,7 @@ from apps.core.models import NameBaseModel
 
 
 class CompanyDepartment(NameBaseModel):
-    '''Company Department model.'''
+    '''Company Department model (Департаменты).'''
 
     head = models.OneToOneField(
         'staff.Employee',

@@ -1,11 +1,13 @@
+from django.db.models import Case, When, F
 from rest_framework import serializers
 
 from apps.projects.models import Project
 from apps.staff.models import Employee
-from api.serializers.company_team import CompanyTeamBriefInfoSerializer
 from api.serializers.position import PositionSerializer
 from api.serializers.progress_status import ProgressStatusSerializer
 from api.serializers.tag import WorkTagSerializer
+from api.serializers.team_member import TeamMemberSerializer
+from api.utils import get_team_groups
 
 
 class ProjectNameSerializer(serializers.ModelSerializer):
@@ -115,44 +117,13 @@ class ProjectMainPageSerializer(serializers.ModelSerializer):
         return team_extra_count if team_extra_count > 0 else 0
 
 
-class TeamMemberSerializer(serializers.ModelSerializer):
-    '''
-    Serializer for listing team members of projects, services and components.
-
-    '''
-    position = PositionSerializer()
-    company_team = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Employee
-        fields = (
-            'id',
-            'image',
-            'last_name',
-            'first_name',
-            'employment_type',
-            'position',
-            'company_team',
-        )
-
-    def get_company_team(self, employee) -> CompanyTeamBriefInfoSerializer:
-        '''Return the company team (Отдел) that employee belongs to.'''
-
-        unit = employee.unit
-        if unit is not None:
-            return CompanyTeamBriefInfoSerializer(unit.team).data
-
-        if hasattr(employee, 'team'):
-            return CompanyTeamBriefInfoSerializer(employee.team).data
-
-
 class ProjectListSerializer(serializers.ModelSerializer):
     '''
     Serializer for listing all company projects (Раздел 'Проекты').
 
     '''
     director = TeamMemberSerializer()
-    team_members = TeamMemberSerializer(many=True)
+    company_teams = serializers.SerializerMethodField()
     status = ProgressStatusSerializer()
 
     class Meta:
@@ -161,31 +132,27 @@ class ProjectListSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'status',
-            'team_members',
+            'company_teams',
             'director',
         )
 
+    def get_company_teams(self, project):
+        '''Return project members grouped by company teams(отделы).'''
+        return get_team_groups(project)
 
-class ProjectDetailSerializer(serializers.ModelSerializer):
+
+class ProjectDetailSerializer(ProjectListSerializer):
     '''
     Serializer for information about a single project.
 
     '''
-    director = TeamMemberSerializer()
-    team_members = TeamMemberSerializer(many=True)
     tags = WorkTagSerializer(many=True)
-    status = ProgressStatusSerializer()
 
-    class Meta:
+    class Meta(ProjectListSerializer.Meta):
         model = Project
-        fields = (
-            'id',
-            'name',
-            'status',
-            'description',
+        fields = ProjectListSerializer.Meta.fields + (
             'tags',
-            'team_members',
-            'director',
+            'description',
             'start_date',
             'end_date',
         )

@@ -5,14 +5,16 @@ from apps.staff.models import SavedContact
 
 class SavedContactSerializer(serializers.ModelSerializer):
     '''Serialiser for the employee's saved contacts.'''
-    user_id = serializers.CharField(source='contact.id')
+    user_id = serializers.IntegerField(source='contact.id')
     full_name = serializers.CharField(source='contact.get_full_name')
     phone_number = serializers.CharField(source='contact.phone_number')
-    email = serializers.CharField(source='contact.email')
-    image = serializers.CharField(source='contact.image')
+    email = serializers.EmailField(source='contact.email')
+    image = serializers.URLField(source='contact.image')
     telegram = serializers.CharField(source='contact.telegram')
-    employment_type = serializers.CharField(source='contact.employment_type')
-    ms_teams = serializers.CharField(source='contact.ms_teams')
+    employment_type = serializers.IntegerField(
+        source='contact.employment_type'
+    )
+    ms_teams = serializers.EmailField(source='contact.ms_teams')
     position = serializers.CharField(source='contact.position')
 
     class Meta:
