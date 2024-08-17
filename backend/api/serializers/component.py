@@ -2,7 +2,12 @@ from rest_framework import serializers
 
 from api.serializers.progress_status import ProgressStatusSerializer
 from api.serializers.tag import WorkTagSerializer
-from api.utils import get_team_groups
+from api.utils import (
+    check_dates_within_project_dates,
+    check_start_date_lt_end_date,
+    check_team_members_belong_to_project,
+    get_team_groups,
+)
 from apps.projects.models import Component
 
 
@@ -79,58 +84,29 @@ class ComponentCreateUpdateSerializer(serializers.ModelSerializer):
         and component dates are within the related project dates.
 
         '''
+        # service is a required field and each service belogns to a project
         service = data['service']
         project = service.project
-        project_start_date = project.start_date
-        project_end_date = project.end_date
 
         component_start_date = data.get('start_date')
         component_end_date = data.get('end_date')
 
-        if component_start_date:
-            if (project_start_date
-                    and component_start_date < project_start_date):
-                raise serializers.ValidationError(
-                    (f'Дата начала компонента не может быть раньше '
-                     f'даты начала проекта {project_start_date}.')
-                )
-            if project_end_date and component_start_date > project_end_date:
-                raise serializers.ValidationError(
-                    (f'Дата начала компонента не может быть позже '
-                     f'даты окончания проекта {project_end_date}.')
-                )
-
-        if component_end_date:
-            if project_end_date and component_end_date > project_start_date:
-                raise serializers.ValidationError(
-                    (f'Дата окончания компонента не может быть позже '
-                     f'даты окончания проекта {project_end_date}.')
-                )
-            if project_start_date and component_end_date < project_start_date:
-                raise serializers.ValidationError(
-                    (f'Дата окончания компонента не может быть раньше '
-                     f'даты начала проекта {project_start_date}.')
-                )
-
-        if component_start_date and component_end_date:
-            if component_start_date >= component_end_date:
-                raise serializers.ValidationError(
-                    'Дата начала компонента не может быть позже даты окончания.'
-                )
+        check_start_date_lt_end_date(
+            start_date=component_start_date,
+            end_date=component_end_date,
+        )
+        check_dates_within_project_dates(
+            start_date=component_start_date,
+            end_date=component_end_date,
+            project=project,
+        )
 
         component_members = data.get('team_members')
 
-        if component_members:
-            project_members = set(project.team_members.all())
-            project_director = project.director
-            if project_director:
-                project_members.add(project_director)
-
-            if not set(component_members).issubset(project_members):
-                raise serializers.ValidationError(
-                    ('Участники команды компонента должны '
-                     'входить в команду проекта.')
-                )
+        check_team_members_belong_to_project(
+            members=component_members,
+            project=project,
+        )
         return data
 
     def to_representation(self, service) -> ComponentDetailSerializer:

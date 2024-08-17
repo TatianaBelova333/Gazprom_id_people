@@ -85,7 +85,7 @@ class ServiceAdmin(admin.ModelAdmin):
     )
     search_fields = ('name', 'description')
     ordering = ('start_date', 'end_date')
-    list_filter = ('is_archived', 'status')
+    list_filter = ('is_archived', 'status', 'project')
     list_select_related = (
         'status',
         'project',
@@ -111,7 +111,7 @@ class ComponentAdmin(admin.ModelAdmin):
     )
     search_fields = ('name', 'description')
     ordering = ('start_date', 'end_date')
-    list_filter = ('priority', 'is_archived', 'status')
+    list_filter = ('priority', 'is_archived', 'status', 'service')
     list_select_related = (
         'status',
         'service',

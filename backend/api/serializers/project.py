@@ -7,7 +7,7 @@ from api.serializers.position import PositionSerializer
 from api.serializers.progress_status import ProgressStatusSerializer
 from api.serializers.tag import WorkTagSerializer
 from api.serializers.team_member import TeamMemberSerializer
-from api.utils import get_team_groups
+from api.utils import check_start_date_lt_end_date, get_team_groups
 
 
 class ProjectNameSerializer(serializers.ModelSerializer):
@@ -187,10 +187,7 @@ class ProjectCreateUpdateSerializer(serializers.ModelSerializer):
         start_date = data.get('start_date')
         end_date = data.get('end_date')
 
-        if (start_date and end_date) and (start_date >= end_date):
-            raise serializers.ValidationError(
-                'Дата начала не может быть позже даты окончания.'
-            )
+        check_start_date_lt_end_date(start_date=start_date, end_date=end_date)
 
         return data
 
