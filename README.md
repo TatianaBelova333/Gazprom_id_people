@@ -9,7 +9,11 @@
 * Docker
 * PostgreSQL
 
-Создать виртуальное окру
+
+Клонировать репозиторий
+`git clone https://github.com/TatianaBelova333/Gazprom_id_people.git`
+
+Создать виртуальное окружение
 `python3 -m venv venv`<br>
 `source venv/bin/activate`<br>
 
