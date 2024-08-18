@@ -1,0 +1,3108 @@
+openapi: 3.0.3
+info:
+  title: Газпром ID People
+  version: 0.1.0
+paths:
+  /api/v1/auth/jwt/create/:
+    post:
+      operationId: v1_auth_jwt_create_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPairRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPairRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPairRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenObtainPair'
+          description: ''
+  /api/v1/auth/jwt/refresh/:
+    post:
+      operationId: v1_auth_jwt_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefreshRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefreshRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefreshRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /api/v1/auth/jwt/verify/:
+    post:
+      operationId: v1_auth_jwt_verify_create
+      description: |-
+        Takes a token and indicates if it is valid.  This view provides no
+        information about a token's fitness for a particular use.
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenVerifyRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenVerifyRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenVerifyRequest'
+        required: true
+      responses:
+        '200':
+          description: No response body
+  /api/v1/company_teams/:
+    get:
+      operationId: v1_company_teams_list
+      description: |-
+        list:
+        Return a list of all teams (отделы) in the company.
+        Search by the company team name and filter by company units.
+
+        retrieve:
+        Return a single company team (отдел).
+      summary: Return a list of all teams(Отделы) in the company.
+      parameters:
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - in: query
+        name: units
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
+      tags:
+      - Employee's Profile editing
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CompanyTeamBriefInfo'
+          description: ''
+  /api/v1/company_teams/{id}/:
+    get:
+      operationId: v1_company_teams_retrieve
+      description: |-
+        list:
+        Return a list of all teams (отделы) in the company.
+        Search by the company team name and filter by company units.
+
+        retrieve:
+        Return a single company team (отдел).
+      summary: Return a single company team(Отдел).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Отдел.
+        required: true
+      tags:
+      - Employee's Profile editing
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyTeamBriefInfo'
+          description: ''
+  /api/v1/company_units/:
+    get:
+      operationId: v1_company_units_list
+      description: |-
+        list:
+        Return a list of all units (Подразделения) in the company.
+        Search by the name of the team and filter by company units.
+
+        retrieve:
+        Return a single company unit (Подразделение).
+      summary: Return a list of all units(Подразделения) in the company.
+      parameters:
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - in: query
+        name: team
+        schema:
+          type: integer
+      tags:
+      - Employee's Profile editing
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CompanyUnitBriefInfo'
+          description: ''
+  /api/v1/company_units/{id}/:
+    get:
+      operationId: v1_company_units_retrieve
+      description: |-
+        list:
+        Return a list of all units (Подразделения) in the company.
+        Search by the name of the team and filter by company units.
+
+        retrieve:
+        Return a single company unit (Подразделение).
+      summary: Return a single company unit(Подразделение).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Подразделение.
+        required: true
+      tags:
+      - Employee's Profile editing
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyUnitBriefInfo'
+          description: ''
+  /api/v1/components/:
+    get:
+      operationId: v1_components_list
+      description: |-
+        list:
+        Return a list of all components.
+
+        retrieve:
+        Return component by id.
+      summary: List all components for the dropdown.
+      tags:
+      - Components
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ComponentList'
+          description: ''
+    post:
+      operationId: v1_components_create
+      description: |-
+        list:
+        Return a list of all components.
+
+        retrieve:
+        Return component by id.
+      summary: Create a new component.
+      tags:
+      - Components
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComponentCreateUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ComponentCreateUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ComponentCreateUpdateRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComponentCreateUpdate'
+          description: ''
+  /api/v1/components/{id}/:
+    get:
+      operationId: v1_components_retrieve
+      description: |-
+        list:
+        Return a list of all components.
+
+        retrieve:
+        Return component by id.
+      summary: Retrieve a component by pk.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Компонент.
+        required: true
+      tags:
+      - Components
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComponentDetail'
+          description: ''
+    patch:
+      operationId: v1_components_partial_update
+      description: |-
+        list:
+        Return a list of all components.
+
+        retrieve:
+        Return component by id.
+      summary: Update a new component.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Компонент.
+        required: true
+      tags:
+      - Components
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedComponentCreateUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedComponentCreateUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedComponentCreateUpdateRequest'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComponentCreateUpdate'
+          description: ''
+  /api/v1/offices/:
+    get:
+      operationId: v1_offices_list
+      description: |-
+        list:
+        Return a list of all company offices.
+
+        retrieve:
+        Return a single company office.
+      summary: List all company offices
+      tags:
+      - Employee's Profile editing
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Office'
+          description: ''
+  /api/v1/offices/{id}/:
+    get:
+      operationId: v1_offices_retrieve
+      description: |-
+        list:
+        Return a list of all company offices.
+
+        retrieve:
+        Return a single company office.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Офис.
+        required: true
+      tags:
+      - Employee's Profile editing
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Office'
+          description: ''
+  /api/v1/positions/:
+    get:
+      operationId: v1_positions_list
+      description: |-
+        list:
+        Return a list of all existing employee position.
+
+        retrieve:
+        Return a single employee position.
+      summary: List all employee positions
+      parameters:
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - Employee's Profile editing
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Position'
+          description: ''
+  /api/v1/positions/{id}/:
+    get:
+      operationId: v1_positions_retrieve
+      description: |-
+        list:
+        Return a list of all existing employee position.
+
+        retrieve:
+        Return a single employee position.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Должность.
+        required: true
+      tags:
+      - Employee's Profile editing
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Position'
+          description: ''
+  /api/v1/progress_statuses/:
+    get:
+      operationId: v1_progress_statuses_list
+      description: |-
+        list:
+        Return a list of all existing progress statuses.
+
+        retrieve:
+        Return a single progress status.
+      summary: List all progress statuses
+      tags:
+      - Tags and progress statuses
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProgressStatus'
+          description: ''
+  /api/v1/progress_statuses/{id}/:
+    get:
+      operationId: v1_progress_statuses_retrieve
+      description: |-
+        list:
+        Return a list of all existing progress statuses.
+
+        retrieve:
+        Return a single progress status.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Статус работы.
+        required: true
+      tags:
+      - Tags and progress statuses
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProgressStatus'
+          description: ''
+  /api/v1/projects/:
+    get:
+      operationId: v1_projects_list
+      description: |-
+        list:
+        Return a list of all projects.
+        Search by project name and filter by status.
+
+        retrieve:
+        Return a project by pk.
+      summary: List all projects with detailed info
+      parameters:
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - in: query
+        name: status
+        schema:
+          type: integer
+      tags:
+      - Projects
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjectList'
+          description: ''
+    post:
+      operationId: v1_projects_create
+      description: |-
+        list:
+        Return a list of all projects.
+        Search by project name and filter by status.
+
+        retrieve:
+        Return a project by pk.
+      tags:
+      - Projects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectCreateUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProjectCreateUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProjectCreateUpdateRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectCreateUpdate'
+          description: ''
+  /api/v1/projects/{id}/:
+    get:
+      operationId: v1_projects_retrieve
+      description: |-
+        list:
+        Return a list of all projects.
+        Search by project name and filter by status.
+
+        retrieve:
+        Return a project by pk.
+      summary: Retrieve project by id
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Проект.
+        required: true
+      tags:
+      - Projects
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDetail'
+          description: ''
+    patch:
+      operationId: v1_projects_partial_update
+      description: |-
+        list:
+        Return a list of all projects.
+        Search by project name and filter by status.
+
+        retrieve:
+        Return a project by pk.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Проект.
+        required: true
+      tags:
+      - Projects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProjectCreateUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedProjectCreateUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedProjectCreateUpdateRequest'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectCreateUpdate'
+          description: ''
+  /api/v1/projects/short/:
+    get:
+      operationId: v1_projects_short_retrieve
+      description: Return a list of projects and their names for a dropdown list.
+      summary: Project list for a dropdown menu
+      tags:
+      - Projects
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectName'
+          description: ''
+    patch:
+      operationId: v1_projects_short_partial_update
+      description: Update team members for several projects.
+      tags:
+      - Projects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProjectNameRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedProjectNameRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedProjectNameRequest'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectName'
+          description: ''
+  /api/v1/services/:
+    get:
+      operationId: v1_services_list
+      description: ModelVieset for services.
+      summary: List all services for the dropdown.
+      tags:
+      - Services
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServiceList'
+          description: ''
+    post:
+      operationId: v1_services_create
+      description: ModelVieset for services.
+      tags:
+      - Services
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceCreateUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ServiceCreateUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ServiceCreateUpdateRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceCreateUpdate'
+          description: ''
+  /api/v1/services/{id}/:
+    get:
+      operationId: v1_services_retrieve
+      description: ModelVieset for services.
+      summary: Retrieve a single service
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Сервис.
+        required: true
+      tags:
+      - Services
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceDetail'
+          description: ''
+    patch:
+      operationId: v1_services_partial_update
+      description: ModelVieset for services.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Сервис.
+        required: true
+      tags:
+      - Services
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedServiceCreateUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedServiceCreateUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedServiceCreateUpdateRequest'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceCreateUpdate'
+          description: ''
+  /api/v1/skills/:
+    get:
+      operationId: v1_skills_list
+      description: |-
+        list:
+        Return a list of all existing employee skills.
+
+        retrieve:
+        Return a single skill.
+      summary: List all employee skills
+      parameters:
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - Employee's Profile editing
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Skill'
+          description: ''
+  /api/v1/skills/{id}/:
+    get:
+      operationId: v1_skills_retrieve
+      description: |-
+        list:
+        Return a list of all existing employee skills.
+
+        retrieve:
+        Return a single skill.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Ключевой навык.
+        required: true
+      tags:
+      - Employee's Profile editing
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Skill'
+          description: ''
+  /api/v1/structures/:
+    get:
+      operationId: v1_structures_list
+      description: Return a Company tree structure.
+      summary: Retrieve company Structure
+      tags:
+      - Company Structure
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CompanyStructure'
+          description: ''
+  /api/v1/tags/:
+    get:
+      operationId: v1_tags_list
+      description: |-
+        list:
+        Return a list of all existing tags.
+
+        retrieve:
+        Return a single tag.
+      summary: List all work tags
+      parameters:
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - Tags and progress statuses
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkTag'
+          description: ''
+  /api/v1/tags/{id}/:
+    get:
+      operationId: v1_tags_retrieve
+      description: |-
+        list:
+        Return a list of all existing tags.
+
+        retrieve:
+        Return a single tag.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Тег.
+        required: true
+      tags:
+      - Tags and progress statuses
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkTag'
+          description: ''
+  /api/v1/timezones/:
+    get:
+      operationId: v1_timezones_list
+      description: |-
+        list:
+        Return a list of all timezones for employee's profile.
+
+        retrieve:
+        Return a single timezone.
+      summary: List all timezones
+      tags:
+      - Employee's Profile editing
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmployeeTimeZone'
+          description: ''
+  /api/v1/timezones/{id}/:
+    get:
+      operationId: v1_timezones_retrieve
+      description: |-
+        list:
+        Return a list of all timezones for employee's profile.
+
+        retrieve:
+        Return a single timezone.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Часовой пояс.
+        required: true
+      tags:
+      - Employee's Profile editing
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeTimeZone'
+          description: ''
+  /api/v1/user_statuses/:
+    get:
+      operationId: v1_user_statuses_list
+      description: |-
+        list:
+        Return a list of all existing employee statuses.
+
+        retrieve:
+        Return a single employee status.
+      summary: List all employee statuses
+      tags:
+      - Employee's Profile editing
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmployeeStatus'
+          description: ''
+  /api/v1/user_statuses/{id}/:
+    get:
+      operationId: v1_user_statuses_retrieve
+      description: |-
+        list:
+        Return a list of all existing employee statuses.
+
+        retrieve:
+        Return a single employee status.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Рабочий статус.
+        required: true
+      tags:
+      - Employee's Profile editing
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeStatus'
+          description: ''
+  /api/v1/users/:
+    get:
+      operationId: v1_users_list
+      description: |-
+        Extends the Djoser UserViewSet.
+
+        Additional endpoints:
+
+        /contacts:
+        Add/remove the given user to/from the request user's saved contancts.
+
+        /me/contacts:
+        list the current employee's saved contacts.
+      summary: List all employees (Справочник)
+      parameters:
+      - in: query
+        name: employment_type
+        schema:
+          type: integer
+          title: Форма трудоустройства
+          enum:
+          - 0
+          - 1
+        description: |-
+          * `0` - Штат
+          * `1` - Аутсорс
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - in: query
+        name: projects
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - in: query
+        name: skills
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
+      tags:
+      - Employee's Profile
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEmployeeListList'
+          description: ''
+  /api/v1/users/{id}/:
+    get:
+      operationId: v1_users_retrieve
+      description: |-
+        Extends the Djoser UserViewSet.
+
+        Additional endpoints:
+
+        /contacts:
+        Add/remove the given user to/from the request user's saved contancts.
+
+        /me/contacts:
+        list the current employee's saved contacts.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Сотрудник.
+        required: true
+      tags:
+      - Employee's Profile
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeDetail'
+          description: ''
+    patch:
+      operationId: v1_users_partial_update
+      description: |-
+        Extends the Djoser UserViewSet.
+
+        Additional endpoints:
+
+        /contacts:
+        Add/remove the given user to/from the request user's saved contancts.
+
+        /me/contacts:
+        list the current employee's saved contacts.
+      summary: Partially update a user
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Сотрудник.
+        required: true
+      tags:
+      - Employee's Profile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedEmployeeUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedEmployeeUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedEmployeeUpdateRequest'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeUpdate'
+          description: ''
+  /api/v1/users/{id}/contacts/:
+    post:
+      operationId: v1_users_contacts_create
+      description: |-
+        Extends the Djoser UserViewSet.
+
+        Additional endpoints:
+
+        /contacts:
+        Add/remove the given user to/from the request user's saved contancts.
+
+        /me/contacts:
+        list the current employee's saved contacts.
+      summary: Add/delete other users to/from the current user'contacts
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Сотрудник.
+        required: true
+      tags:
+      - Employee's Profile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SavedContactRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SavedContactRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SavedContactRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedContact'
+          description: ''
+    delete:
+      operationId: v1_users_contacts_destroy
+      description: |-
+        Extends the Djoser UserViewSet.
+
+        Additional endpoints:
+
+        /contacts:
+        Add/remove the given user to/from the request user's saved contancts.
+
+        /me/contacts:
+        list the current employee's saved contacts.
+      summary: Add/delete other users to/from the current user'contacts
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Сотрудник.
+        required: true
+      tags:
+      - Employee's Profile
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/users/me/:
+    get:
+      operationId: v1_users_me_retrieve
+      description: The current user's profile.
+      summary: Get/update the current user's profile
+      tags:
+      - Employee's Profile
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeDetail'
+          description: ''
+    patch:
+      operationId: v1_users_me_partial_update
+      description: The current user's profile.
+      summary: Get/update the current user's profile
+      tags:
+      - Employee's Profile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedEmployeeUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedEmployeeUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedEmployeeUpdateRequest'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeUpdate'
+          description: ''
+  /api/v1/users/me/contacts/:
+    get:
+      operationId: v1_users_me_contacts_retrieve
+      description: |-
+        Extends the Djoser UserViewSet.
+
+        Additional endpoints:
+
+        /contacts:
+        Add/remove the given user to/from the request user's saved contancts.
+
+        /me/contacts:
+        list the current employee's saved contacts.
+      summary: List the current user's contacts
+      tags:
+      - Main
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedContact'
+          description: ''
+  /api/v1/users/me/projects/:
+    get:
+      operationId: v1_users_me_projects_retrieve
+      description: |-
+        Extends the Djoser UserViewSet.
+
+        Additional endpoints:
+
+        /contacts:
+        Add/remove the given user to/from the request user's saved contancts.
+
+        /me/contacts:
+        list the current employee's saved contacts.
+      summary: List the current user's projects
+      tags:
+      - Main
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectMainPage'
+          description: ''
+  /api/v1/users/reset_password/:
+    post:
+      operationId: v1_users_reset_password_create
+      description: |-
+        Extends the Djoser UserViewSet.
+
+        Additional endpoints:
+
+        /contacts:
+        Add/remove the given user to/from the request user's saved contancts.
+
+        /me/contacts:
+        list the current employee's saved contacts.
+      tags:
+      - Employee's Profile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendEmailResetRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SendEmailResetRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SendEmailResetRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendEmailReset'
+          description: ''
+  /api/v1/users/reset_password_confirm/:
+    post:
+      operationId: v1_users_reset_password_confirm_create
+      description: |-
+        Extends the Djoser UserViewSet.
+
+        Additional endpoints:
+
+        /contacts:
+        Add/remove the given user to/from the request user's saved contancts.
+
+        /me/contacts:
+        list the current employee's saved contacts.
+      tags:
+      - Employee's Profile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirmRetypeRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirmRetypeRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirmRetypeRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasswordResetConfirmRetype'
+          description: ''
+  /api/v1/users/set_password/:
+    post:
+      operationId: v1_users_set_password_create
+      description: |-
+        Extends the Djoser UserViewSet.
+
+        Additional endpoints:
+
+        /contacts:
+        Add/remove the given user to/from the request user's saved contancts.
+
+        /me/contacts:
+        list the current employee's saved contacts.
+      tags:
+      - Employee's Profile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetPasswordRetypeRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SetPasswordRetypeRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SetPasswordRetypeRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetPasswordRetype'
+          description: ''
+components:
+  schemas:
+    CompanyDepartment:
+      type: object
+      description: Department(Департамент) Serializer for the Company Structure.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Название
+          maxLength: 50
+          minLength: 2
+        head:
+          $ref: '#/components/schemas/EmployeeBriefInfo'
+        teams:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyTeam'
+      required:
+      - head
+      - id
+      - name
+      - teams
+    CompanyStructure:
+      type: object
+      description: Company(Компания) Serializer for the Company Structure.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        company_name:
+          type: string
+        director:
+          $ref: '#/components/schemas/EmployeeBriefInfo'
+        departments:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyDepartment'
+      required:
+      - company_name
+      - departments
+      - director
+      - id
+    CompanyTeam:
+      type: object
+      description: Team(Отдел) Serializer for the Company Tree Structure.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Название
+          maxLength: 50
+          minLength: 2
+        team_lead:
+          $ref: '#/components/schemas/EmployeeBriefInfo'
+        units:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyUnit'
+      required:
+      - id
+      - name
+      - team_lead
+      - units
+    CompanyTeamBriefInfo:
+      type: object
+      description: Serializer for company teams.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Название
+          maxLength: 50
+          minLength: 2
+      required:
+      - id
+      - name
+    CompanyUnit:
+      type: object
+      description: Unit(Подразделение) Serializer for the Company Tree Structure.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Название
+          maxLength: 50
+          minLength: 2
+        employees:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmployeeBriefInfo'
+      required:
+      - employees
+      - id
+      - name
+    CompanyUnitBriefInfo:
+      type: object
+      description: Serializer for company units.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Название
+          maxLength: 50
+          minLength: 2
+      required:
+      - id
+      - name
+    ComponentCreateUpdate:
+      type: object
+      description: Serializer for creating and updating components.
+      properties:
+        service:
+          type: integer
+          title: Сервис
+        name:
+          type: string
+          title: Название
+          maxLength: 50
+          minLength: 2
+        description:
+          type: string
+          title: Описание
+          minLength: 2
+          maxLength: 3000
+        status:
+          type: integer
+          nullable: true
+          title: Статус работы
+        tags:
+          type: array
+          items:
+            type: integer
+            title: Теги
+          title: Теги
+        team_members:
+          type: array
+          items:
+            type: integer
+            title: Команда
+          title: Команда
+        start_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата начала
+        end_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата окончания
+        priority:
+          allOf:
+          - $ref: '#/components/schemas/ComponentCreateUpdatePriorityEnum'
+          title: Приоритет
+          minimum: 0
+          maximum: 9223372036854775807
+        release_type:
+          type: string
+          nullable: true
+          title: Тип релиза
+          maxLength: 50
+          minLength: 2
+      required:
+      - description
+      - name
+      - service
+    ComponentCreateUpdatePriorityEnum:
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      type: integer
+      description: |-
+        * `1` - 1/4
+        * `2` - 2/4
+        * `3` - 3/4
+        * `4` - 4/4
+    ComponentCreateUpdateRequest:
+      type: object
+      description: Serializer for creating and updating components.
+      properties:
+        service:
+          type: integer
+          title: Сервис
+        name:
+          type: string
+          minLength: 2
+          title: Название
+          maxLength: 50
+        description:
+          type: string
+          minLength: 2
+          title: Описание
+          maxLength: 3000
+        status:
+          type: integer
+          nullable: true
+          title: Статус работы
+        tags:
+          type: array
+          items:
+            type: integer
+            title: Теги
+          title: Теги
+        team_members:
+          type: array
+          items:
+            type: integer
+            title: Команда
+          title: Команда
+        start_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата начала
+        end_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата окончания
+        priority:
+          allOf:
+          - $ref: '#/components/schemas/ComponentCreateUpdatePriorityEnum'
+          title: Приоритет
+          minimum: 0
+          maximum: 9223372036854775807
+        release_type:
+          type: string
+          nullable: true
+          title: Тип релиза
+          maxLength: 50
+          minLength: 2
+      required:
+      - description
+      - name
+      - service
+    ComponentDetail:
+      type: object
+      description: Serialiser for retrieving a single component.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Название
+          maxLength: 50
+          minLength: 2
+        description:
+          type: string
+          title: Описание
+          minLength: 2
+          maxLength: 3000
+        status:
+          $ref: '#/components/schemas/ProgressStatus'
+        start_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата начала
+        end_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата окончания
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkTag'
+        release_type:
+          type: string
+          nullable: true
+          title: Тип релиза
+          maxLength: 50
+          minLength: 2
+        priority:
+          $ref: '#/components/schemas/ComponentDetailPriorityEnum'
+        service:
+          type: integer
+          title: Сервис
+        company_teams:
+          type: string
+          readOnly: true
+      required:
+      - company_teams
+      - description
+      - id
+      - name
+      - priority
+      - service
+      - status
+      - tags
+    ComponentDetailPriorityEnum:
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      type: integer
+      description: |-
+        * `1` - 1
+        * `2` - 2
+        * `3` - 3
+        * `4` - 4
+    ComponentList:
+      type: object
+      description: Serialiser for listing all components.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Название
+          maxLength: 50
+          minLength: 2
+        start_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата начала
+        end_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата окончания
+      required:
+      - id
+      - name
+    EmployeeBriefInfo:
+      type: object
+      description: Employee Serializer for the Company Tree Structure.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        image:
+          type: string
+          format: uri
+          nullable: true
+          title: Изображение
+        employment_type:
+          allOf:
+          - $ref: '#/components/schemas/EmploymentType6b5Enum'
+          title: Форма трудоустройства
+          minimum: 0
+          maximum: 9223372036854775807
+        first_name:
+          type: string
+          title: Имя
+          maxLength: 50
+        last_name:
+          type: string
+          title: Фамилия
+          maxLength: 50
+        position:
+          type: string
+      required:
+      - id
+      - position
+    EmployeeDetail:
+      type: object
+      description: Serialiser for retrieving Employee's profile.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        first_name:
+          type: string
+          title: Имя
+          maxLength: 50
+        last_name:
+          type: string
+          title: Фамилия
+          maxLength: 50
+        middle_name:
+          type: string
+          title: Отчество
+          maxLength: 50
+        birthday:
+          type: string
+          format: date
+          nullable: true
+          title: День рождения
+        about_me:
+          type: string
+          title: О себе
+          maxLength: 600
+        phone_number:
+          type: string
+          nullable: true
+          title: Номер телефона
+          maxLength: 128
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email адрес
+        status:
+          $ref: '#/components/schemas/EmployeeStatus'
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/Skill'
+        image:
+          type: string
+          format: uri
+          nullable: true
+        ms_teams:
+          type: string
+          format: email
+          nullable: true
+          maxLength: 254
+        is_saved_contact:
+          type: boolean
+          description: |-
+            Return True of the employee is in the request user's saved contacts.
+            False, otherwise.
+          readOnly: true
+        employment_type:
+          $ref: '#/components/schemas/EmploymentType0daEnum'
+        office:
+          $ref: '#/components/schemas/Office'
+        position:
+          $ref: '#/components/schemas/Position'
+        timezone:
+          $ref: '#/components/schemas/EmployeeTimeZone'
+        unit:
+          $ref: '#/components/schemas/CompanyUnitBriefInfo'
+        company_team:
+          allOf:
+          - $ref: '#/components/schemas/CompanyTeamBriefInfo'
+          readOnly: true
+        manager:
+          allOf:
+          - $ref: '#/components/schemas/Manager'
+          readOnly: true
+        projects:
+          allOf:
+          - $ref: '#/components/schemas/ProjectMainPage'
+          readOnly: true
+      required:
+      - company_team
+      - email
+      - employment_type
+      - id
+      - is_saved_contact
+      - manager
+      - office
+      - position
+      - projects
+      - skills
+      - status
+      - timezone
+      - unit
+    EmployeeList:
+      type: object
+      description: Serialiser for listing all Employees.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        full_name:
+          type: string
+        image:
+          type: string
+          format: uri
+          nullable: true
+          title: Изображение
+        employment_type:
+          allOf:
+          - $ref: '#/components/schemas/EmploymentType6b5Enum'
+          title: Форма трудоустройства
+          minimum: 0
+          maximum: 9223372036854775807
+        position:
+          type: string
+          readOnly: true
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/Skill'
+          readOnly: true
+        projects:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectName'
+          readOnly: true
+      required:
+      - full_name
+      - id
+      - position
+      - projects
+      - skills
+    EmployeeStatus:
+      type: object
+      description: Serializer for Employee's work status.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Название
+          maxLength: 50
+          minLength: 2
+        color:
+          type: string
+          title: Цвет тега
+          pattern: ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$
+          maxLength: 25
+      required:
+      - id
+      - name
+    EmployeeTimeZone:
+      type: object
+      description: Serializer for employee timezones.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Название
+          maxLength: 50
+          minLength: 2
+      required:
+      - id
+      - name
+    EmployeeUpdate:
+      type: object
+      description: Serialiser for updating Employee's profile.
+      properties:
+        first_name:
+          type: string
+          title: Имя
+          maxLength: 50
+        last_name:
+          type: string
+          title: Фамилия
+          maxLength: 50
+        middle_name:
+          type: string
+          title: Отчество
+          maxLength: 50
+        birthday:
+          type: string
+          format: date
+          nullable: true
+          title: День рождения
+        about_me:
+          type: string
+          title: О себе
+          maxLength: 600
+        phone_number:
+          type: string
+          nullable: true
+          title: Номер телефона
+          maxLength: 128
+        status:
+          type: integer
+          nullable: true
+          title: Статус
+        skills:
+          type: array
+          items:
+            type: integer
+            title: Навыки
+          title: Навыки
+        image:
+          type: string
+          format: uri
+          nullable: true
+        employment_type:
+          $ref: '#/components/schemas/EmploymentType0daEnum'
+        office:
+          type: integer
+          nullable: true
+          title: Офис
+        position:
+          type: integer
+          nullable: true
+          title: Должность
+        timezone:
+          type: integer
+          nullable: true
+          title: Часовой пояс
+        unit:
+          type: integer
+          nullable: true
+          title: Подразделение
+        team:
+          type: integer
+      required:
+      - employment_type
+      - team
+    EmploymentType0daEnum:
+      enum:
+      - 0
+      - 1
+      type: integer
+      description: |-
+        * `0` - 0
+        * `1` - 1
+    EmploymentType6b5Enum:
+      enum:
+      - 0
+      - 1
+      type: integer
+      description: |-
+        * `0` - Штат
+        * `1` - Аутсорс
+    Manager:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        last_name:
+          type: string
+          title: Фамилия
+          maxLength: 50
+        first_name:
+          type: string
+          title: Имя
+          maxLength: 50
+        image:
+          type: string
+          format: uri
+          nullable: true
+          title: Изображение
+        employment_type:
+          allOf:
+          - $ref: '#/components/schemas/EmploymentType6b5Enum'
+          title: Форма трудоустройства
+          minimum: 0
+          maximum: 9223372036854775807
+      required:
+      - id
+    Office:
+      type: object
+      description: Serializer for company offices.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        address:
+          type: string
+          title: Адрес
+      required:
+      - address
+      - id
+    PaginatedEmployeeListList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmployeeList'
+    PasswordResetConfirmRetype:
+      type: object
+      properties:
+        uid:
+          type: string
+        token:
+          type: string
+        new_password:
+          type: string
+        re_new_password:
+          type: string
+      required:
+      - new_password
+      - re_new_password
+      - token
+      - uid
+    PasswordResetConfirmRetypeRequest:
+      type: object
+      properties:
+        uid:
+          type: string
+          minLength: 1
+        token:
+          type: string
+          minLength: 1
+        new_password:
+          type: string
+          minLength: 1
+        re_new_password:
+          type: string
+          minLength: 1
+      required:
+      - new_password
+      - re_new_password
+      - token
+      - uid
+    PatchedComponentCreateUpdateRequest:
+      type: object
+      description: Serializer for creating and updating components.
+      properties:
+        service:
+          type: integer
+          title: Сервис
+        name:
+          type: string
+          minLength: 2
+          title: Название
+          maxLength: 50
+        description:
+          type: string
+          minLength: 2
+          title: Описание
+          maxLength: 3000
+        status:
+          type: integer
+          nullable: true
+          title: Статус работы
+        tags:
+          type: array
+          items:
+            type: integer
+            title: Теги
+          title: Теги
+        team_members:
+          type: array
+          items:
+            type: integer
+            title: Команда
+          title: Команда
+        start_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата начала
+        end_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата окончания
+        priority:
+          allOf:
+          - $ref: '#/components/schemas/ComponentCreateUpdatePriorityEnum'
+          title: Приоритет
+          minimum: 0
+          maximum: 9223372036854775807
+        release_type:
+          type: string
+          nullable: true
+          title: Тип релиза
+          maxLength: 50
+          minLength: 2
+    PatchedEmployeeUpdateRequest:
+      type: object
+      description: Serialiser for updating Employee's profile.
+      properties:
+        first_name:
+          type: string
+          title: Имя
+          maxLength: 50
+        last_name:
+          type: string
+          title: Фамилия
+          maxLength: 50
+        middle_name:
+          type: string
+          title: Отчество
+          maxLength: 50
+        birthday:
+          type: string
+          format: date
+          nullable: true
+          title: День рождения
+        about_me:
+          type: string
+          title: О себе
+          maxLength: 600
+        phone_number:
+          type: string
+          nullable: true
+          title: Номер телефона
+          maxLength: 128
+        status:
+          type: integer
+          nullable: true
+          title: Статус
+        skills:
+          type: array
+          items:
+            type: integer
+            title: Навыки
+          title: Навыки
+        image:
+          type: string
+          format: binary
+          nullable: true
+        employment_type:
+          $ref: '#/components/schemas/EmploymentType0daEnum'
+        office:
+          type: integer
+          nullable: true
+          title: Офис
+        position:
+          type: integer
+          nullable: true
+          title: Должность
+        timezone:
+          type: integer
+          nullable: true
+          title: Часовой пояс
+        unit:
+          type: integer
+          nullable: true
+          title: Подразделение
+        team:
+          type: integer
+    PatchedProjectCreateUpdateRequest:
+      type: object
+      description: Serializer for creating/updating projects.
+      properties:
+        name:
+          type: string
+          minLength: 2
+          title: Название
+          maxLength: 50
+        status:
+          type: integer
+          nullable: true
+          title: Статус работы
+        description:
+          type: string
+          minLength: 2
+          title: Описание
+          maxLength: 3000
+        tags:
+          type: array
+          items:
+            type: integer
+            title: Теги
+          title: Теги
+        team_members:
+          type: array
+          items:
+            type: integer
+            title: Команда
+          title: Команда
+        director:
+          type: integer
+          nullable: true
+          title: Руководитель проекта
+        start_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата начала
+        end_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата окончания
+    PatchedProjectNameRequest:
+      type: object
+      description: Serialiser for listing employee projects in the employee catalogue.
+      properties:
+        name:
+          type: string
+          minLength: 2
+          title: Название
+          maxLength: 50
+    PatchedServiceCreateUpdateRequest:
+      type: object
+      description: Serializer for creating and updating services.
+      properties:
+        project:
+          type: integer
+          title: Проект
+        name:
+          type: string
+          minLength: 2
+          title: Название
+          maxLength: 50
+        description:
+          type: string
+          minLength: 2
+          title: Описание
+          maxLength: 3000
+        status:
+          type: integer
+          nullable: true
+          title: Статус работы
+        tags:
+          type: array
+          items:
+            type: integer
+            title: Теги
+          title: Теги
+        team_members:
+          type: array
+          items:
+            type: integer
+            title: Команда
+          title: Команда
+        start_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата начала
+        end_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата окончания
+    Position:
+      type: object
+      description: Serializer for employee positions.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Название
+          maxLength: 50
+          minLength: 2
+      required:
+      - id
+      - name
+    ProgressStatus:
+      type: object
+      description: Serializer for work progress statuses.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Название
+          maxLength: 50
+          minLength: 2
+        color:
+          type: string
+          title: Цвет тега
+          pattern: ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$
+          maxLength: 25
+      required:
+      - id
+      - name
+    ProjectCreateUpdate:
+      type: object
+      description: Serializer for creating/updating projects.
+      properties:
+        name:
+          type: string
+          title: Название
+          maxLength: 50
+          minLength: 2
+        status:
+          type: integer
+          nullable: true
+          title: Статус работы
+        description:
+          type: string
+          title: Описание
+          minLength: 2
+          maxLength: 3000
+        tags:
+          type: array
+          items:
+            type: integer
+            title: Теги
+          title: Теги
+        team_members:
+          type: array
+          items:
+            type: integer
+            title: Команда
+          title: Команда
+        director:
+          type: integer
+          nullable: true
+          title: Руководитель проекта
+        start_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата начала
+        end_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата окончания
+      required:
+      - description
+      - name
+    ProjectCreateUpdateRequest:
+      type: object
+      description: Serializer for creating/updating projects.
+      properties:
+        name:
+          type: string
+          minLength: 2
+          title: Название
+          maxLength: 50
+        status:
+          type: integer
+          nullable: true
+          title: Статус работы
+        description:
+          type: string
+          minLength: 2
+          title: Описание
+          maxLength: 3000
+        tags:
+          type: array
+          items:
+            type: integer
+            title: Теги
+          title: Теги
+        team_members:
+          type: array
+          items:
+            type: integer
+            title: Команда
+          title: Команда
+        director:
+          type: integer
+          nullable: true
+          title: Руководитель проекта
+        start_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата начала
+        end_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата окончания
+      required:
+      - description
+      - name
+    ProjectDetail:
+      type: object
+      description: Serializer for information about a single project.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Название
+          maxLength: 50
+          minLength: 2
+        status:
+          $ref: '#/components/schemas/ProgressStatus'
+        company_teams:
+          type: string
+          readOnly: true
+        director:
+          $ref: '#/components/schemas/TeamMember'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkTag'
+        description:
+          type: string
+          title: Описание
+          minLength: 2
+          maxLength: 3000
+        start_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата начала
+        end_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата окончания
+      required:
+      - company_teams
+      - description
+      - director
+      - id
+      - name
+      - status
+      - tags
+    ProjectDirector:
+      type: object
+      description: Serializer for project directors on the main page.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        full_name:
+          type: string
+        position:
+          $ref: '#/components/schemas/Position'
+        phone_number:
+          type: string
+          nullable: true
+          title: Номер телефона
+          maxLength: 128
+        telegram:
+          type: string
+          format: uri
+          nullable: true
+          title: Telegram-аккаунт
+          description: 'Введите телеграм аккуант в следующем формате: https://t.me/<tg-username>'
+          maxLength: 200
+        email:
+          type: string
+          format: email
+          title: Email адрес
+          maxLength: 254
+        image:
+          type: string
+          format: uri
+          nullable: true
+          title: Изображение
+        employment_type:
+          allOf:
+          - $ref: '#/components/schemas/EmploymentType6b5Enum'
+          title: Форма трудоустройства
+          minimum: 0
+          maximum: 9223372036854775807
+        ms_teams:
+          type: string
+          format: email
+          nullable: true
+          maxLength: 254
+      required:
+      - email
+      - full_name
+      - id
+      - position
+    ProjectList:
+      type: object
+      description: Serializer for listing all company projects (Раздел 'Проекты').
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Название
+          maxLength: 50
+          minLength: 2
+        status:
+          $ref: '#/components/schemas/ProgressStatus'
+        company_teams:
+          type: string
+          readOnly: true
+        director:
+          $ref: '#/components/schemas/TeamMember'
+      required:
+      - company_teams
+      - director
+      - id
+      - name
+      - status
+    ProjectMainPage:
+      type: object
+      description: Serializer for listing the current user's projects on the main
+        page.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Название
+          maxLength: 50
+          minLength: 2
+        description:
+          type: string
+          title: Описание
+          minLength: 2
+          maxLength: 3000
+        status:
+          $ref: '#/components/schemas/ProgressStatus'
+        start_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата начала
+        end_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата окончания
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkTag'
+        team_members:
+          allOf:
+          - $ref: '#/components/schemas/ProjectMemberMainPage'
+          readOnly: true
+        team_extra_count:
+          type: integer
+          description: |-
+            Return the difference between the total number of team members
+            and the `team_limit` query_param.
+          readOnly: true
+        director:
+          $ref: '#/components/schemas/ProjectDirector'
+      required:
+      - description
+      - director
+      - id
+      - name
+      - status
+      - tags
+      - team_extra_count
+      - team_members
+    ProjectMemberMainPage:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        image:
+          type: string
+          format: uri
+          nullable: true
+          title: Изображение
+        employment_type:
+          allOf:
+          - $ref: '#/components/schemas/EmploymentType6b5Enum'
+          title: Форма трудоустройства
+          minimum: 0
+          maximum: 9223372036854775807
+      required:
+      - id
+    ProjectName:
+      type: object
+      description: Serialiser for listing employee projects in the employee catalogue.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Название
+          maxLength: 50
+          minLength: 2
+      required:
+      - id
+      - name
+    SavedContact:
+      type: object
+      description: Serialiser for the employee's saved contacts.
+      properties:
+        user_id:
+          type: integer
+        full_name:
+          type: string
+        position:
+          type: string
+        phone_number:
+          type: string
+        telegram:
+          type: string
+        email:
+          type: string
+          format: email
+        image:
+          type: string
+          format: uri
+        employment_type:
+          type: integer
+        ms_teams:
+          type: string
+          format: email
+      required:
+      - email
+      - employment_type
+      - full_name
+      - image
+      - ms_teams
+      - phone_number
+      - position
+      - telegram
+      - user_id
+    SavedContactRequest:
+      type: object
+      description: Serialiser for the employee's saved contacts.
+      properties:
+        user_id:
+          type: integer
+        full_name:
+          type: string
+          minLength: 1
+        position:
+          type: string
+          minLength: 1
+        phone_number:
+          type: string
+          minLength: 1
+        telegram:
+          type: string
+          minLength: 1
+        email:
+          type: string
+          format: email
+          minLength: 1
+        image:
+          type: string
+          format: uri
+          minLength: 1
+        employment_type:
+          type: integer
+        ms_teams:
+          type: string
+          format: email
+          minLength: 1
+      required:
+      - email
+      - employment_type
+      - full_name
+      - image
+      - ms_teams
+      - phone_number
+      - position
+      - telegram
+      - user_id
+    SendEmailReset:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+      - email
+    SendEmailResetRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          minLength: 1
+      required:
+      - email
+    ServiceCreateUpdate:
+      type: object
+      description: Serializer for creating and updating services.
+      properties:
+        project:
+          type: integer
+          title: Проект
+        name:
+          type: string
+          title: Название
+          maxLength: 50
+          minLength: 2
+        description:
+          type: string
+          title: Описание
+          minLength: 2
+          maxLength: 3000
+        status:
+          type: integer
+          nullable: true
+          title: Статус работы
+        tags:
+          type: array
+          items:
+            type: integer
+            title: Теги
+          title: Теги
+        team_members:
+          type: array
+          items:
+            type: integer
+            title: Команда
+          title: Команда
+        start_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата начала
+        end_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата окончания
+      required:
+      - description
+      - name
+      - project
+    ServiceCreateUpdateRequest:
+      type: object
+      description: Serializer for creating and updating services.
+      properties:
+        project:
+          type: integer
+          title: Проект
+        name:
+          type: string
+          minLength: 2
+          title: Название
+          maxLength: 50
+        description:
+          type: string
+          minLength: 2
+          title: Описание
+          maxLength: 3000
+        status:
+          type: integer
+          nullable: true
+          title: Статус работы
+        tags:
+          type: array
+          items:
+            type: integer
+            title: Теги
+          title: Теги
+        team_members:
+          type: array
+          items:
+            type: integer
+            title: Команда
+          title: Команда
+        start_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата начала
+        end_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата окончания
+      required:
+      - description
+      - name
+      - project
+    ServiceDetail:
+      type: object
+      description: Serializer for return information about a single service.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        project:
+          type: integer
+          title: Проект
+        name:
+          type: string
+          title: Название
+          maxLength: 50
+          minLength: 2
+        status:
+          $ref: '#/components/schemas/ProgressStatus'
+        description:
+          type: string
+          title: Описание
+          minLength: 2
+          maxLength: 3000
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkTag'
+        company_teams:
+          type: string
+          readOnly: true
+        start_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата начала
+        end_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата окончания
+      required:
+      - company_teams
+      - description
+      - id
+      - name
+      - project
+      - status
+      - tags
+    ServiceList:
+      type: object
+      description: Serialiser for listing all services.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Название
+          maxLength: 50
+          minLength: 2
+        start_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата начала
+        end_date:
+          type: string
+          format: date
+          nullable: true
+          title: Дата окончания
+      required:
+      - id
+      - name
+    SetPasswordRetype:
+      type: object
+      properties:
+        new_password:
+          type: string
+        re_new_password:
+          type: string
+        current_password:
+          type: string
+      required:
+      - current_password
+      - new_password
+      - re_new_password
+    SetPasswordRetypeRequest:
+      type: object
+      properties:
+        new_password:
+          type: string
+          minLength: 1
+        re_new_password:
+          type: string
+          minLength: 1
+        current_password:
+          type: string
+          minLength: 1
+      required:
+      - current_password
+      - new_password
+      - re_new_password
+    Skill:
+      type: object
+      description: Serializer for employee's skills.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Название
+          maxLength: 50
+          minLength: 2
+        color:
+          type: string
+          title: Цвет тега
+          pattern: ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$
+          maxLength: 25
+      required:
+      - id
+      - name
+    TeamMember:
+      type: object
+      description: Serializer for team members of projects, services and components.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        image:
+          type: string
+          format: uri
+          nullable: true
+          title: Изображение
+        last_name:
+          type: string
+          title: Фамилия
+          maxLength: 50
+        first_name:
+          type: string
+          title: Имя
+          maxLength: 50
+        employment_type:
+          allOf:
+          - $ref: '#/components/schemas/EmploymentType6b5Enum'
+          title: Форма трудоустройства
+          minimum: 0
+          maximum: 9223372036854775807
+        position:
+          $ref: '#/components/schemas/Position'
+      required:
+      - id
+      - position
+    TokenObtainPair:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          readOnly: true
+      required:
+      - access
+      - refresh
+    TokenObtainPairRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          writeOnly: true
+          minLength: 1
+        password:
+          type: string
+          writeOnly: true
+          minLength: 1
+      required:
+      - email
+      - password
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+      required:
+      - access
+    TokenRefreshRequest:
+      type: object
+      properties:
+        refresh:
+          type: string
+          writeOnly: true
+          minLength: 1
+      required:
+      - refresh
+    TokenVerifyRequest:
+      type: object
+      properties:
+        token:
+          type: string
+          writeOnly: true
+          minLength: 1
+      required:
+      - token
+    WorkTag:
+      type: object
+      description: Serializer for work tags.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Название
+          maxLength: 50
+          minLength: 2
+        color:
+          type: string
+          title: Цвет тега
+          pattern: ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$
+          maxLength: 25
+      required:
+      - id
+      - name
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

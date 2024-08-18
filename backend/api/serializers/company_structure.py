@@ -7,11 +7,12 @@ from apps.company_structure.models import (
     CompanyUnit,
 )
 from apps.staff.models import Employee
+from api.serializers.position import PositionSerializer
 
 
 class EmployeeBriefInfoSerializer(serializers.ModelSerializer):
     '''Employee Serializer for the Company Tree Structure.'''
-    position = serializers.CharField(source='position.name')
+    position = PositionSerializer()
 
     class Meta:
         model = Employee
