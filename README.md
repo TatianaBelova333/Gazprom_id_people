@@ -26,9 +26,6 @@
 docker compose up
 ```
 ```
-docker compose exec backend python manage.py migrate
-```
-```
 docker compose exec backend python manage.py makemigrations
 ```
 ```
