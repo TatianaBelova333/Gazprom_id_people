@@ -1,0 +1,61 @@
+body {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+* {
+  /* border: 1px red solid; */
+}
+
+/* для вставки - color: var(--main-blue); */
+:root {
+  --black: #212121;
+
+  --black-85: #000000d9;
+  --black-45: #00000073;
+  --black-25: #00000040;
+  --black-10: #0000001a;
+
+  --main-blue: #1890ff;
+  --dark-blue: #096dd9;
+  --light-blue: #d6e4ff;
+  --background-blue: #f0f5ff;
+  --purple-blue: #597ef7;
+  --medium-blue: #40a9ff;
+
+  --dark-gray: #595959;
+  --gray: #8c8c8c;
+  --gray-light: #d9d9d9;
+  --gray-60-percent: #d9d9d999;
+  --gray-picker: #f5f5f5;
+
+  --pale-yellow: #ffe58f;
+  --pink: #ffd2d3;
+  --pale-green-25-percent: #b7eb8f40;
+  --blue-6-percent: #096dd90f;
+  --pale-green: #d9f7be;
+  --yellow: #ffd666;
+  --menu-selection: #e6f7ff;
+  --blue-label: #91d5ff;
+  --sky-blue-label: #69c0ff;
+  --green: #73d13d;
+  --light-green: #b7eb8f;
+  --pale-orange: #ffd8bf;
+  --sea-blue: #87e8de;
+  --light-purple: #adc6ff;
+  --pale-red: #ffa39e;
+  --red: #ff7875;
+  --orange: #ffa940;
+
+  --lavender: #d3adf7;
+  --outsourcing: #fa8c16;
+  --error: #ff603b;
+  --notifications: #ff4d4f;
+  --input-error: #f81d22;
+}
