@@ -10,16 +10,16 @@
 * PostgreSQL
 
 
-Клонировать репозиторий
+* Клонировать репозиторий
 `git clone https://github.com/TatianaBelova333/Gazprom_id_people.git`
 
-Создать виртуальное окружение
+* Создать виртуальное окружение<br>
 `python3 -m venv venv`<br>
 `source venv/bin/activate`<br>
 
-Перейти в папку infra из корня проекта<br>
-`cd infra`
-Выполнить следующие команды
+* Перейти в папку infra из корня проекта<br>
+`cd infra`<br>
+* Выполнить следующие команды<br>
 `docker compose up`<br>
 `docker compose exec backend python manage.py migrate`<br>
 `docker compose exec backend python manage.py makemigrations`<br>
