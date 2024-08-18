@@ -8,18 +8,20 @@
 * Nginx
 * Docker
 * PostgreSQL
+<br>
+<br>
+<br>
 
-
-* Клонировать репозиторий
+1. Клонировать репозиторий
 `git clone https://github.com/TatianaBelova333/Gazprom_id_people.git`
 
-* Создать виртуальное окружение<br>
+2. Создать виртуальное окружение<br>
 `python3 -m venv venv`<br>
 `source venv/bin/activate`<br>
 
-* Перейти в папку infra из корня проекта<br>
+3. Перейти в папку infra из корня проекта<br>
 `cd infra`<br>
-* Выполнить следующие команды<br>
+4. Выполнить следующие команды<br>
 `docker compose up`<br>
 `docker compose exec backend python manage.py migrate`<br>
 `docker compose exec backend python manage.py makemigrations`<br>
