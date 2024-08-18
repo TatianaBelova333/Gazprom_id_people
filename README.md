@@ -22,16 +22,26 @@
 3. Перейти в папку infra из корня проекта<br>
 `cd infra`<br>
 4. Выполнить следующие команды<br>
-`docker compose up`<br>
-`docker compose exec backend python manage.py migrate`<br>
-`docker compose exec backend python manage.py makemigrations`<br>
-`docker compose exec backend python manage.py migrate`<br>
-`docker compose exec backend python manage.py loaddata skill status company office timezone position progress_status tag department company_team company_unit employee project service component`<br>
+```
+docker compose up
+```
+```
+docker compose exec backend python manage.py migrate
+```
+```
+docker compose exec backend python manage.py makemigrations
+```
+```
+docker compose exec backend python manage.py migrate
+```
+```
+docker compose exec backend python manage.py loaddata skill status company office timezone position progress_status tag department company_team company_unit employee project service component
+```
 
 
 
 
-Это не надо
+<b>Это не надо</b>
 `pip install poetry`<br>
 `poetry install`<br>
 `python3 manage.py makemigrations`<br>
