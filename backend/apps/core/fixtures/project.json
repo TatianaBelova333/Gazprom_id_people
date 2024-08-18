@@ -4,12 +4,15 @@
   "pk": 1,
   "fields": {
     "name": "Веб-сайт Сервис Газпром ID People",
-    "description": "Программное обеспечение для построения организационных диаграмм, разработанное для того, чтобы помочь компаниям управлять своей организационной структурой и визуализировать ее. Проект состоит из четырех разделов. Первый - справочник сотрудников компании. Второй - раздел с проектами. На этой странице реализована возможность перемещать сотрудников или целые отделы между проектами. Третий раздел посвящен структуре компании. Она представлена в виде дерева, которое автоматически генерируется на основе базы сотрудников. Последний раздел - это главная страница, на которой сотрудник может просматривать свои проекты и сохраненные контакты коллег.",
-    "start_date": "2024-05-01",
-    "end_date": "2024-08-31",
-    "status": 1,
+    "description": "Программное обеспечение для построения организационных диаграмм, разработанное для того, чтобы помочь компаниям управлять своей организационной структурой и визуализировать ее. Проект состоит из четырех разделов. Первый - справочник сотрудников компании. Второй - раздел с проектами. На этой странице реализована возможность перемещать сотрудников или целые отделы между проектами. Третий раздел посвящен структуре компании. Она представлена в виде дерева, которое автоматически генерируется на основе базы сотрудников. Последний раздел - это главная страница, на которой сотрудник может просматривать свои проекты и сохраненные контакты коллег...",
+    "start_date": "2024-09-01",
+    "end_date": "2024-09-30",
+    "status": 3,
     "created_at": "2024-08-11T21:57:14.075Z",
-    "updated_at": "2024-08-12T14:03:23.233Z",
+    "updated_at": "2024-08-14T16:58:47.703Z",
+    "is_archived": false,
+    "created_by": null,
+    "updated_by": null,
     "director": 27,
     "tags": [
       8,
@@ -33,7 +36,8 @@
       1,
       52,
       36,
-      53
+      53,
+      67
     ]
   }
 },
@@ -48,6 +52,9 @@
     "status": 4,
     "created_at": "2024-08-12T14:10:30.040Z",
     "updated_at": "2024-08-12T14:12:54.331Z",
+    "is_archived": false,
+    "created_by": null,
+    "updated_by": null,
     "director": 61,
     "tags": [
       8,
@@ -81,6 +88,9 @@
     "status": 2,
     "created_at": "2024-08-12T14:28:00.643Z",
     "updated_at": "2024-08-12T14:28:00.643Z",
+    "is_archived": false,
+    "created_by": null,
+    "updated_by": null,
     "director": 64,
     "tags": [
       8,
@@ -97,6 +107,168 @@
       11,
       32,
       39
+    ]
+  }
+},
+{
+  "model": "projects.project",
+  "pk": 4,
+  "fields": {
+    "name": "Ffgfg",
+    "description": "fgfgfgfgfg",
+    "start_date": "2024-08-05",
+    "end_date": null,
+    "status": 1,
+    "created_at": "2024-08-13T18:37:44.785Z",
+    "updated_at": "2024-08-14T18:14:56.647Z",
+    "is_archived": false,
+    "created_by": null,
+    "updated_by": null,
+    "director": 67,
+    "tags": [
+      1,
+      7
+    ],
+    "team_members": [
+      17,
+      39
+    ]
+  }
+},
+{
+  "model": "projects.project",
+  "pk": 9,
+  "fields": {
+    "name": "Example1",
+    "description": "Example",
+    "start_date": "2024-09-01",
+    "end_date": "2024-09-30",
+    "status": 1,
+    "created_at": "2024-08-14T17:26:53.441Z",
+    "updated_at": "2024-08-14T17:26:53.441Z",
+    "is_archived": false,
+    "created_by": null,
+    "updated_by": null,
+    "director": 1,
+    "tags": [
+      1
+    ],
+    "team_members": [
+      3
+    ]
+  }
+},
+{
+  "model": "projects.project",
+  "pk": 10,
+  "fields": {
+    "name": "Example3",
+    "description": "Example",
+    "start_date": "2024-09-01",
+    "end_date": "2024-09-30",
+    "status": 1,
+    "created_at": "2024-08-14T17:29:43.072Z",
+    "updated_at": "2024-08-14T17:29:43.072Z",
+    "is_archived": false,
+    "created_by": null,
+    "updated_by": null,
+    "director": 1,
+    "tags": [
+      1
+    ],
+    "team_members": [
+      3
+    ]
+  }
+},
+{
+  "model": "projects.project",
+  "pk": 11,
+  "fields": {
+    "name": "Example4",
+    "description": "Example",
+    "start_date": null,
+    "end_date": null,
+    "status": null,
+    "created_at": "2024-08-14T18:30:22.526Z",
+    "updated_at": "2024-08-14T18:30:22.526Z",
+    "is_archived": false,
+    "created_by": null,
+    "updated_by": null,
+    "director": null,
+    "tags": [],
+    "team_members": []
+  }
+},
+{
+  "model": "projects.project",
+  "pk": 12,
+  "fields": {
+    "name": "Example4",
+    "description": "Example",
+    "start_date": "2024-09-01",
+    "end_date": null,
+    "status": null,
+    "created_at": "2024-08-14T18:31:22.134Z",
+    "updated_at": "2024-08-14T18:31:22.134Z",
+    "is_archived": false,
+    "created_by": null,
+    "updated_by": null,
+    "director": null,
+    "tags": [],
+    "team_members": []
+  }
+},
+{
+  "model": "projects.project",
+  "pk": 14,
+  "fields": {
+    "name": "Example5",
+    "description": "Example",
+    "start_date": null,
+    "end_date": "2024-09-01",
+    "status": null,
+    "created_at": "2024-08-14T18:36:36.931Z",
+    "updated_at": "2024-08-16T16:34:17.979Z",
+    "is_archived": false,
+    "created_by": null,
+    "updated_by": 67,
+    "director": null,
+    "tags": [
+      1
+    ],
+    "team_members": [
+      8,
+      27,
+      10,
+      17,
+      39,
+      18,
+      1
+    ]
+  }
+},
+{
+  "model": "projects.project",
+  "pk": 15,
+  "fields": {
+    "name": "Examdffffple5",
+    "description": "fffggddddddfg",
+    "start_date": null,
+    "end_date": null,
+    "status": 1,
+    "created_at": "2024-08-15T19:52:41.520Z",
+    "updated_at": "2024-08-16T16:56:32.027Z",
+    "is_archived": false,
+    "created_by": 67,
+    "updated_by": 67,
+    "director": 1,
+    "tags": [
+      3
+    ],
+    "team_members": [
+      3,
+      1
     ]
   }
 }

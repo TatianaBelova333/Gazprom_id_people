@@ -4,18 +4,18 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$720000$NvJrae5mUJnf7lTZo9IME6$HV4EVwTCKUdb9qlaab7JdqXRg7x2K0R1njcfv9SxPIw=",
-    "last_login": "2024-08-08T10:56:10.799Z",
+    "last_login": "2024-08-12T18:15:21.420Z",
     "role": "admin",
     "first_name": "Татьяна",
     "last_name": "Белова",
     "middle_name": "Сергеевна",
     "date_joined": "2024-08-08T07:28:00.661Z",
-    "updated_at": "2024-08-08T09:15:49.507Z",
+    "updated_at": "2024-08-13T15:50:18.744Z",
     "image": "",
     "is_active": true,
-    "email": "admin@mail.ru",
+    "email": "admin1@mail.ru",
     "phone_number": "+79142186902",
-    "birthday": "2024-08-09",
+    "birthday": "1980-08-10",
     "about_me": "аддпладпапап",
     "timezone": 1,
     "telegram": "https://t.me/Tanya333_B",
@@ -28,9 +28,10 @@
     "groups": [],
     "user_permissions": [],
     "skills": [
-      63,
-      23,
-      18
+      6,
+      1,
+      4,
+      5
     ]
   }
 },
@@ -41,11 +42,11 @@
     "password": "pbkdf2_sha256$720000$iPCdaD75RaflGl7MKmPjSM$q88/L0FD0kYunkEJi++jIalVhYEk8ik/+UF86f6cCb4=",
     "last_login": null,
     "role": "admin",
-    "first_name": "Сергей",
+    "first_name": "Sergey",
     "last_name": "Сергеев",
     "middle_name": "Сергеевич",
     "date_joined": "2024-08-08T07:48:50.761Z",
-    "updated_at": "2024-08-08T18:42:38.435Z",
+    "updated_at": "2024-08-13T13:09:23.944Z",
     "image": "",
     "is_active": true,
     "email": "serge@mail.ru",
@@ -58,14 +59,13 @@
     "status": 1,
     "office": 2,
     "position": 40,
-    "unit": null,
-    "employment_type": 1,
+    "unit": 9,
+    "employment_type": 0,
     "groups": [],
     "user_permissions": [],
     "skills": [
-      63,
-      23,
-      18
+      1,
+      8
     ]
   }
 },
@@ -2324,6 +2324,42 @@
       57,
       12,
       42
+    ]
+  }
+},
+{
+  "model": "staff.employee",
+  "pk": 67,
+  "fields": {
+    "password": "pbkdf2_sha256$720000$tejEReComigUxRwUinLHEZ$I9CiCqmKBS5Yup8KWnVMh5ZoOvYwR1dhM4wVJTAemCg=",
+    "last_login": "2024-08-12T22:32:11.074Z",
+    "role": "admin",
+    "first_name": "Татьяна",
+    "last_name": "",
+    "middle_name": "",
+    "date_joined": "2024-08-12T21:53:36.548Z",
+    "updated_at": "2024-08-16T08:03:33.456Z",
+    "image": "",
+    "is_active": true,
+    "email": "example@mail.ru",
+    "phone_number": null,
+    "birthday": null,
+    "about_me": "",
+    "timezone": null,
+    "telegram": null,
+    "ms_teams": null,
+    "status": 1,
+    "office": 1,
+    "position": null,
+    "unit": 1,
+    "employment_type": 1,
+    "groups": [],
+    "user_permissions": [],
+    "skills": [
+      6,
+      1,
+      4,
+      5
     ]
   }
 }
