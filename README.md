@@ -12,7 +12,7 @@
 <br>
 <br>
 
-1. Клонировать репозиторий
+1. Клонировать репозиторий<br>
 `git clone https://github.com/TatianaBelova333/Gazprom_id_people.git`
 
 2. Создать виртуальное окружение<br>
@@ -20,13 +20,13 @@
 `source venv/bin/activate`<br>
 
 3. Перейти в папку infra из корня проекта<br>
-`cd infra`<br>
+```
+cd infra
+
+```
 4. Выполнить следующие команды<br>
 ```
 docker compose up
-```
-```
-docker compose exec backend python manage.py migrate
 ```
 ```
 docker compose exec backend python manage.py makemigrations
