@@ -34,7 +34,9 @@ docker compose exec backend python manage.py makemigrations
 ```
 docker compose exec backend python manage.py migrate
 ```
-`docker compose exec backend python manage.py loaddata skill status company office timezone position progress_status tag department company_team company_unit employee project service component`<br>
+```
+docker compose exec backend python manage.py loaddata skill status company office timezone position progress_status tag department company_team company_unit employee project service component
+```
 
 
 
