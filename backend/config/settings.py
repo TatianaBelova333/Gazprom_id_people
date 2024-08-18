@@ -15,7 +15,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "paste_your_key")
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1;localhost').split(';')
-
+# CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', '*').split(';')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'colorfield',
     'debug_toolbar',
+    'corsheaders',
 
     'apps.core.apps.CoreConfig',
     'apps.staff.apps.StaffConfig',
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -173,6 +175,7 @@ USE_TZ = True
 FIXTURE_DIRS = (os.path.join(BASE_DIR, 'apps/core/fixtures/'),)
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
