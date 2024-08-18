@@ -4,7 +4,7 @@ from apps.core.models import NameBaseModel
 
 
 class CompanyTeam(NameBaseModel):
-    '''Company Team model.'''
+    '''Company Team model (Отделы).'''
 
     team_lead = models.OneToOneField(
         'staff.Employee',

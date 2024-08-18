@@ -12,6 +12,12 @@ class CompanyOffice(models.Model):
         verbose_name='Адрес',
         unique=True,
     )
+    company = models.ForeignKey(
+        'Company',
+        verbose_name='Компания',
+        on_delete=models.PROTECT,
+        related_name='offices',
+    )
 
     class Meta:
         verbose_name = 'Офис'

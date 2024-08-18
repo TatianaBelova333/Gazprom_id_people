@@ -14,7 +14,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "paste_your_key")
 
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1;localhost').split(';')
 
 
 INSTALLED_APPS = [
@@ -31,10 +31,12 @@ INSTALLED_APPS = [
     'djoser',
     'phonenumber_field',
     'colorfield',
+    'debug_toolbar',
 
     'apps.core.apps.CoreConfig',
     'apps.staff.apps.StaffConfig',
     'apps.company_structure.apps.CompanyStructureConfig',
+    'apps.projects.apps.ProjectsConfig',
     'api.apps.ApiConfig',
 ]
 
@@ -46,9 +48,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
 
 TEMPLATES = [
     {
@@ -105,9 +112,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-    #'DEFAULT_PERMISSION_CLASSES': (
-    #    'rest_framework.permissions.IsAuthenticated',
-    #),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -140,11 +147,16 @@ DJOSER = {
     'LOGIN_FIELD': 'email',
     'SET_PASSWORD_RETYPE': True,
     'HIDE_USERS': False,
-    "SERIALIZERS": {
-        'current_user': 'api.serializers.EmployeeSerializer',
+    'SERIALIZERS': {
+        'current_user': 'api.serializers.EmployeeDetailSerializer',
+        'user': 'api.serializers.EmployeeDetailSerializer',
+        'user_list': 'api.serializers.EmployeeListSerializer',
+        'user_update': 'api.serializers.EmployeeUpdateSerializer',
         'contacts': 'api.serializers.SavedContactSerializer',
         'my_contacts': 'api.serializers.SavedContactSerializer',
-        # 'set_password': 'api.serializers.CustomSetPasswordSerializer',
+    },
+    'PERMISSIONS': {
+        'user': ['djoser.permissions.CurrentUserOrAdmin'],
     },
 }
 
@@ -164,5 +176,16 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Газпром ID People',
+    'VERSION': '0.1.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SWAGGER_UI_SETTINGS': {
+        'filter': True,
+    },
+    'COMPONENT_SPLIT_REQUEST': True,
+}
