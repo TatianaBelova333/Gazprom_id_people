@@ -20,11 +20,11 @@
 Перейти в папку infra из корня проекта<br>
 `cd infra`
 Выполнить следующие команды
-`docker compose up`
-`docker compose exec backend python manage.py migrate`
-`docker compose exec backend python manage.py makemigrations`
-`docker compose exec backend python manage.py migrate`
-`docker compose exec backend python manage.py loaddata skill status company office timezone position progress_status tag department company_team company_unit employee project service component`
+`docker compose up`<br>
+`docker compose exec backend python manage.py migrate`<br>
+`docker compose exec backend python manage.py makemigrations`<br>
+`docker compose exec backend python manage.py migrate`<br>
+`docker compose exec backend python manage.py loaddata skill status company office timezone position progress_status tag department company_team company_unit employee project service component`<br>
 
 
 
