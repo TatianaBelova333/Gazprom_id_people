@@ -1,6 +1,5 @@
 
 //todo , шрифты подключить, проверить мусор, написать ридми, настроить линтер
-
 import React from "react";
 import {
   BrowserRouter as Router,

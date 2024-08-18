@@ -75,7 +75,7 @@ const StyledFormItem = styled(Form.Item)`
 function AuthForm() {
   const [loading, setLoading] = useState(false);
 
-  function onClickButton() {
+  const onClickButton= (e) => {
     console.log("button clicked");
     setLoading(true);
     setTimeout(() => {
@@ -97,17 +97,18 @@ function AuthForm() {
             name="login"
             initialValues={{ remember: true }}
             autoComplete="off"
+            // validateTrigger='onSubmit'
           >
             <StyledFormItem
               name="email"
-              rules={[{ required: true, message: "Введите электронную почту" }]}
+              rules={[{ required: true, message: "Введите электронную почту", max: 20, min: 5 }]}
             >
               <Input placeholder="Введите электронную почту" />
             </StyledFormItem>
 
             <StyledFormItem
               name="password"
-              rules={[{ required: true, message: "Введите пароль" }]}
+              rules={[{ required: true, message: "Введите пароль", max: 20, min: 5 }]}
             >
               <Input.Password placeholder="Введите пароль" />
             </StyledFormItem>
@@ -118,7 +119,7 @@ function AuthForm() {
                 htmlType="submit"
                 block
                 loading={loading}
-                onClick={onClickButton}
+                onClick={(e) => onClickButton(e)}
               >
                 Войти
               </ButtonWithSize>
@@ -147,7 +148,7 @@ function AuthForm() {
           >
             <StyledFormItem
               name="email"
-              rules={[{ required: true, message: "Введите электронную почту" }]}
+              rules={[{ required: true, message: "Введите электронную почту", max: 20, min: 5 }]}
             >
               <Input placeholder="Введите электронную почту" />
             </StyledFormItem>
@@ -165,7 +166,7 @@ function AuthForm() {
                 htmlType="submit"
                 block
                 loading={loading}
-                onClick={onClickButton}
+                onClick={(e) => onClickButton(e)}
               >
                 Далее
               </ButtonWithSize>
