@@ -92,8 +92,9 @@ docker compose exec backend python manage.py createsuperuser
 
 #### Аутентификация по JWT-токену.
 
-`GET /api/v1/auth/jwt/create/`
 
+`GET /api/v1/auth/jwt/create/`
+![login](./readme_images/login.png)
 ```
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -202,6 +203,7 @@ Content-Type: application/json
 ]
 ```
 #### Страница другого пользователя.
+![Profile](./readme_images/profile.png)
 
 `GET /api/v1/users/3/` <br>
 
@@ -423,6 +425,7 @@ Content-Type: application/json
 ```
 #### Страница со всеми проектами компании.
 Участники проектов сгруппированы по отделам.
+![Projects](./readme_images/projects.png)
 
 `GET api/v1/projects/`
 
