@@ -1,4 +1,15 @@
 # Gazprom_id_people
+* [Админ-панель джанго](http://gazprompeopleid.ddns.net/admin/)
+
+Тестовый суперпользователь
+```
+{
+    "email": "example@mail.ru",
+    "password" : "1111",
+
+}
+```
+* [Swagger](http://gazprompeopleid.ddns.net/api/swagger/)
 
 ### Стэк технологий
 * Django
@@ -14,19 +25,6 @@
 * [django-phonenumbers](https://pypi.org/project/django-phonenumbers/)
 * [django-colorfield](https://pypi.org/project/django-colorfield/)
 * [djangorestframework-simplejwt](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/)
-<br>
-
-* [Админ-панель джанго](http://gazprompeopleid.ddns.net/admin/)
-
-Тестовый суперпользователь
-```
-{
-    "email": "example@mail.ru",
-    "password" : "1111",
-
-}
-```
-* [Swagger](http://gazprompeopleid.ddns.net/api/swagger/)
 
 ### Запуск приложения через докер
 
