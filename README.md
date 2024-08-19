@@ -14,6 +14,19 @@
 * [django-phonenumbers](https://pypi.org/project/django-phonenumbers/)
 * [django-colorfield](https://pypi.org/project/django-colorfield/)
 * [djangorestframework-simplejwt](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/)
+<br>
+<br>
+* [Админ-панель джанго](http://gazprompeopleid.ddns.net/admin/)
+
+Тестовый суперпользователь
+```
+{
+    "email": "example@mail.ru",
+    "password" : "1111",
+
+}
+```
+* [Swagger](http://gazprompeopleid.ddns.net/api/swagger/)
 
 ### Запуск приложения через докер
 
@@ -467,6 +480,7 @@ Content-Type: application/json
         ]        
 ]
 ```
+
 ### Team
 
 * Александра Петелина - PM<br>
