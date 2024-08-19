@@ -105,7 +105,7 @@ Content-Type: application/json
 
 ```
 #### Главная страница. Получение списка проектов и контактов текущего пользователя.
-![Main page](Gazprom_id_people/readme_images/main_page.png)
+![Main page](./readme_images/main_page.png)
 
 `GET /api/v1/users/me/projects/`<br>
 
@@ -324,6 +324,7 @@ Content-Type: application/json
 }
 ```
 #### Получение организационной структуры компании
+![Org chart](./readme_images/company_org.png)
 
 `GET /api/v1/structures/` <br>
 
