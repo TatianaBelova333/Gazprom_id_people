@@ -15,9 +15,8 @@
 * [django-colorfield](https://pypi.org/project/django-colorfield/)
 * [djangorestframework-simplejwt](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/)
 <br>
-<br>
 
-* [Админ-панель джанго](http://gazprompeopleid.ddns.net/admin/)
+* <b>[Админ-панель джанго]</b>(http://gazprompeopleid.ddns.net/admin/)
 
 Тестовый суперпользователь
 ```
@@ -27,7 +26,7 @@
 
 }
 ```
-* [Swagger](http://gazprompeopleid.ddns.net/api/swagger/)
+* <b>[Swagger]</b>(http://gazprompeopleid.ddns.net/api/swagger/)
 
 ### Запуск приложения через докер
 
