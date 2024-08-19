@@ -16,7 +16,7 @@
 * [djangorestframework-simplejwt](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/)
 <br>
 
-* <b>[Админ-панель джанго]</b>(http://gazprompeopleid.ddns.net/admin/)
+* [Админ-панель джанго](http://gazprompeopleid.ddns.net/admin/)
 
 Тестовый суперпользователь
 ```
@@ -26,7 +26,7 @@
 
 }
 ```
-* <b>[Swagger]</b>(http://gazprompeopleid.ddns.net/api/swagger/)
+* [Swagger](http://gazprompeopleid.ddns.net/api/swagger/)
 
 ### Запуск приложения через докер
 
