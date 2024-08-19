@@ -9,7 +9,7 @@
 
 }
 ```
-* [Swagger](http://gazprompeopleid.ddns.net/api/swagger/)
+* [Документация Swagger](http://gazprompeopleid.ddns.net/api/swagger/)
 
 ### Стэк технологий
 * Django
