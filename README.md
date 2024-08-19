@@ -16,6 +16,7 @@
 * [djangorestframework-simplejwt](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/)
 <br>
 <br>
+
 * [Админ-панель джанго](http://gazprompeopleid.ddns.net/admin/)
 
 Тестовый суперпользователь
