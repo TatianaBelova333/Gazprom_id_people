@@ -91,10 +91,10 @@ docker compose exec backend python manage.py createsuperuser
 а также создавать и редактировать проекты, сервисы и компоненты.
 
 #### Аутентификация по JWT-токену.
-
+![login](./readme_images/login.png)
 
 `GET /api/v1/auth/jwt/create/`
-![login](./readme_images/login.png)
+
 ```
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -497,6 +497,6 @@ Content-Type: application/json
 * Екатерина Байзигитова -  SA<br>
 * Дарья Учаева -страший в направлении BA<br>
 * Беклемышев Андрей - BA<br>
-* Анастасия Лазарева - Frontend<br>
-* Татьяна Белова - Backend<br>
+* [Анастасия Лазарева](https://github.com/Anastasy-ya)- Frontend<br>
+* [Tatiana Belova](https://github.com/TatianaBelova333) - Backend <br>
 * Кирилл Новиков -  QA<br>
