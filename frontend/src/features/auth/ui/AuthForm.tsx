@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Form, Input, Tabs, Typography } from "antd";
 import styled from "styled-components";
-import Button from "../../../shared/components/ui/ButtonStyled";
+import Button from "../../../shared/components/ui/ButtonStyled/ButtonStyled";
+import { useForm } from "react-hook-form";
 
 const { Title } = Typography;
 
@@ -69,19 +70,24 @@ const StyledFormItem = styled(Form.Item)`
     line-height: 22px;
     text-align: left;
   }
-
 `;
 
 function AuthForm() {
   const [loading, setLoading] = useState(false);
 
-  function onClickButton() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (e) => {
     console.log("button clicked");
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
     }, 2000);
-  }
+  };
 
   const tabItems = [
     {
@@ -97,17 +103,27 @@ function AuthForm() {
             name="login"
             initialValues={{ remember: true }}
             autoComplete="off"
+            // validateTrigger='onSubmit'
           >
             <StyledFormItem
               name="email"
-              rules={[{ required: true, message: "Введите электронную почту" }]}
+              rules={[
+                {
+                  required: true,
+                  message: "Введите электронную почту",
+                  max: 20,
+                  min: 5,
+                },
+              ]}
             >
               <Input placeholder="Введите электронную почту" />
             </StyledFormItem>
 
             <StyledFormItem
               name="password"
-              rules={[{ required: true, message: "Введите пароль" }]}
+              rules={[
+                { required: true, message: "Введите пароль", max: 20, min: 5 },
+              ]}
             >
               <Input.Password placeholder="Введите пароль" />
             </StyledFormItem>
@@ -118,7 +134,7 @@ function AuthForm() {
                 htmlType="submit"
                 block
                 loading={loading}
-                onClick={onClickButton}
+                onClick={(e) => onSubmit(e)}
               >
                 Войти
               </ButtonWithSize>
@@ -147,7 +163,14 @@ function AuthForm() {
           >
             <StyledFormItem
               name="email"
-              rules={[{ required: true, message: "Введите электронную почту" }]}
+              rules={[
+                {
+                  required: true,
+                  message: "Введите электронную почту",
+                  max: 20,
+                  min: 5,
+                },
+              ]}
             >
               <Input placeholder="Введите электронную почту" />
             </StyledFormItem>
@@ -165,12 +188,11 @@ function AuthForm() {
                 htmlType="submit"
                 block
                 loading={loading}
-                onClick={onClickButton}
+                onClick={(e) => onSubmit(e)}
               >
                 Далее
               </ButtonWithSize>
             </Form.Item>
-
           </Form>
         </>
       ),

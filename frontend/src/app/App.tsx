@@ -1,7 +1,7 @@
 
 //todo , шрифты подключить, проверить мусор, написать ридми, настроить линтер
-
 import React from "react";
+import './App.css';
 import {
   BrowserRouter as Router,
   Routes,
