@@ -1,13 +1,13 @@
-import { 
-  Layout, 
-  // Menu, 
+import {
+  Layout,
+  // Menu,
   // Avatar,
-} from 'antd';
-import styled from 'styled-components';
-import Header from '../../widgets/Header';
-import MenuMain from '../../shared/components/ui/Menu';
-import Button from '../../shared/components/ui/ButtonStyled';
-import ProjectDescription from '../../widgets/ProjectCard';
+} from "antd";
+import styled from "styled-components";
+import Header from "../../widgets/Header";
+import MenuMain from "../../shared/components/ui/Menu/Menu";
+import Button from "../../shared/components/ui/ButtonStyled/ButtonStyled";
+import ProjectCard from "../../widgets/ProjectCard";
 
 const { Sider, Content } = Layout;
 
@@ -63,26 +63,28 @@ const MainPage = () => {
       <Header />
       <Layout
         style={{
-          background: 'var(--light-blue)',
-          flexWrap: 'wrap',
-          overflow: 'scroll',
+          background: "var(--light-blue)",
+          flexWrap: "wrap",
+          overflow: "scroll",
           flexGrow: 1,
         }}
       >
         <Sider
-          theme='light'
+          theme="light"
           width={207}
           // flexGrow=1,
         >
           <MenuMain />
-          <ButtonStyled style={{ bottom: '24px', left: '24px', position: 'absolute' }}>
+          <ButtonStyled
+            style={{ bottom: "24px", left: "24px", position: "absolute" }}
+          >
             Выйти из системы
           </ButtonStyled>
         </Sider>
 
         <StyledContent>
-          <ProjectDescription />
-          <ProjectDescription />
+          <ProjectCard />
+          <ProjectCard />
         </StyledContent>
 
         <RightColumn>

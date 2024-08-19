@@ -2,7 +2,7 @@ import {
   Image,
 } from "antd";
 import styled from "styled-components";
-import logo from '../../assets/logo.svg';
+import logo from '../../../assets/logo.svg';
 
 const ResponsiveImage = styled(Image)`
   width: 100%;

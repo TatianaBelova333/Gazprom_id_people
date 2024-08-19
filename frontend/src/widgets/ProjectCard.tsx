@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Card, Typography, Avatar, Row, Col } from "antd";
-import TagCloud from "../shared/components/ui/Tags";
+import TagCloud from "../shared/components/ui/Tags/Tags";
 
 const { Title, Text } = Typography;
 const Flex = styled.div`
@@ -17,10 +17,54 @@ const StyledCard = styled(Card)`
   margin: 16px 0;
 `;
 
-const ProjectDescription = () => {
+const data = {
+  //TODO заменить данными
+  id: 0,
+  name: "string",
+  description: "string",
+  status: {
+    id: 0,
+    name: "string",
+    color: "#96B9fA",
+  },
+  tags: [
+    {
+      id: 0,
+      name: "В работе",
+      color: "#a8F",
+    },
+    {
+      id: 1,
+      name: "Внутренний  продукт",
+      color: "#a8F",
+    },
+    {
+      id: 2,
+      name: "Веб-сервиc",
+      color: "#a8F",
+    },
+  ],
+  team_members: {
+    id: 0,
+    image: "string",
+  },
+  team_extra_count: 0,
+  director: {
+    id: 0,
+    full_name: "string",
+    position: "string",
+    phone_number: "string",
+    telegram: "string",
+    email: "user@example.com",
+    image: "string",
+    employment_type: 0,
+    ms_teams: "user@example.com",
+  },
+};
+
+const ProjectCard = () => {
   return (
-    <StyledCard
-    >
+    <StyledCard>
       {/* Первый контейнер */}
       <div>
         <Title
@@ -54,7 +98,7 @@ const ProjectDescription = () => {
           просматривать свои проекты и сохраненные контакты коллег.
         </Typography>
         <div style={{ marginTop: 16 }}>
-          <TagCloud />
+          <TagCloud data={data} />
         </div>
       </div>
 
@@ -62,7 +106,7 @@ const ProjectDescription = () => {
       <div style={{ height: 28 }} />
 
       {/* Второй контейнер */}
-      <div style={{ padding: 16 }}>
+      <div style={{  }}>
         <Title
           level={3}
           style={{
@@ -75,8 +119,8 @@ const ProjectDescription = () => {
           Команда проекта
         </Title>
         <Row gutter={24} style={{ marginBottom: 16, height: 62 }}>
-          <Row flex="1">
-            <Avatar size={40} style={{ marginRight: -8 }} />
+          <Row style={{ flex: "1" }}>
+            <Avatar size={40} style={{ marginRight: 8 }} />
             <Flex>
               <Typography>Алексеева Анна</Typography>
               <Typography>Product Manager</Typography>
@@ -91,18 +135,47 @@ const ProjectDescription = () => {
             <Text>Участник 3</Text>
           </Col>
         </Row>
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <Avatar size={40} style={{ marginRight: -8 }} />
-          <Avatar size={40} style={{ marginRight: -8 }} />
-          <Avatar size={40} style={{ marginRight: -8 }} />
-          <Avatar size={40} style={{ marginRight: -8 }} />
-          <Avatar size={40} style={{ marginRight: -8 }} />
-          <Avatar size={40} style={{ marginRight: -8 }} />
-          <Avatar size={40} style={{ marginRight: -8 }} />
-          <Avatar size={40} style={{ marginRight: -8 }} />
+        <div style={{ position: "relative", width: "fit-content", height: 40 }}>
           <Avatar
             size={40}
-            style={{ backgroundColor: "var(--main-blue)", marginRight: -8 }}
+            style={{ position: "absolute", left: 0, zIndex: 9 }}
+          />
+          <Avatar
+            size={40}
+            style={{ position: "absolute", left: 35, zIndex: 8 }}
+          />
+          <Avatar
+            size={40}
+            style={{ position: "absolute", left: 70, zIndex: 7 }}
+          />
+          <Avatar
+            size={40}
+            style={{ position: "absolute", left: 105, zIndex: 6 }}
+          />
+          <Avatar
+            size={40}
+            style={{ position: "absolute", left: 140, zIndex: 5 }}
+          />
+          <Avatar
+            size={40}
+            style={{ position: "absolute", left: 40, zIndex: 4 }}
+          />
+          <Avatar
+            size={40}
+            style={{ position: "absolute", left: 48, zIndex: 3 }}
+          />
+          <Avatar
+            size={40}
+            style={{ position: "absolute", left: 56, zIndex: 2 }}
+          />
+          <Avatar
+            size={40}
+            style={{
+              position: "absolute",
+              left: 64,
+              zIndex: 1,
+              backgroundColor: "var(--main-blue)",
+            }}
           >
             +2
           </Avatar>
@@ -112,4 +185,4 @@ const ProjectDescription = () => {
   );
 };
 
-export default ProjectDescription;
+export default ProjectCard;

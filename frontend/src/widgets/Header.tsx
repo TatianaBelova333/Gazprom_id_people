@@ -1,9 +1,9 @@
 import { Layout, Avatar } from "antd";
 import { BellOutlined, QuestionCircleOutlined } from "@ant-design/icons";
 import styled from "styled-components";
-import LogoImage from "../shared/components/ui/LogoImage";
+import LogoImage from "../shared/components/ui/LogoImage/LogoImage";
 // import QuestionCircleOutlined from "@ant-design/icons";
-import Bell from "../shared/components/ui/Bell";
+import Bell from "../shared/components/ui/Bell/Bell";
 
 // const { Header } = Layout;
 
